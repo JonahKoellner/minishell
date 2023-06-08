@@ -6,14 +6,12 @@
 /*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/06/08 21:06:53 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/06/08 21:21:44 by jonahkollne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+
 #include "minishell.h"
-#include <string.h>
 
 
 int	main(void)
