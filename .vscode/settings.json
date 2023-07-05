@@ -1,5 +1,9 @@
 {
 	"files.associations": {
-		"y.tab.h": "c"
+		"y.tab.h": "c",
+		"stdlib.h": "c",
+		"readline.h": "c",
+		"history.h": "c",
+		"stdio.h": "c"
 	}
 }
