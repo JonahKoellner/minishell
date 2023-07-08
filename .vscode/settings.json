@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"y.tab.h": "c"
+		"y.tab.h": "c",
+		"string.h": "c"
 	}
 }
