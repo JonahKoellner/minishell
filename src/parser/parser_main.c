@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/06/27 16:39:52 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:30:24 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_Token	redirect_decide(t_Token token, int *i)
 	return (token);
 }
 
-//gets the next token, after complete command call with command = NULL
+//gets the next token, after complete command call with command = NULL to reset
 t_Token	get_next_token(char *command)
 {
 	t_Token		token;
