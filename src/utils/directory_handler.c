@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visual_prompt.c                                    :+:      :+:    :+:   */
+/*   directory_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 18:47:20 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/07/08 09:13:21 by jonahkollne      ###   ########.fr       */
+/*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
+/*   Updated: 2023/07/08 10:06:34 by jonahkollne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	new_line(void)
+int	cd_back(t_sys_val *sys_val)
 {
-	printf("minishell>:$ ");
-	return (0);
+	char	**new_dir_split;
+
+	new_dir_split = ft_split(sys_val->dir, '/');
+}
+
+int	cd_arg(t_sys_val *sys_val, char *arg)
+{
+	sys_val->dir = arg;
 }
