@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/06/27 16:07:22 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/08 16:44:24 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ typedef enum TokenType
 	TOKEN_RIGHT_PAREN
 }	t_TokenType;
 
-
 typedef struct Token
 {
 	t_TokenType	type;
 	char		*lexeme;
 }	t_Token;
 
-#endif
+t_Token	get_next_token(char *command);
 
+#endif
