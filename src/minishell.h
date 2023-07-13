@@ -6,7 +6,7 @@
 /*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/07/13 14:54:23 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/07/13 15:30:30 by jonahkollne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <stddef.h>
-# include "parser.h"
+//# include "parser/parser.h"
 
 # define ERROR -1
 # define SUCCESS 0
@@ -41,10 +41,12 @@ typedef struct sys_val
 }	t_sys_val;
 
 //#--------- visual_prompt ----------#//
-int		new_line(void);
+int		new_line(t_sys_val *sys_val);
 
 //#--------- signal_handler ----------#//
 void	sig_ctrl_c(int signo, siginfo_t *client_info, void *param);
 void	sig_ctrl_d(int signo, siginfo_t *client_info, void *param);
+int		cd_back(t_sys_val *sys_val);
+int		cd_arg(t_sys_val *sys_val, char *arg);
 
 #endif
