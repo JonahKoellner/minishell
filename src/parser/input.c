@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/08 16:44:38 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:18:28 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 t_Token	*input_to_lex(char *input)
 {
 	int		i;
+	int		j;
 	t_Token	*tokens;
 
+	j = 0;
 	i = wordcount(input, ' ');
+	tokens = malloc(sizeof(t_Token) * i);
 	while (i--)
 	{
-		*tokens = get_next_token(input);
+		tokens[j++] = get_next_token(input);
 	}
 }
 

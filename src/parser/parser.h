@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/08 16:44:24 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:28:31 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ typedef enum TokenType
 	TOKEN_WORD,
 	TOKEN_VARIABLE,
 	TOKEN_COMMAND_NAME,
+	TOKEN_DOLLAR,
+	TOKEN_LITERAL_CHARS,
+	TOKEN_LITERAL_STRING,
 	TOKEN_REDIRECT,
 	TOKEN_GREAT,
 	TOKEN_LESS,
