@@ -6,7 +6,7 @@
 #    By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 19:53:44 by jonahkollne       #+#    #+#              #
-#    Updated: 2023/07/05 19:07:00 by jonahkollne      ###   ########.fr        #
+#    Updated: 2023/07/13 15:11:18 by jonahkollne      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,14 +46,15 @@
 NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRC = utils/visual_prompt.c utils/signal_handler.c minishell.c
+LIBFT = ../lib/42-libft/libft.a
+SRC = utils/visual_prompt.c utils/signal_handler.c utils/directory_handler.c minishell.c
 OBJ = ${SRC:.c=.o}
 RM	= rm -f
 
 all: $(NAME)
 
 $(NAME):$(OBJ)
-	$(CC) $(OBJ) -o $@
+	$(CC) $(OBJ) -o $@ $(LIBFT)
 
 src/%.o: src/%.c
 	$(CC) $(CFLAGS) $< -c -o $@
