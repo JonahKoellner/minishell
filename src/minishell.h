@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/08 09:57:43 by jonahkollne      ###   ########.fr       */
-=======
-/*   Updated: 2023/07/07 17:51:35 by mreidenb         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2023/07/08 11:08:48 by jonahkollne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +22,7 @@
 # include <signal.h>
 # include <sys/types.h>
 
-# include "lib/42-libft/libft.h"
+# include "../lib/42-libft/libft.h"
 
 //#--------- Structs ----------#//
 typedef struct sys_val
