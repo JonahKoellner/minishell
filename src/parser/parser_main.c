@@ -6,28 +6,11 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/03 15:30:24 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/08 16:40:38 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-
-static char	*fillstr(const char *str, int z, int fin)
-{
-	char	*fill;
-	int		i;
-
-	i = 0;
-	if (!*str)
-		return (NULL);
-	fill = (char *)malloc((fin - z + 1) * sizeof(char));
-	if (!fill)
-		return (NULL);
-	while (z < fin)
-		fill[i++] = str[z++];
-	fill[i] = 0;
-	return (fill);
-}
+#include "minishell.h"
 
 t_Token	redirect_decide(t_Token token, int *i)
 {

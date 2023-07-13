@@ -6,9 +6,10 @@
 /*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/07/08 11:08:48 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/07/13 14:54:23 by jonahkollne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -21,6 +22,15 @@
 # include <string.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <stddef.h>
+# include "parser.h"
+
+# define ERROR -1
+# define SUCCESS 0
+
+# define STDOUT 1
+# define STDIN 0
+# define STDERR 2
 
 # include "../lib/42-libft/libft.h"
 
