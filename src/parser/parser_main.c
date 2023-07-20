@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/13 15:05:17 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/20 20:22:10 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 t_Token	redirect_decide(t_Token token, int *i)
 {
-	if (token.lexeme[0] == '>' && token.lexeme[1] != '>')
+	if (token.lexeme[0] == '>' && token.lexeme[1] == ' ')
 		token.type = TOKEN_GREAT;
 	else if (token.lexeme[0] == '>' && token.lexeme[1] == '>')
 		token.type = TOKEN_GREAT_GREAT;
-	else if (token.lexeme[0] == '<' && token.lexeme[1] != '<')
+	else if (token.lexeme[0] == '<' && token.lexeme[1] == ' ')
 		token.type = TOKEN_LESS;
 	else if (token.lexeme[0] == '<' && token.lexeme[1] == '<')
 		token.type = TOKEN_LESS_LESS;
-	else if (token.lexeme[0] == '|' && token.lexeme[1] != '|')
+	else if (token.lexeme[0] == '|' && token.lexeme[1] == ' ')
 		token.type = TOKEN_PIPE;
 	if (token.type == TOKEN_GREAT_GREAT || TOKEN_LESS_LESS)
 		*i++;
@@ -62,6 +62,8 @@ t_Token	get_next_token(char *command)
 		i = 0;
 	while (command[i] == ' ', command[i] == '\t', command[i] == '\n')
 		i++;
+	if (command[i] == NULL)
+		return ((t_Token){NULL, TOKEN_END});
 	if (!strncmp(&command[i], "echo", 4))
 		return (command_decide('e', &i, 4));
 	else if (!strncmp(&command[i], "cd", 2))
@@ -76,15 +78,33 @@ t_Token	get_next_token(char *command)
 		return (command_decide('v', &i, 3));
 	else if (!strncmp(&command[i], "exit", 4))
 		return (command_decide('q', &i, 4));
-	return (get_next_token2(command, &i));
+	return (get_next_token_qte(command, &i));
 
 }
 
-//gets the next token, after complete command call with command = NULL to reset
-t_Token	get_next_token2(char *command, int *i)
+t_Token	get_next_token_qte(char *command, int *i)
 {
-	t_Token		token;
-	int			j;
+	t_Token	token;
+
+	if(command[*i] == '\'')
+	{
+		token.type = TOKEN_LITERAL_CHARS;
+		token.lexeme = quote(command, &i);
+		return (token);
+	}
+	else if(command[*i] == '\"')
+	{
+		token.type = TOKEN_LITERAL_STRING;
+		token.lexeme = quote(command, &i);
+		return (token);
+	}
+	return (get_next_token_rst(command, &i));
+}
+//gets the next token, after complete command call with command = NULL to reset
+t_Token	get_next_token_rst(char *command, int *i)
+{
+	t_Token	token;
+	int		j;
 
 	if (command[*i] == '$')
 	{

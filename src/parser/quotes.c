@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/20 18:41:06 by mreidenb         ###   ########.fr       */
+/*   Created: 2023/07/20 18:08:35 by mreidenb          #+#    #+#             */
+/*   Updated: 2023/07/20 19:54:44 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_Token	*input_to_lex(char *input)
+char	*quote(char *command, int *i)
 {
-	int		i;
-	int		j;
-	t_Token	*tokens;
+	int		start;
+	char	c;
 
-	j = 0;
-	i = wordcount(input, ' ');
-	tokens = malloc(sizeof(t_Token) * i);
-	while (i--)
+	start = *i;
+	c = command[start];
+	while (command[*i] != c)
 	{
-		tokens[j++] = get_next_token(input);
+		if(command[*i] == '\0')
+		{
+			return (NULL);
+		}
+		*i++;
 	}
-}
-
-char	*input(char *command)
-{
-	char	*input;
-
-	if (isatty(STDIN))
-		input = readline(command);
-	free(command);
-	return (input);
+	return (fillstr(command, start + 1, *i - 1));
 }
