@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/20 20:01:05 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:55:43 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ typedef struct Command
 
 t_Token	get_next_token(char *command);
 char	*quote(char *command, int *i);
+int		is_unquotable(char c);
 
 #endif

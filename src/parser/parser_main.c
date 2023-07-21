@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/20 20:22:10 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:02:24 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_Token	command_decide(char c, int *i, int l)
 	return (token);
 }
 
+//gets the next token, after complete command call with command = NULL to reset
 t_Token	get_next_token(char *command)
 {
 	t_Token		token;
@@ -100,7 +101,7 @@ t_Token	get_next_token_qte(char *command, int *i)
 	}
 	return (get_next_token_rst(command, &i));
 }
-//gets the next token, after complete command call with command = NULL to reset
+
 t_Token	get_next_token_rst(char *command, int *i)
 {
 	t_Token	token;
@@ -111,10 +112,10 @@ t_Token	get_next_token_rst(char *command, int *i)
 		token.type = TOKEN_DOLLAR;
 		return (token);
 	}
-	if (ft_isalnum(command[*i]))
+	if (is_unquotable(command[*i]))
 	{
 		j = i;
-		while (ft_isalnum(command[*i]))
+		while (is_unquotable(command[*i]))
 			*i++;
 		token.lexeme = fillstr(command, j, *i);
 		token.type = TOKEN_WORD;
