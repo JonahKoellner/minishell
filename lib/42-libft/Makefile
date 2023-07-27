@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 08:11:09 by mreidenb          #+#    #+#              #
-#    Updated: 2023/05/10 16:07:18 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/07/27 17:43:08 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ MAIN	= isalpha isdigit isalnum isascii isprint strlen memset bzero memcpy\
 		memmove strlcpy strlcat toupper tolower strchr strrchr strncmp memchr\
 		memcmp strnstr atoi calloc strdup substr strjoin strtrim split itoa\
 		strmapi striteri putchar_fd putstr_fd putendl_fd putnbr_fd printf/ft_printf\
-		atoi_l
+		atoi_l printf_fd/ft_printf_fd
 BONUS	= lstnew lstadd_front lstsize lstlast lstadd_back lstdelone lstclear\
 		lstiter lstmap
 
@@ -34,7 +34,7 @@ $(NAME): $(MAINOBJ)
 	$(AR) $(ARFLAGS) $@ $^
 
 bonus:	$(BONUSOBJ)
-	$(AR) $(ARFLAGS) $(NAME) $^ 
+	$(AR) $(ARFLAGS) $(NAME) $^
 
 %.o : %.c
 	@$(CC) -c $(CFLAGSS) $(INCFLAG) $< -o $@

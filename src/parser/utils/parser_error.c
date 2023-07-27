@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 15:35:23 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/27 17:48:33 by mreidenb         ###   ########.fr       */
+/*   Created: 2023/07/27 17:14:26 by mreidenb          #+#    #+#             */
+/*   Updated: 2023/07/27 18:00:15 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "minishell.h"
 
-# include <stdarg.h>
-# include "../libft.h"
-
-int		ft_printf(const char *format, ...);
-
-#endif
+int	unexpected_token(t_Token err_token)
+{
+	if (err_token.type != TOKEN_END)
+		ft_printf_fd(STDERR, "minishell: Parser Error Near unexp. Token `%s",
+			err_token.lexeme);
+	else
+		ft_printf_fd(STDERR, "minishell: Parser Error Near unexp. Token `\\n");
+	free(err_token.lexeme);
+	return (-3);
+}

@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/21 18:55:43 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:59:41 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef enum TokenType
 	TOKEN_WORD,
 	TOKEN_VARIABLE,
 	TOKEN_COMMAND_NAME,
-	TOKEN_DOLLAR,
 	TOKEN_LITERAL_CHARS,
 	TOKEN_LITERAL_STRING,
 	TOKEN_REDIRECT,
@@ -33,7 +32,8 @@ typedef enum TokenType
 	TOKEN_PIPE,
 	TOKEN_LEFT_PAREN,
 	TOKEN_RIGHT_PAREN,
-	TOKEN_END
+	TOKEN_END,
+	ERR
 }	t_TokenType;
 
 typedef struct Token
@@ -58,9 +58,22 @@ typedef struct Command
 	char	*out_file;
 }	t_Command;
 
+//Input
+int		tokencount(const char *s);
 
+//Lexer
 t_Token	get_next_token(char *command);
 char	*quote(char *command, int *i);
 int		is_unquotable(char c);
+t_Token	lex_dollar(char *input, int *i);
+
+//Parser
+int		parser(t_Token *tokens);
+int		is_allowed_token(t_Token token);
+
+//Error
+int		bad_quote(char *input);
+int		empty_input(char *input);
+int		unexpected_token(t_Token err_token);
 
 #endif

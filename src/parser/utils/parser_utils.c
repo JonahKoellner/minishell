@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/21 19:16:46 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:08:21 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,79 @@
 
 int	is_unquotable(char c)
 {
-	if (c == '|' || c == '&' || c ==';' || c == '<' || c == '>'
+	if (c == '|' || c == '&' || c == ';' || c == '<' || c == '>'
 		|| c == '(' || c == ')' || c == '$' || c == '`' || c == '\\'
-		|| c == '"' || c == '\'' || c == ' ' || c == '\n' || c == '\t')
-		return (0);
-	else
+		|| c == '"' || c == '\'')
+		return (2);
+	else if (c == ' ' || c == '\n' || c == '\t')
 		return (1);
+	else
+		return (0);
 }
 
-int	tokencount(const char *s, char c)
+int	tokencount(const char *s)
 {
 	int		i;
 	int		wrd;
+	char	qte;
 
+	qte = 0;
 	wrd = 0;
 	i = 0;
 	while (*s)
 	{
-		if (*s != c && wrd == 0)
+		if ((*s == '\'' || *s == '"') && qte == 0)
 		{
-			wrd = 1;
+			qte = *s;
 			i++;
 		}
-		if (*s == c)
+		if ((*s == ' ' || *s == '\n' || *s == '\t') && wrd == 0 && qte == 0)
+			wrd = ++i;
+		if (*s == ' ' || *s == '\n' || *s == '\t')
 			wrd = 0;
 		s++;
+		if (*s == qte)
+			qte = NULL;
 	}
-	return (i);
+	return (i * ((qte - 1) * -1));
+}
+
+t_Token	lex_dollar(char *input, int *i)
+{
+	int		j;
+	t_Token	token;
+
+	i = 0;
+	token.type = TOKEN_WORD;
+	if (is_unquotable(input[*i + 1]) == 1)
+		token.lexeme = ft_strdup("$");
+	else
+	{
+		j = *i;
+		token.type = TOKEN_VARIABLE;
+		while (is_unquotable(input[*i]) == 0 || is_unquotable(input[*i]) == 2)
+		{
+			if (is_unquotable(input[*i] == 2))
+			{
+				unexpected_token((t_Token){ERR, fillstr(input, *i, *i + 1)});
+				token.type = ERR;
+				break ;
+			}
+			*i++;
+		}
+		token.lexeme = fillstr(input, j, i);
+	}
+	return (token);
+}
+
+int	is_allowed_token(t_Token token)
+{
+	if (token.type == TOKEN_WORD
+		|| token.type == TOKEN_VARIABLE
+		|| token.type == TOKEN_LITERAL_CHARS
+		|| token.type == TOKEN_LITERAL_STRING
+		|| token.type == TOKEN_COMMAND_NAME)
+		return (1);
+	else
+		return (0);
 }

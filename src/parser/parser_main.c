@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/21 19:02:24 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:03:48 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 t_Token	redirect_decide(t_Token token, int *i)
 {
-	if (token.lexeme[0] == '>' && token.lexeme[1] == ' ')
+	if (token.lexeme[0] == '>' && token.lexeme[1] != '>')
 		token.type = TOKEN_GREAT;
 	else if (token.lexeme[0] == '>' && token.lexeme[1] == '>')
 		token.type = TOKEN_GREAT_GREAT;
-	else if (token.lexeme[0] == '<' && token.lexeme[1] == ' ')
+	else if (token.lexeme[0] == '<' && token.lexeme[1] != '<')
 		token.type = TOKEN_LESS;
 	else if (token.lexeme[0] == '<' && token.lexeme[1] == '<')
 		token.type = TOKEN_LESS_LESS;
@@ -26,7 +26,8 @@ t_Token	redirect_decide(t_Token token, int *i)
 		token.type = TOKEN_PIPE;
 	if (token.type == TOKEN_GREAT_GREAT || TOKEN_LESS_LESS)
 		*i++;
-	free(token.lexeme);
+	else
+		token.lexeme[1] = 0;
 	return (token);
 }
 
@@ -37,94 +38,91 @@ t_Token	command_decide(char c, int *i, int l)
 	token.type = TOKEN_COMMAND_NAME;
 	*i += l;
 	if (c == 'e')
-		token.lexeme = fillstr("echo", 0, l - 1);
+		token.lexeme = fillstr("echo", 0, l);
 	else if (c == 'c')
-		token.lexeme = fillstr("cd", 0, l - 1);
+		token.lexeme = fillstr("cd", 0, l);
 	else if (c == 'p')
-		token.lexeme = fillstr("pwd", 0, l - 1);
+		token.lexeme = fillstr("pwd", 0, l);
 	else if (c == 'x')
-		token.lexeme = fillstr("export", 0, l - 1);
+		token.lexeme = fillstr("export", 0, l);
 	else if (c == 'u')
-		token.lexeme = fillstr("unset", 0, l - 1);
+		token.lexeme = fillstr("unset", 0, l);
 	else if (c == 'v')
-		token.lexeme = fillstr("env", 0, l - 1);
+		token.lexeme = fillstr("env", 0, l);
 	else if (c == 'q')
-		token.lexeme = fillstr("exit", 0, l - 1);
+		token.lexeme = fillstr("exit", 0, l);
 	return (token);
 }
 
-//gets the next token, after complete command call with command = NULL to reset
-t_Token	get_next_token(char *command)
+//gets the next token, after complete command call with input = NULL to reset
+t_Token	get_next_token(char *input)
 {
 	t_Token		token;
 	static int	i = 0;
 
-	if (!command)
+	if (!input)
 		i = 0;
-	while (command[i] == ' ', command[i] == '\t', command[i] == '\n')
+	while (input[i] == ' ', input[i] == '\t', input[i] == '\n')
 		i++;
-	if (command[i] == NULL)
+	if (input[i] == NULL)
 		return ((t_Token){NULL, TOKEN_END});
-	if (!strncmp(&command[i], "echo", 4))
+	if (!strncmp(&input[i], "echo", 4))
 		return (command_decide('e', &i, 4));
-	else if (!strncmp(&command[i], "cd", 2))
+	else if (!strncmp(&input[i], "cd", 2))
 		return (command_decide('c', &i, 2));
-	else if (!strncmp(&command[i], "pwd", 3))
+	else if (!strncmp(&input[i], "pwd", 3))
 		return (command_decide('p', &i, 3));
-	else if (!strncmp(&command[i], "export", 6))
+	else if (!strncmp(&input[i], "export", 6))
 		return (command_decide('x', &i, 6));
-	else if (!strncmp(&command[i], "unset", 5))
+	else if (!strncmp(&input[i], "unset", 5))
 		return (command_decide('u', &i, 5));
-	else if (!strncmp(&command[i], "env", 3))
+	else if (!strncmp(&input[i], "env", 3))
 		return (command_decide('v', &i, 3));
-	else if (!strncmp(&command[i], "exit", 4))
+	else if (!strncmp(&input[i], "exit", 4))
 		return (command_decide('q', &i, 4));
-	return (get_next_token_qte(command, &i));
+	return (get_next_token_qte(input, &i));
 
 }
 
-t_Token	get_next_token_qte(char *command, int *i)
+t_Token	get_next_token_qte(char *input, int *i)
 {
 	t_Token	token;
 
-	if(command[*i] == '\'')
+	if (input[*i] == '\'')
 	{
 		token.type = TOKEN_LITERAL_CHARS;
-		token.lexeme = quote(command, &i);
+		token.lexeme = quote(input, &i);
 		return (token);
 	}
-	else if(command[*i] == '\"')
+	else if (input[*i] == '\"')
 	{
 		token.type = TOKEN_LITERAL_STRING;
-		token.lexeme = quote(command, &i);
+		token.lexeme = quote(input, &i);
 		return (token);
 	}
-	return (get_next_token_rst(command, &i));
+	return (get_next_token_rst(input, &i));
 }
 
-t_Token	get_next_token_rst(char *command, int *i)
+t_Token	get_next_token_rst(char *input, int *i)
 {
 	t_Token	token;
 	int		j;
 
-	if (command[*i] == '$')
-	{
-		token.type = TOKEN_DOLLAR;
-		return (token);
-	}
-	if (is_unquotable(command[*i]))
+	if (input[*i] == '$')
+		return (lex_dollar(input, &i));
+	if (!is_unquotable(input[*i]))
 	{
 		j = i;
-		while (is_unquotable(command[*i]))
+		while (!is_unquotable(input[*i]))
 			*i++;
-		token.lexeme = fillstr(command, j, *i);
+		token.lexeme = fillstr(input, j, *i);
 		token.type = TOKEN_WORD;
 		return (token);
 	}
-	if (command[*i] == '>' || command[*i] != '<' || command[*i] != '|')
+	if (input[*i] == '>' || input[*i] != '<' || input[*i] != '|')
 	{
 		token.type = TOKEN_REDIRECT;
-		token.lexeme = fillstr(command, *i, *i + 1);
+		token.lexeme = fillstr(input, *i, *i + 1);
 		*i++;
 		return (redirect_decide(token, &i));
 	}
