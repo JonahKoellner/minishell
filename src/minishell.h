@@ -6,7 +6,7 @@
 /*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/07/27 15:15:37 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/07/31 19:45:03 by jonahkollne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <stddef.h>
-//# include "parser/parser.h"
+# include "parser/parser.h"
 
 # define ERROR -1
 # define SUCCESS 0

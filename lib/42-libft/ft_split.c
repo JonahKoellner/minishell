@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:09:20 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/08 16:39:33 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:02:23 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	wordcount(const char *s, char c)
 	return (i);
 }
 
+//creates and allocates sub String from str, z till fin, excluding fin
 char	*fillstr(const char *str, int z, int fin)
 {
 	char	*fill;
@@ -52,7 +53,7 @@ char	*fillstr(const char *str, int z, int fin)
 	return (fill);
 }
 
-void	assign_values(int *i, int *j, size_t *z)
+static void	assign_values(int *i, int *j, size_t *z)
 {
 	*i = 0;
 	*j = -1;
