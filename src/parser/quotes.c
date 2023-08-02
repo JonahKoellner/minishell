@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 18:08:35 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/20 19:54:44 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/01 18:10:03 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*quote(char *command, int *i)
 	c = command[start];
 	while (command[*i] != c)
 	{
-		if(command[*i] == '\0')
+		if (command[*i] == '\0')
 		{
 			return (NULL);
 		}

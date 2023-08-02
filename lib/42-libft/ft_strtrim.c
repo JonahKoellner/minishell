@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:14:47 by mreidenb          #+#    #+#             */
-/*   Updated: 2022/10/19 15:53:25 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/02 01:51:52 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 			;
 	if (i > slen)
 		return (ft_strdup(""));
-	newstr = (char *)ft_calloc(slen - i + 2, 1);
+	newstr = (char *)ft_calloc(slen - i + 2, sizeof(char));
 	if (!newstr)
 		return (0);
 	while (i <= slen && s1[i])

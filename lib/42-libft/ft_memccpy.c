@@ -6,11 +6,12 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:00 by mreidenb          #+#    #+#             */
-/*   Updated: 2022/08/10 10:38:44 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/02 03:11:14 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include "libft.h"
 
 void	*ft_memccpy(void *dst, void *src, int c, size_t n)
 {

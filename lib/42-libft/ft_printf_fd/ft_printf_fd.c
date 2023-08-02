@@ -6,11 +6,12 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:15:43 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/27 17:48:00 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/02 03:05:17 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_fd.h"
+#include <stdarg.h>
+#include "../libft.h"
 
 static int	ft_print_uphex(unsigned int n, int count, int base, int fd)
 {
