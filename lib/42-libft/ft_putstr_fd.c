@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:50:13 by mreidenb          #+#    #+#             */
-/*   Updated: 2022/11/03 16:17:03 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/02 02:45:11 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ int	ft_putstr_fd(char *s, int fd)
 	if (!s)
 		return (ft_putstr_fd("(null)", 1));
 	while (s && *s)
-	{
-		ft_putchar_fd(*s++, fd);
-		i++;
-	}
+		i += ft_putchar_fd(*s++, fd);
 	return (i);
 }
