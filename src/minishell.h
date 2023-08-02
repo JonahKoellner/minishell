@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/07/31 19:45:03 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/08/02 12:57:44 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct sys_val
 }	t_sys_val;
 
 //#--------- visual_prompt ----------#//
-int		new_line();
+int		new_line(char *string);
 
 //#--------- signal_handler ----------#//
 void	sig_ctrl_c(int signo, siginfo_t *client_info, void *param);
