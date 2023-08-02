@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:57:44 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/02 11:13:28 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/02 12:21:26 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 /*À toi! Small-step and irresistibly French: With strings, long and int. À toi*/
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 /// @brief Computes the length of string \p [str].
 /// @param str String of which length to get.
@@ -44,9 +44,9 @@ long	ft_atoi_l(const char *str);
 /// NULL if the allocation fails.
 char	*ft_itoa(int n);
 
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 /*          Filling the memory like it's my bank account! (Only zer0s)        */
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 /// @brief Writes \p n bytes with the value '\0' to the string \p [s].
 /// @param src Pointer to the zeroed string.
@@ -68,9 +68,9 @@ void	*ft_calloc(size_t count, size_t size);
 /// @return Returns a pointer to str.
 void	*ft_memset(void *str, int c, size_t n);
 
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 /*        Moving stuff from memory to memory in 5 diffrent flavours!!!        */
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 /// @brief Duplicates \p [s1] and allocates sufficent memory for the copy.
 /// @param s1 String to be duplicated.
@@ -116,9 +116,9 @@ void	*ft_memmove(void *dst, const void *src, size_t len);
 /// @return Returns strlen(src). If return >= \p size output string was cut off.
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 /* Discover chars, unsigned chars, and chars* in strings. Unmatched Diversity!*/
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 /// @brief Searches the first occurence of \p [c] in string \p [s] whithin
 /// \p [n] bytes.
@@ -153,9 +153,9 @@ char	*ft_strrchr(const char *s, int c);
 /// the first character of the first occurrence of \p [needle] is returned.
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
-/* ---------------------------------------------------------------------------*/
-/*Comparing s1 to s2 for n bytes, seemed hard till discovering those lifehacks*/
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/* Comparing s1 to s2 for n bytes felt brutal until I discovered this lifehack*/
+/*----------------------------------------------------------------------------*/
 
 /// @brief Compares String \p [s1] to String \p [s2] for \p [n] amount of bytes.
 /// @param s1 String 1 as unsigned char*.
@@ -172,9 +172,9 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 /// @return return NULL if strings are identical. (s1[i] - s2[i]) if not.
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 /*  What, when, where or who dafuq is c?? The answer will shock you (!scary!) */
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 /// @brief Checks if \p c is Alphabetical ("A-Z"/"a-z").
 /// @param c character to be checked.
@@ -201,9 +201,9 @@ int		ft_isalnum(int c);
 /// @return Returns 1 if character is Ascii (true). 0 if not (false).
 int		ft_isascii(int c);
 
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 /*       Using strings to make other strings. (Fun for the whole family!)     */
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 /// @brief Allocates and returns a new string, consisting of \p [s1]
 /// (prefix) and \p [s2] (sufix).
@@ -253,9 +253,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 /// the split. NULL if the allocation fails.
 char	**ft_split(char const *s, char c);
 
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 /*Changing chars has never been easy. Here are 4 tips to make it less charring*/
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 /// @brief Capitalizes \p  c "a-z" to "A-Z".
 /// @param c character to be Capitalized.
@@ -312,9 +312,9 @@ int		ft_putnbr_fd(int n, int fd, int i);
 /// @param fd The file descriptor to write to.
 void	ft_putendl_fd(char *s, int fd);
 
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 /*                 What rhymes to list? I whish to not exist.                 */
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
 
 typedef struct s_list
 {
