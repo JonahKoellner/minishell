@@ -6,18 +6,92 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:57:44 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/02 12:21:26 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/03 02:08:56 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <stdlib.h>
-# include <unistd.h>
 
-/*----------------------------------------------------------------------------*/
-/*À toi! Small-step and irresistibly French: With strings, long and int. À toi*/
-/*----------------------------------------------------------------------------*/
+/* ************************************************************************** */
+/* __/\\\____________________/\\\_______________/\\\\\_______________         */
+/*  _\/\\\___________________\/\\\_____________/\\\///________________        */
+/*   _\/\\\______________/\\\_\/\\\____________/\\\__________/\\\______       */
+/*    _\/\\\_____________\///__\/\\\_________/\\\\\\\\\____/\\\\\\\\\\\_      */
+/*     _\/\\\______________/\\\_\/\\\\\\\\\__\////\\\//____\////\\\////__     */
+/*      _\/\\\_____________\/\\\_\/\\\////\\\____\/\\\_________\/\\\______    */
+/*       _\/\\\_____________\/\\\_\/\\\__\/\\\____\/\\\_________\/\\\_/\\__   */
+/*        _\/\\\\\\\\\\\\\\\_\/\\\_\/\\\\\\\\\_____\/\\\_________\//\\\\\___  */
+/*         _\///////////////__\///__\/////////______\///___________\/////____ */
+/* ************************************************************************** */
+
+// _         _         _
+//(_)_ _  __| |_  _ __| |___ ___
+//| | ' \/ _| | || / _` / -_(_-<
+//|_|_||_\__|_|\_,_\__,_\___/__/
+////////////////////////////////////////////////////////////////////////////////
+# include <stdlib.h>// Libft is the starting project of the 42 curus and acts //
+# include <unistd.h>// as a foundation for its core curriculum.               //
+////////////////////////////////////////////////////////////////////////////////
+
+// _____                                    _
+//|  ______  _ __ _____      _____  _ __ __| |
+//| |_ / _ \| '__/ _ \ \ /\ / / _ \| '__/ _` |
+//|  _| (_) | | |  __/\ V  V | (_) | | | (_| |
+//|_|  \___/|_|  \___| \_/\_/ \___/|_|  \__,_|
+////////////////////////////////////////////////////////////////////////////////
+// When I started 42, I speedrunned this project. I had already started libft //
+// before the school even started and was therfore able to bridge the gap from//
+// piscine to the kickoff, without loosing much tempo or knowledge gathered in//
+// the piscine. I finished in under 3 days, not beeing able to evaluate it for//
+// a week, becuase there where simply no eval points in circulation(on my lvl)//
+// Still proud on my achivment, I started the next projects and finished the  //
+// coding part of the first circle in the first three weeks.				  //
+// At the time my startup, I slidered in and became co-founder 1 Month prior  //
+// to 42, started to become more serious and work intensive. Suddenly I was   //
+// developing an app, with no prior coding experience other than theoretic    //
+// IT knowledge, literally last-updated 20 years ago, I learned in school.    //
+// Needless to say, that I did not have time or focus for anything 42 related //
+// in the next 7 month.                                                       //
+// Speedrunning another circle, after dipping to 2 days blackhole, and        //
+// a well deserved 2 Month freeze to recover from startup and personal stress //
+// later, I shall return to actually being a student.                         //
+// I am currently writing this to give myself a break from creating silly     //
+// Ascii artworks with stupid lines, based on inside jokes I have with myself.//
+// That should tell you enough about my current level of sanity.              //
+// Tonight I decided to document my libft like a libary, because It's being   //
+// used by my project partner (PS: Sorry if your reading this, thinking this  //
+// was important) and to regaine an overview over the code that I have written//
+// in the past. A overview I would probably have, if I didn't do it at 3 am on//
+// 3 Liters of espresso.                                                      //
+// I know this isn't remotly the right scope for a text like this but I think //
+// this, the head of the little libary that is constantly evolving with me,   //
+// evolving as a student, is the right spot to remind me of my journey, every //
+// time i go to add a new function for my future me.
+// A journey of learning that always trying to speedrun stuff, makes you not  //
+// actually play the game you and your privilidges worked so hard to be a     //
+// part of. LOL                                                               //
+// Also nobody looks iside libft header files after the first circle          //
+////////////////////////////////////////////////////////////////////////////////
+
+/*      /‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\     *\
+       /‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾.‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\
+      /                              .|.                                  \
+     /                     .-..      |||  .                                \
+    /                      | _|_     ||| _|_      o                         \
+   /                      -|- |      .-.  |  .-.  .                          \
+  /                        |  |     (   ) | (   ) |                           \
+ /                         '  `-'____`-'`-`-'`-'-' `-                          \
+( À toi! Small and irresistibly French: With strings, longs and ints <3 À toi!  )
+ \     .-..           .              j_I   .-..          .      .              /
+  \    | _|_       o _|_            .)_(.  | _|_        _|_     |             /
+   \  -|- |        .  |  .-.  .-.   |===| -|- |      .--.|  .--.| .-. .--.   /
+    \  |  |        |  | (   )(   )  /___\  |  |      `--.|  |   |(.-' |  |  /
+     \ '  `-'____-' `-`-'`-'  `-'`-//___\\ '  `-'____`--'`-''   `-`--''  - /
+      \                           /=======\                               /
+       \                         / .-"""-. \                             /
+        \                       |__|     |__|                           /
+\*       ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾     */
 
 /// @brief Computes the length of string \p [str].
 /// @param str String of which length to get.
@@ -44,9 +118,20 @@ long	ft_atoi_l(const char *str);
 /// NULL if the allocation fails.
 char	*ft_itoa(int n);
 
-/*----------------------------------------------------------------------------*/
-/*          Filling the memory like it's my bank account! (Only zer0s)        */
-/*----------------------------------------------------------------------------*/
+/*     /‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\    *\
+      /    ____      __ _                             _          ____    \
+     /    / __ \    / _| |_   _ __  ___ _ __  ___ ___| |_       / __ \    \
+    /    / / / /   |  _|  _| | '  \/ -_) '  \(_-</ -_)  _|     / / / /     \
+   /    / /_/ /    |_|  \__|_|_|_|_\___|_|_|_/__/\___|\__|    / /_/ /       \
+  /     \____/            |___|                               \____/         \
+ /                                                                            \
+( Filling up that memory as if it were my bank account! (There are only zer0s) )
+ \       __ _             _ _           _    __ _     _                       /
+  \     / _| |_   __ __ _| | |___  __  | |  / _| |_  | |__ ______ _ _ ___    /
+   \   |  _|  _| / _/ _` | | / _ \/ _| | | |  _|  _| | '_ \_ / -_) '_/ _ \  /
+    \  |_|  \__|_\__\__,_|_|_\___/\__| | | |_|  \__|_|_.__/__\___|_| \___/ /
+     \        |___|                    |_|        |___|                   /
+\*    \__________________________________________________________________/    */
 
 /// @brief Writes \p n bytes with the value '\0' to the string \p [s].
 /// @param src Pointer to the zeroed string.
@@ -68,9 +153,11 @@ void	*ft_calloc(size_t count, size_t size);
 /// @return Returns a pointer to str.
 void	*ft_memset(void *str, int c, size_t n);
 
-/*----------------------------------------------------------------------------*/
-/*        Moving stuff from memory to memory in 5 diffrent flavours!!!        */
-/*----------------------------------------------------------------------------*/
+/** ***************************************************************************/
+/**                                                                          **/
+/*COPYCATS>Need to copy? Try our 5 original options! More coming-soon<COPYCATS*/
+/**                                                                          **/
+/* ************************************************************************** */
 
 /// @brief Duplicates \p [s1] and allocates sufficent memory for the copy.
 /// @param s1 String to be duplicated.
@@ -154,7 +241,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
 /*----------------------------------------------------------------------------*/
-/* Comparing s1 to s2 for n bytes felt brutal until I discovered this lifehack*/
+/*Comparing s1 to s2 for n bytes felt brutal until I discovered this lifehack.*/
 /*----------------------------------------------------------------------------*/
 
 /// @brief Compares String \p [s1] to String \p [s2] for \p [n] amount of bytes.
@@ -173,7 +260,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /*----------------------------------------------------------------------------*/
-/*  What, when, where or who dafuq is c?? The answer will shock you (!scary!) */
+/*What when or who is c? The quest is not safe. Be alert, they can c your fear*/
 /*----------------------------------------------------------------------------*/
 
 /// @brief Checks if \p c is Alphabetical ("A-Z"/"a-z").
@@ -202,7 +289,7 @@ int		ft_isalnum(int c);
 int		ft_isascii(int c);
 
 /*----------------------------------------------------------------------------*/
-/*       Using strings to make other strings. (Fun for the whole family!)     */
+/*Strings make strings, strings join strings, strings trim strings. Thats life*/
 /*----------------------------------------------------------------------------*/
 
 /// @brief Allocates and returns a new string, consisting of \p [s1]
@@ -313,7 +400,7 @@ int		ft_putnbr_fd(int n, int fd, int i);
 void	ft_putendl_fd(char *s, int fd);
 
 /*----------------------------------------------------------------------------*/
-/*                 What rhymes to list? I whish to not exist.                 */
+/*              What rhymes to list? This shit should not exist!              */
 /*----------------------------------------------------------------------------*/
 
 typedef struct s_list
@@ -400,7 +487,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* ---------------------------------------------------------------------------*/
-/*        Did you miss those gems from the all time classic ft_split()?       */
+/*       Have you missed these gems from the all-time classic ft_split()?     */
 /* ---------------------------------------------------------------------------*/
 
 /// @brief Counts words in string \p [s] delimited by char \p [c].
@@ -421,9 +508,9 @@ int		wordcount(const char *s, char c);
 /// @return Returns a pointer to allocated and Nul-terminated sub-string.
 char	*fillstr(const char *str, int z, int fin);
 
-/* ---------------------------------------------------------------------------*/
-/* ft_printf() now with x 1024 times the choice. Infinity just got an update^°*/
-/* ---------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/*ft_printf(), now with 1024 times more choices. Infinity just got an update^°*/
+/*----------------------------------------------------------------------------*/
 
 /// @brief Formats and prints its arguments \p [...] on the STDOUT. Controlled
 /// by the string \p [format]. The \p [format] string consist of literal chars,
