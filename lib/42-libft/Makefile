@@ -6,7 +6,7 @@
 #    By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 08:11:09 by mreidenb          #+#    #+#              #
-#    Updated: 2023/08/02 03:11:58 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/08/08 00:08:05 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,5 +48,7 @@ fclean:	clean
 re:		fclean all
 
 all:	$(NAME) bonus
+
+allclean: all clean
 
 .PHONY: bonus clean fclean re all

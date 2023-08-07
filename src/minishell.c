@@ -6,11 +6,11 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/01 19:42:32 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/08 00:02:42 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/42-libft/libft.h"
+//#include "../lib/42-libft/libft.h"
 
 #include "minishell.h"
 

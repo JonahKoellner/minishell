@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/07 10:49:53 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:18:33 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSER_H
 
 # include <stdlib.h>
-# include "../lib/42-libft/libft.h"
+# include "../../lib/42-libft/libft.h"
 # include <stdbool.h>
 
 typedef enum TokenType
@@ -59,6 +59,8 @@ typedef struct Command
 
 //Input
 
+int		input_to_lex(char *input);
+
 /// @brief Checks how many potential tokens there are in a string.
 /// Used to calculate allocation size for token array.
 /// @param s String to count number of tokens in.
@@ -72,7 +74,7 @@ int		tokencount(const char *s);
 /// Call with Input = NULL to reset after complete command call.
 /// @param command Input String.
 /// @return Returns the next available token of the input.
-t_Token	get_next_token(char *command);
+t_Token		get_next_token(char *input, t_Token token);
 
 /// @brief Gets the String inside the quotes, returns it and moves the index.
 /// @param command Command with quotes.
@@ -81,17 +83,17 @@ t_Token	get_next_token(char *command);
 char	*quote(char *command, int *i);
 
 /// @brief Checks if given character Needs to be quotet or not.
-/// @param c Charachter to be ckecked
+/// @param c Charachter to be ckecked.
 /// @return Returns 2 if given Charachter needs to be quoted but no whitespace.
 /// Returns 1 if Charachter is whitespace. Returns 0 if Charachter is normal.
 int		is_unquotable(char c);
 
-/// @brief Checks if $ is just a single $ or a indicator for a variable.
-/// Throws Error Message when unexpected token is encountered
-/// @param input Input where $ was encountered
-/// @param i Pointer to current index of \p input
-/// @return Returns $ as a word token if it's just a $ space with whitespaces.
-/// Returns the word as \a token.lexme after the $ as a variable token.
+/// @brief Checks if '$' at \p i is just a single '$' or a indicator for a
+/// variable. Throws Error Message when unexpected token is encountered.
+/// @param input Input where '$' was encountered.
+/// @param i Pointer to the '$' index in \p input
+/// @return Returns '$' as a word token if the '$' is just a lonely '$'.
+/// Returns the word after the '$' in \a token.lexme  as a variable token.
 /// Returns Err token and prints error msg if unexpected token is encountered.
 t_Token	lex_dollar(char *input, int *i);
 
@@ -111,7 +113,7 @@ int		is_allowed_token(t_Token token);
 /// @return Returns 0
 int		empty_input(char *input);
 
-/// @brief prints a quote error to STDIN, adding input to history
+/// @brief prints a quote error to STDIN, adding input to history and
 /// freeing input
 /// @param input Input to add to history and free
 /// @return Returns -1

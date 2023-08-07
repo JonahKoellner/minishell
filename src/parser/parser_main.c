@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/07 10:50:12 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:59:30 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,37 @@ t_Token	command_decide(char c, int *i, int l)
 
 	token.type = TOKEN_COMMAND_NAME;
 	*i += l;
-	if (c == 'e')
-		token.lexeme = fillstr("echo", 0, l);
+	if (c == 'n')
+		token.lexeme = ft_strdup("echo -n");
+	else if (c == 'e')
+		token.lexeme = ft_strdup("echo");
 	else if (c == 'c')
-		token.lexeme = fillstr("cd", 0, l);
+		token.lexeme = ft_strdup("cd");
 	else if (c == 'p')
-		token.lexeme = fillstr("pwd", 0, l);
+		token.lexeme = ft_strdup("pwd");
 	else if (c == 'x')
-		token.lexeme = fillstr("export", 0, l);
+		token.lexeme = ft_strdup("export");
 	else if (c == 'u')
-		token.lexeme = fillstr("unset", 0, l);
+		token.lexeme = ft_strdup("unset");
 	else if (c == 'v')
-		token.lexeme = fillstr("env", 0, l);
+		token.lexeme = ft_strdup("env");
 	else if (c == 'q')
-		token.lexeme = fillstr("exit", 0, l);
+		token.lexeme = ft_strdup("exit");
 	return (token);
 }
 
-//gets the next token, after complete command call with input = NULL to reset
-t_Token	get_next_token(char *input)
+t_Token	get_next_token(char *input, t_Token token)
 {
-	t_Token		token;
 	static int	i = 0;
 
 	if (!input)
-		i = 0;
-	while (input[i] == ' ', input[i] == '\t', input[i] == '\n')
+		i = -1;
+	while (input[i] == ' ' || input[i] == '\t' || input[i] == '\n')
 		i++;
-	if (input[i] == NULL)
+	if (input[i] == NULL || i++ == -1)
 		return ((t_Token){NULL, TOKEN_END});
+	if (!strncmp(&input[i], "echo -n", 7))
+		return (command_decide('n', &i, 7));
 	if (!strncmp(&input[i], "echo", 4))
 		return (command_decide('e', &i, 4));
 	else if (!strncmp(&input[i], "cd", 2))

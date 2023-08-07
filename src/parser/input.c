@@ -6,11 +6,16 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/27 20:17:01 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:13:05 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//void	free_tokens(t_Token *tokens)
+//{
+
+//}
 
 int	input_to_lex(char *input)
 {
@@ -27,11 +32,11 @@ int	input_to_lex(char *input)
 	tokens = ft_calloc(i, sizeof(t_Token));
 	while (i--)
 	{
-		tokens[j++] = get_next_token(input);
+		tokens[j++] = get_next_token(input, (t_Token){NULL, TOKEN_END});
 		if (tokens[j - 1].type == TOKEN_END || tokens[j - 1].type == ERR)
 			break ;
 	}
-	get_next_token(0);
+	get_next_token(0, (t_Token){NULL, TOKEN_END});
 	add_history(input);
 	free(input);
 	if (tokens[j - 1].type == ERR)

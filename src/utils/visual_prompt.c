@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   visual_prompt.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:47:20 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/02 12:57:34 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/08 00:13:39 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	new_line(char *string)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   directory_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/07/31 19:40:11 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/08/08 00:13:44 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	cd(char *path)
 {

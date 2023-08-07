@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/02 12:57:44 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/08 00:12:32 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <stddef.h>
-# include "parser/parser.h"
+# include "../src/parser/parser.h"
 
 # define ERROR -1
 # define SUCCESS 0
 
-# define STDOUT 1
 # define STDIN 0
+# define STDOUT 1
 # define STDERR 2
 
-# include "../lib/42-libft/libft.h"
+# include <libft.h>
 
 //#--------- Structs ----------#//
 typedef struct sys_val
