@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/01 18:07:42 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/07 10:50:12 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_Token	get_next_token(char *input)
 	else if (!strncmp(&input[i], "exit", 4))
 		return (command_decide('q', &i, 4));
 	return (get_next_token_qte(input, &i));
-
 }
 
 t_Token	get_next_token_qte(char *input, int *i)
