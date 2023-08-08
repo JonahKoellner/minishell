@@ -2,7 +2,7 @@
 
 <h2>Error Handeling Lexer </h2>
 
-::: mermaid
+```mermaid
 sequenceDiagram
 	box Shell
 	participant minishell
@@ -44,4 +44,4 @@ sequenceDiagram
 	else No Error in Lexer
 		lexer-->>-minishell: Parser exit code
 	end
-:::
+```

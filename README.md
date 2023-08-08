@@ -4,7 +4,7 @@
 <h2>Example minishell Sequence</h2>
 <! Needs to be simplified, prob. move this to parser section later>
 
-::: mermaid
+```mermaid
 sequenceDiagram
 	box transparent Input Handeling
 	participant minishell
@@ -47,4 +47,4 @@ sequenceDiagram
 			get_next_token-->>input_to_lex: token
 		end
 	end
-:::
+```
