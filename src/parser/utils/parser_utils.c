@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/27 20:08:21 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/08 02:49:57 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_Token	lex_dollar(char *input, int *i)
 		{
 			if (is_unquotable(input[*i] == 2))
 			{
-				unexpected_token((t_Token){ERR, fillstr(input, *i, *i + 1)});
+				unexpected_token((t_Token){ERR, ft_substr(input, *i, 1)});
 				token.type = ERR;
 				break ;
 			}

@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/07/27 18:10:01 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/08 02:19:52 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	parser(t_Token *tokens)
 			if (is_allowed_token(tokens[i + 1]))
 				command = parse_redirect(tokens[i], tokens[i + 1], command);
 			else
-				return (wrong_redirect_token(tokens[i + 1]));
+				return (unexpected_token(tokens[i + 1]));
 		}
 	}
 }
