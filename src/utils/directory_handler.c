@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/09 09:24:36 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:37:29 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
  */
 int	cd(char *path)
 {
+	if (!path)
+		return (chdir("~"));
 	return (chdir(path));
 }
 
