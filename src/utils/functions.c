@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/09 14:03:26 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:16:24 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	echo(char *string, int n_flag)
 }
 
 /**
- * Prints the enviroment variables taken from extern char**environ
+ * @brief Prints the enviroment variables taken from extern char**environ
  *
  * @param void (void) No Parameter.
  * @return Returns 0 on success, no failure catched for now.

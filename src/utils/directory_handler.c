@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/09 13:50:55 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:38:18 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,22 @@ int	pwd(void)
 	pwd = getcwd(NULL, 0);
 	ft_printf("\n%s\n", pwd);
 	free(pwd);
+	return (0);
+}
+
+/**
+ * Check if file exists or create it
+ *
+ * @param path (char *) Path to the file.
+ * @return Returns an error code. -1 == doesnt exist, -2 not given rights, 0 == ok
+*/
+int	check_file(char *path, int rights)
+{
+	if (!path)
+		return (NULL);
+	if (open(path, NULL) == -1)
+		return (-1);
+	if (open(path, rights) == -1)
+		return (-2);
 	return (0);
 }

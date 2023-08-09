@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/09 12:46:01 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:34:04 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/types.h>
 # include <stddef.h>
 # include "../src/parser/parser.h"
+# include <fcntl.h>
 
 # define ERROR -1
 # define SUCCESS 0
