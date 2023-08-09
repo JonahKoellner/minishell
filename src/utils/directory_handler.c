@@ -3,20 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   directory_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/08 00:13:44 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/09 09:24:36 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
+
+/**
+ * Change Path of Current Working Directory
+ *
+ * @param path (char *) The Directory to change to.
+ * @return Return Value from chdir (lib function).
+ */
 int	cd(char *path)
 {
 	return (chdir(path));
 }
 
+/**
+ * Print the current working Directory
+ *
+ * @param void (void) No Parameter.
+ * @return Returns 0 on success, no failure catched for now.
+ */
 int	pwd(void)
 {
 	char	*pwd;
