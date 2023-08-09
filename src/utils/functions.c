@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/09 09:29:20 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:31:37 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	env(void)
  * Exits the Shell and cleans up the remainders
  *
  * @param to_clean (void *) Pointer to anything that needs to be cleaned
- * when exitin the shell.
+ * when exitin the shell. When nothing to clear pass NULL
  * @return (void) No return.
  */
 void	custom_exit(void *to_clean)
