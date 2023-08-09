@@ -6,11 +6,11 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:47:20 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/09 12:44:41 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/09 15:49:05 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 /**
  * Prints a new line of the shell, with string appended
