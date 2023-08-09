@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/09 12:39:47 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:03:26 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,25 @@ void	custom_exit(void *to_clean)
 	if (to_clean)
 		free(to_clean);
 	exit(0);
+}
+
+/**
+ * Executes the programm
+ *
+ * @param path (char *) Path to the executeable
+ * @param args (char *) Array containing the arguments for the programm,
+ *  starting with its own name and ending with null.
+ * @param env_var (char *) Enviroment Variables (Nullable)
+ *
+ * @return (int) Returns value of executing the path.
+ * 1 == function error,
+ * -1 == execve error,
+ * 0 == no error;
+ *
+*/
+int	execute_path(char *path, char *args, char *env_var)
+{
+	if (!path)
+		return (1);
+	return (execve(path, args, env_var));
 }
