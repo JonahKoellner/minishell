@@ -6,11 +6,69 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/08 02:49:57 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/10 21:07:11 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_unused_tokens(t_Token *tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i].type != TOKEN_END)
+	{
+		if (!is_allowed_token(tokens[i]) && tokens[i].lexeme)
+			free(tokens[i].lexeme);
+		i++;
+	}
+}
+
+int	cmd_arg_count(t_Token *tokens)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = -1;
+	while (tokens[i].type != TOKEN_PIPE || tokens[i].type != TOKEN_END)
+	{
+		if (is_allowed_token(tokens[i]))
+			n++;
+	}
+	return (n);
+}
+
+int	cmd_count(t_Token *tokens)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 1;
+	while (tokens[i].type != TOKEN_END)
+	{
+		if (tokens[i].type != TOKEN_PIPE)
+			n++;
+	}
+	return (n);
+}
+
+t_Command	std_command(t_Command command, t_Token *tokens)
+{
+	int	i;
+
+	i = 0;
+	command.type.type = ERR;
+	command.arg_count = cmd_arg_count(tokens);
+	command.arguments = malloc((command.arg_count + 1) * sizeof(t_Token));
+	while (i <= command.arg_count)
+		command.arguments[i++].type = ERR;
+	command.arg_i = 0;
+	command.in_file = STDIN;
+	command.out_file = STDOUT;
+}
 
 int	is_unquotable(char c)
 {
