@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+         #
+#    By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 19:53:44 by jonahkollne       #+#    #+#              #
-#    Updated: 2023/08/08 00:23:27 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/08/12 18:11:09 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,21 @@ UTILS			= $(addprefix $(UTILS_DIR),$(addsuffix .c, $(UTILS_FILES)))
 UTILS_DIR		= $(addprefix $(SRC_DIR), utils/)
 UTILS_FILES		= visual_prompt signal_handler directory_handler
 
+PARSER			= $(addprefix $(PARSER_DIR),$(addsuffix .c, $(PARSER_FILES)))
+PARSER_DIR		= $(addprefix $(SRC_DIR), parser/)
+PARSER_FILES	= input lexer parser quotes
+
+PARSER_UTIL		= $(addprefix $(PARSER_UTIL_DIR),$(addsuffix .c, $(PARSER_UTIL_FIL)))
+PARSER_UTIL_DIR	= $(addprefix $(SRC_DIR), parser/utils)
+PARSER_UTIL_FIL	= lexer_error parser_error parser_utils
+
+##################################-HEADER-######################################
+
 HEADER			= $(addprefix $(HEADER_DIR), $(HEADER_DIR))
 HEADER_DIR		= include/
 HEADER_FILES	= minishell.h
 
-ALL_C			= $(SRC) $(UTILS)
+ALL_C			= $(SRC) $(UTILS) $(PARSER) $(PARSER_UTIL)
 
 ################################################################################
 ##################################-Objects-#####################################

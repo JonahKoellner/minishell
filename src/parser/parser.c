@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/10 21:54:38 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:02:08 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_Command	parse_redirect(t_Token type, t_Token where, t_Command command_pre)
 		command.in_file = ft_strdup(where.lexeme);
 	free(where.lexeme);
 	free(type.lexeme);
+	return (command);
 }
 
 int	check_parsed(t_Command *cmds, int n)

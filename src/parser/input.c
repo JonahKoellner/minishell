@@ -3,19 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/07 14:13:05 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:00:50 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//void	free_tokens(t_Token *tokens)
-//{
+void	free_tokens(t_Token *tokens)
+{
+	int	i;
 
-//}
+	i = 0;
+	while (tokens[i].type != TOKEN_END && tokens[i].type != ERR)
+	{
+		if (tokens[i].lexeme)
+			free(tokens[i].lexeme);
+		i++;
+	}
+	free(tokens);
+}
 
 int	input_to_lex(char *input)
 {
@@ -30,6 +39,8 @@ int	input_to_lex(char *input)
 	else if (i == 0)
 		return (empty_input(input));
 	tokens = ft_calloc(i, sizeof(t_Token));
+	if (!tokens)
+		return (-2);
 	while (i--)
 	{
 		tokens[j++] = get_next_token(input, (t_Token){NULL, TOKEN_END});
@@ -40,7 +51,7 @@ int	input_to_lex(char *input)
 	add_history(input);
 	free(input);
 	if (tokens[j - 1].type == ERR)
-		return (-3); //Would leak here, implement free tokens somwhere
+		return (free_tokens(tokens), -3);
 	return (parser(tokens));
 }
 
