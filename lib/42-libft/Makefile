@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+         #
+#    By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 08:11:09 by mreidenb          #+#    #+#              #
-#    Updated: 2023/08/08 00:08:05 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/08/17 03:50:17 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ MAIN	= isalpha isdigit isalnum isascii isprint strlen memset bzero memcpy memccp
 		memmove strlcpy strlcat toupper tolower strchr strrchr strncmp memchr\
 		memcmp strnstr atoi calloc strdup substr strjoin strtrim split itoa\
 		strmapi striteri putchar_fd putstr_fd putendl_fd putnbr_fd\
-		printf/ft_printf atoi_l printf_fd/ft_printf_fd
+		printf/ft_printf atoi_l printf_fd/ft_printf_fd vecdup vecfree veclen
 BONUS	= lstnew lstadd_front lstsize lstlast lstadd_back lstdelone lstclear\
 		lstiter lstmap
 

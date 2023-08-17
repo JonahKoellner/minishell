@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:09:20 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/02 05:58:04 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/17 07:09:01 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	**ft_split(char const *s, char c)
 		{
 			strarr[i++] = fillstr(s, j, z);
 			if (!strarr[i - 1])
-				return (NULL);
+				return (ft_vecfree(strarr), NULL);
 			j = -1;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/08 00:02:42 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/17 00:29:55 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 
 #include "minishell.h"
 
+/*
+int	main(int argc, char **argv, char **envp)
+{
+	char	*input;
+	char	**env;
+	(void)argc;
+	(void)argv;
+	while (1)
+	{
+		input = input();
+	}
+	
+}
+*/
 
 int	main(void)
 {
@@ -27,13 +41,5 @@ int	main(void)
 	new_line(sys);
 	cd_back(sys);
 	new_line(sys);
-	//while (1)
-	//{
-	//	new_line();
-	//	//add_history(command);
-	//	//printf("exec %s\n", command);
-	//	//if (strncmp(command, "exit", 4) == 0)
-	//		//break ;
-	//}
 	return (1);
 }

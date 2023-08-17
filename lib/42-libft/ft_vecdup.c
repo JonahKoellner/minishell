@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_vecdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 15:46:31 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/17 03:59:00 by mreidenb         ###   ########.fr       */
+/*   Created: 2023/08/17 00:32:00 by mreidenb          #+#    #+#             */
+/*   Updated: 2023/08/17 03:51:16 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+char	**ft_vecdup(const char **vec)
 {
-	int	i;
+	char	**ret_vec;
+	int		i;
 
 	i = 0;
-	while (str[i])
+	if (!vec)
+		return (NULL);
+	ret_vec = ft_calloc(ft_veclen(vec) + 1, sizeof(char *));
+	if (!ret_vec)
+		return (NULL);
+	while (vec[i])
+	{
+		ret_vec[i] = ft_strdup(vec[i]);
+		if (!ret_vec[i])
+			return (ft_vecfree(ret_vec), NULL);
 		i++;
-	return (i);
+	}
+	ret_vec[i] = NULL;
+	return (ret_vec);
 }

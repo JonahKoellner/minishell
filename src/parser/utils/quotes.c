@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 18:08:35 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/01 18:10:03 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/17 06:54:20 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ char	*quote(char *command, int *i)
 	int		start;
 	char	c;
 
-	start = *i;
+	if (command[*i] != '\"' && command[*i] != '\'')
+		return (command);
+	start = *i + 1;
 	c = command[start];
 	while (command[*i] != c)
 	{
@@ -27,5 +29,5 @@ char	*quote(char *command, int *i)
 		}
 		*i++;
 	}
-	return (fillstr(command, start + 1, *i - 1));
+	return (ft_substr(command, start, *i - start));
 }

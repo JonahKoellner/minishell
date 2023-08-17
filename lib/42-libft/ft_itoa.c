@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:22:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2022/10/21 16:50:57 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/17 06:23:07 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("-2147483648"));
 	if (n == 2147483647)
 		return (ft_strdup("2147483647"));
-	toa = malloc(sizeof(char *) * (i));
+	toa = malloc(sizeof(char) * (i) + 1);
 	if (!toa)
 		return (0);
 	if (n < 0)

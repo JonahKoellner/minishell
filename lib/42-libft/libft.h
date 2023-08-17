@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:57:44 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/05 16:22:05 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/17 08:17:21 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 # include <stdlib.h>// Libft is the starting project of the 42 curus and acts //
 # include <unistd.h>// as a foundation for its core curriculum.               //
+# include <stddef.h>// This project is home to all the little helper funtions //
 ////////////////////////////////////////////////////////////////////////////////
 
 // _____                                    _
@@ -400,15 +401,13 @@ int		ft_putchar_fd(char c, int fd);
 /// @param s String to output.
 /// @param fd The file descriptor to write to.
 /// @return Returns number of charachters written.
-/// return != ft=strlen(s) if an error occoured.
+/// Return != ft_strlen(s) if an error occoured.
 int		ft_putstr_fd(char *s, int fd);
 
 /// @brief Outputs the integer \p [n] to the file descriptor \p [fd]
 /// @param n The integer to output.
 /// @param fd The file descriptor to write to.
-/// @param i Counter for written decimals. Always call with i = 1.
-/// @return Returns number of written decimals.
-int		ft_putnbr_fd(int n, int fd, int i);
+void	ft_putnbr_fd(int n, int fd);
 
 /// @brief Outputs string \p [s] to the file descriptor \p [fd] followed by \\n
 /// @param s String to output.
@@ -419,6 +418,7 @@ void	ft_putendl_fd(char *s, int fd);
 /*          What rhymes to linked list? This shit should not exist!           */
 /*----------------------------------------------------------------------------*/
 
+/// @brief A void pointer for your content and a pointer to the next node.
 typedef struct s_list
 {
 	void			*content;
@@ -554,5 +554,22 @@ int		ft_printf(const char *format, ...);
 /// @param [...] Successive arguments, controlled by flags in \p [format].
 /// @return Returns the total number of chars printed.
 int		ft_printf_fd(int fd, const char *format, ...);
+
+/// @brief Computes number of Strings in null-terminated vector \p [vec].
+/// @param vec Null-terminated string vector.
+/// @return Returns the number of Strings in \p [vec]. Returns 0 if Null-
+/// pointer is passed.
+size_t	ft_veclen(const char **vec);
+
+/// @brief Duplicates null-terminated string vector \p [vec].
+/// @param vec Null-terminated string vector.
+/// @return Returns pointer to the duplicated string vector.
+/// Returns 0 and frees if memory allocation fails while duplicating.
+char	**ft_vecdup(const char **vec);
+
+/// @brief Frees every Element in \p [vec] until null-pointer is encountered,
+/// then freeing \p [vec]
+/// @param vec String vector to be freed.
+void	ft_vecfree(char **vec);
 
 #endif

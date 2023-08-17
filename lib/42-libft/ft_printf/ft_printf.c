@@ -3,15 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:15:43 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/02 03:04:50 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/17 06:38:17 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "../libft.h"
+
+/// @brief Outputs the integer \p [n] to the file descriptor \p [fd]
+/// @param n The integer to output.
+/// @param fd The file descriptor to write to.
+/// @param i Counter for written decimals. Always call with i = 1.
+/// @return Returns number of written decimals.
+static int	ft_put_count_nbr_fd(int n, int fd, int i)
+{
+	if (-2147483648 == n)
+	{
+		ft_putstr_fd("-2147483648", fd);
+		return (11);
+	}
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n *= -1;
+		i++;
+	}
+	if (n >= 10)
+		i += ft_put_count_nbr_fd(n / 10, fd, 1);
+	ft_putchar_fd((n % 10) + '0', fd);
+	return (i);
+}
 
 static int	ft_print_uphex(unsigned int n, int count, int base)
 {
@@ -40,7 +64,7 @@ static int	ft_checkflag(va_list arg, char flag)
 	else if (flag == 's')
 		return (ft_putstr_fd(va_arg(arg, char *), 1));
 	else if (flag == 'i' || flag == 'd')
-		return (ft_putnbr_fd (va_arg(arg, int), 1, 1));
+		return (ft_put_count_nbr_fd(va_arg(arg, int), 1, 1));
 	else if (flag == 'u')
 		return (ft_print_hex(va_arg(arg, unsigned int), 1, 10));
 	else if (flag == 'x')

@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_vecfree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 15:46:31 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/17 03:59:00 by mreidenb         ###   ########.fr       */
+/*   Created: 2023/08/17 03:32:25 by mreidenb          #+#    #+#             */
+/*   Updated: 2023/08/17 03:36:35 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+void	ft_vecfree(char **vec)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (vec == NULL)
+		return ;
+	while (vec[i] != NULL)
+		free(vec[i++]);
+	free(vec);
 }

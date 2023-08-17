@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/12 18:00:50 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/17 00:25:20 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_tokens(t_Token *tokens)
 	free(tokens);
 }
 
-int	input_to_lex(char *input)
+int	input_to_lex(char *input, char **env)
 {
 	int		i;
 	int		j;
@@ -55,12 +55,17 @@ int	input_to_lex(char *input)
 	return (parser(tokens));
 }
 
-char	*input(char *command)
+//char	*input(char *prompt)
+char	*input(void)
 {
 	char	*input;
 
 	if (isatty(STDIN))
-		input = readline(command);
-	free(command);
+		input = readline("very small shell > "); 
+				//readline(prompt)
+
+	// Put gnl fallback here for (testers)
+
+	// free(prompt);
 	return (input);
 }
