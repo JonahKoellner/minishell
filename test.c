@@ -60,14 +60,9 @@ void delete(void *content)
 	free(content);
 }
 
-int main(void)
+int	main(void)
 {
-	t_list	*newlst;
-
-	newlst = ft_lstmap(((t_list *){NULL}), map_length, delete);
-	if (newlst)
-		printf("%s\n", (char *)newlst->content);
-	else
-		printf("Japan");
+	memcpy(((void *)0), "segfaulter tu dois", 17);
+	ft_memcpy(((void *)0), ((void *)0), 3);
 	return (0);
 }
