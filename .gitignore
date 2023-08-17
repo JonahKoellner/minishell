@@ -43,6 +43,7 @@
 *.su
 *.idb
 *.pdb
+test.c
 
 # Kernel Module Compile Results
 *.mod*
