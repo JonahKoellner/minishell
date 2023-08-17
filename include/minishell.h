@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/09 14:34:04 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/17 12:03:56 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		new_line(char *string);
 
 //#--------- signal_handler ----------#//
 
+void	sig_decide(int signo, siginfo_t *client_info, void *param);
 void	sig_ctrl_c(int signo, siginfo_t *client_info, void *param);
 void	sig_ctrl_d(int signo, siginfo_t *client_info, void *param);
 

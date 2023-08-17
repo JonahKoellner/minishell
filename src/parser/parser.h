@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/10 21:08:28 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:43:41 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ typedef struct Command
 
 //Input
 
-int			input_to_lex(char *input);
+/// @brief 
+/// @param input 
+/// @param env 
+/// @return 
+int			input_to_lex(char *input, char **env);
 
 /// @brief Checks how many potential tokens there are in a string.
 /// Used to calculate allocation size for token array.
@@ -123,7 +127,7 @@ t_Command	std_command(t_Command command, t_Token *tokens);
 int			empty_input(char *input);
 
 /// @brief prints a quote error to STDIN, adding input to history and
-/// freeing input
+/// freeing input.
 /// @param input Input to add to history and free
 /// @return Returns -1
 int			bad_quote(char *input);

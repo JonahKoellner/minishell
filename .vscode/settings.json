@@ -9,7 +9,8 @@
 		"string_view": "c",
 		"libft.h": "c",
 		"my_utils.h": "c",
-		"utils.h": "c"
+		"utils.h": "c",
+		"list_utils.h": "c"
 	},
 	"workbench.settings.openDefaultKeybindings": true
 }

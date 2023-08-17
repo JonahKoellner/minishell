@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/17 04:31:55 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/17 11:01:38 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_Token	get_next_token(char *input, t_Token token)
 	while (input[i] == ' ' || input[i] == '\t' || input[i] == '\n')
 		i++;
 	if (input[i] == NULL || i++ == -1)
-		return ((t_Token){NULL, TOKEN_END});
+		return ((t_Token){TOKEN_END, NULL});
 	if (!strncmp(&input[i], "echo -n", 7))
 		return (command_decide('n', &i, 7));
 	if (!strncmp(&input[i], "echo", 4))
@@ -111,7 +111,7 @@ t_Token	get_next_token_rst(char *input, int *i)
 
 	if (input[*i] == '$')
 		return (lex_dollar(input, &i));
-	if (!is_unquotable(input[*i]))
+	else if (!is_unquotable(input[*i]))
 	{
 		j = i;
 		while (!is_unquotable(input[*i]))
@@ -120,13 +120,14 @@ t_Token	get_next_token_rst(char *input, int *i)
 		token.type = TOKEN_WORD;
 		return (token);
 	}
-	if (input[*i] == '>' || input[*i] != '<' || input[*i] != '|')
+	else if (input[*i] == '>' || input[*i] != '<' || input[*i] != '|')
 	{
 		token.type = TOKEN_REDIRECT;
 		token.lexeme = fillstr(input, *i, *i + 1);
 		*i++;
 		return (redirect_decide(token, &i));
 	}
+	else if (input[*i] == '\n')
+		return ((t_Token){TOKEN_END, ft_substr(input, *i, 1)});
 	return (token);
-ft_substr();
 }
