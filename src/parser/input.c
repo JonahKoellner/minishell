@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 13:46:18 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/18 14:08:03 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ int	input_to_lex(char *input, char **env)
 		return (-2);
 	while (i--)
 	{
-		tokens[j++] = get_next_token(input, (t_Token){TOKEN_END, NULL});
+		tokens[j++] = get_next_token(input);
 		if (tokens[j - 1].type == TOKEN_END || tokens[j - 1].type == ERR)
 			break ;
 	}
-	get_next_token(0, (t_Token){TOKEN_END, NULL});
+	get_next_token(0);
 	add_history(input);
 	free(input);
 	if (tokens[j - 1].type == ERR)

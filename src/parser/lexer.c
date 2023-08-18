@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/17 11:01:38 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 14:15:44 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_Token	redirect_decide(t_Token token, int *i)
 		token.type = TOKEN_LESS_LESS;
 	else if (token.lexeme[0] == '|' && token.lexeme[1] == ' ')
 		token.type = TOKEN_PIPE;
-	if (token.type == TOKEN_GREAT_GREAT || TOKEN_LESS_LESS)
-		*i++;
+	if (token.type == TOKEN_GREAT_GREAT || token.type == TOKEN_LESS_LESS)
+		*i += 1;
 	else
 		token.lexeme[1] = 0;
 	return (token);
@@ -56,16 +56,14 @@ t_Token	command_decide(char c, int *i, int l)
 	return (token);
 }
 
-t_Token	get_next_token(char *input, t_Token token)
+t_Token	get_next_token(char *input)
 {
 	static int	i = 0;
 
-	if (!input)
-		i = -1;
+	if (!input || input[i] == '\0')
+		return (i = 0, (t_Token){TOKEN_END, NULL});
 	while (input[i] == ' ' || input[i] == '\t' || input[i] == '\n')
 		i++;
-	if (input[i] == NULL || i++ == -1)
-		return ((t_Token){TOKEN_END, NULL});
 	if (!strncmp(&input[i], "echo -n", 7))
 		return (command_decide('n', &i, 7));
 	if (!strncmp(&input[i], "echo", 4))
@@ -92,16 +90,16 @@ t_Token	get_next_token_qte(char *input, int *i)
 	if (input[*i] == '\'')
 	{
 		token.type = TOKEN_LITERAL_CHARS;
-		token.lexeme = quote(input, &i);
+		token.lexeme = quote(input, i);
 		return (token);
 	}
 	else if (input[*i] == '\"')
 	{
 		token.type = TOKEN_LITERAL_STRING;
-		token.lexeme = quote(input, &i);
+		token.lexeme = quote(input, i);
 		return (token);
 	}
-	return (get_next_token_rst(input, &i));
+	return (get_next_token_rst(input, i));
 }
 
 t_Token	get_next_token_rst(char *input, int *i)
@@ -110,12 +108,12 @@ t_Token	get_next_token_rst(char *input, int *i)
 	int		j;
 
 	if (input[*i] == '$')
-		return (lex_dollar(input, &i));
+		return (lex_dollar(input, i));
 	else if (!is_unquotable(input[*i]))
 	{
-		j = i;
+		j = *i;
 		while (!is_unquotable(input[*i]))
-			*i++;
+			*i += 1;
 		token.lexeme = fillstr(input, j, *i);
 		token.type = TOKEN_WORD;
 		return (token);
@@ -124,10 +122,10 @@ t_Token	get_next_token_rst(char *input, int *i)
 	{
 		token.type = TOKEN_REDIRECT;
 		token.lexeme = fillstr(input, *i, *i + 1);
-		*i++;
-		return (redirect_decide(token, &i));
+		*i += 1;
+		return (redirect_decide(token, i));
 	}
 	else if (input[*i] == '\n')
 		return ((t_Token){TOKEN_END, ft_substr(input, *i, 1)});
-	return (token);
+	return ((t_Token){ERR, NULL});
 }

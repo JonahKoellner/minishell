@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/18 13:43:06 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/18 14:32:06 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ int	main(int argc, char **argv, char **envp)
 {
 	char				*inp;
 	char				**env;
-	struct sigaction	s_sigaction;
+	// struct sigaction	s_sigaction;
 
-	s_sigaction.sa_sigaction = sig_decide;
-	s_sigaction.sa_flags = SA_SIGINFO;
+	// s_sigaction.sa_sigaction = sig_decide;
+	// s_sigaction.sa_flags = SA_SIGINFO;
 	(void)argc;
 	(void)argv;
 	env = ft_vecdup((const char**)envp);
 	while (1)
 	{
-		sigaction(SIGINT, &s_sigaction, 0);
-		sigaction(SIGQUIT, &s_sigaction, 0);
+		// sigaction(SIGINT, &s_sigaction, 0);
+		// sigaction(SIGQUIT, &s_sigaction, 0);
 		inp = input();
 		if (inp == 0x00)
 			printf("0x00\n");

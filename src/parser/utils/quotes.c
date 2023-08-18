@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 18:08:35 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/17 06:54:20 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 14:25:51 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*quote(char *command, int *i)
 		{
 			return (NULL);
 		}
-		*i++;
+		*i += 1;
 	}
 	return (ft_substr(command, start, *i - start));
 }

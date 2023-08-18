@@ -6,7 +6,7 @@
 #    By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 19:53:44 by jonahkollne       #+#    #+#              #
-#    Updated: 2023/08/16 20:48:49 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/08/18 14:31:41 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ PARSER_DIR		= $(addprefix $(SRC_DIR), parser/)
 PARSER_FILES	= input lexer parser 
 
 PARSER_UTIL		= $(addprefix $(PARSER_UTIL_DIR),$(addsuffix .c, $(PARSER_UTIL_FIL)))
-PARSER_UTIL_DIR	= $(addprefix $(SRC_DIR), parser/utils)
+PARSER_UTIL_DIR	= $(addprefix $(SRC_DIR), parser/utils/)
 PARSER_UTIL_FIL	= lexer_error parser_error parser_utils quotes
 
 ##################################-HEADER-######################################
@@ -60,7 +60,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER_DIR) $(LIBFT_INCLUDE)
 
 $(NAME):$(ALL_OBJ_DIR) $(ALL_OBJ)
-	$(CC) $(ALL_OBJ) -o $(NAME) $(LIBFT)
+	$(CC) $(ALL_OBJ) -o $(NAME) $(LIBFT) -lreadline
 
 clean:
 	$(RM) $(OBJ)

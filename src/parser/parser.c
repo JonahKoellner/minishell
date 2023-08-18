@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/12 18:02:08 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 14:18:49 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	check_parsed(t_Command *cmds, int n)
 			return (-7);
 		i++;
 	}
+	return (1);
 }
 
 int	parser(t_Token *tokens)
@@ -55,7 +56,10 @@ int	parser(t_Token *tokens)
 	while (tokens[i].type != TOKEN_END)
 	{
 		if (tokens[i].type == TOKEN_PIPE || j < 0)
-			cmds[++j] = std_command(cmds[j], &tokens[i++]);
+		{
+			j++;
+			cmds[j] = std_command(cmds[j], &tokens[i++]);
+		}
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
 			cmds[j] = parse_redirect(tokens[i], tokens[i + 1], cmds[j]);
 		else

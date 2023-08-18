@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/10 21:07:11 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 14:24:30 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ t_Command	std_command(t_Command command, t_Token *tokens)
 	while (i <= command.arg_count)
 		command.arguments[i++].type = ERR;
 	command.arg_i = 0;
-	command.in_file = STDIN;
-	command.out_file = STDOUT;
+	command.in_file = NULL;
+	command.out_file = NULL;
+	return (command);
 }
 
 int	is_unquotable(char c)
@@ -104,7 +105,7 @@ int	tokencount(const char *s)
 			wrd = 0;
 		s++;
 		if (*s == qte)
-			qte = NULL;
+			qte = 0;
 	}
 	return (i * ((qte - 1) * -1));
 }
@@ -130,9 +131,9 @@ t_Token	lex_dollar(char *input, int *i)
 				token.type = ERR;
 				break ;
 			}
-			*i++;
+			*i += 1;
 		}
-		token.lexeme = fillstr(input, j, i);
+		token.lexeme = fillstr(input, j, *i);
 	}
 	return (token);
 }

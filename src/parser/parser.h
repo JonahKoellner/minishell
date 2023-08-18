@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 13:50:19 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 14:01:31 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char		*input(void);
 /// Call with Input = NULL to reset after complete command call.
 /// @param command Input String.
 /// @return Returns the next available token of the input.
-t_Token		get_next_token(char *input, t_Token token);
+t_Token		get_next_token(char *input);
 
 /// @brief Gets the String inside the quotes, returns it and moves the index.
 /// @param command Command with quotes.
@@ -100,6 +100,10 @@ int			is_unquotable(char c);
 /// Returns the word after the '$' in \a token.lexme  as a variable token.
 /// Returns Err token and prints error msg if unexpected token is encountered.
 t_Token		lex_dollar(char *input, int *i);
+
+t_Token		get_next_token_qte(char *input, int *i);
+
+t_Token		get_next_token_rst(char *input, int *i);
 
 //Parser
 int			parser(t_Token *tokens);
