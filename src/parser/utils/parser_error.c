@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:14:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/10 19:45:55 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:06:50 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	unexpected_token(t_Token err_token)
+t_Command	unexpected_token(t_Token err_token)
 {
 	if (err_token.type != TOKEN_END)
 		ft_printf_fd(STDERR, "minishell: Parser Error Near unexp. Token `%s",
@@ -20,11 +20,11 @@ int	unexpected_token(t_Token err_token)
 	else
 		ft_printf_fd(STDERR, "minishell: Parser Error Near unexp. Token `\\n");
 	free(err_token.lexeme);
-	return (-3);
+	return ((t_Command){.err = -3});
 }
 
-int	unclosed_pipe(void)
+t_Command	unclosed_pipe(void)
 {
 	ft_printf_fd(STDERR, "minishell: Parser Error, unclosed Pipe");
-	return (-4);
+	return ((t_Command){.err = -4});
 }

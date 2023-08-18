@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 14:01:31 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:14:56 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ typedef struct Token
 
 typedef struct Command
 {
-	t_Token	type;
-	int		arg_i;
-	int		arg_count;
-	t_Token	*arguments;
-	char	*in_file;
-	char	*out_file;
-	int		err;
+	t_Token		type;
+	int			arg_i;
+	int			arg_count;
+	t_Token		*arguments;
+	char		*in_file;
+	char		*out_file;
+	int			err;
+	void		*next;
 }	t_Command;
 
 //Input
@@ -59,7 +60,7 @@ typedef struct Command
 /// @param input
 /// @param env
 /// @return
-int			input_to_lex(char *input, char **env);
+t_Command	input_to_lex(char *input, char **env);
 
 /// @brief Checks how many potential tokens there are in a string.
 /// Used to calculate allocation size for token array.
@@ -106,7 +107,7 @@ t_Token		get_next_token_qte(char *input, int *i);
 t_Token		get_next_token_rst(char *input, int *i);
 
 //Parser
-int			parser(t_Token *tokens);
+t_Command	parser(t_Token *tokens);
 
 /// @brief Checks if the token is valid for redirect meaning
 /// Word, Variable, String, Name of a command
@@ -133,19 +134,19 @@ t_Command	std_command(t_Command command, t_Token *tokens);
 /// @brief Just frees the input
 /// @param input Input to be freed
 /// @return Returns 0
-int			empty_input(char *input);
+t_Command	empty_input(char *input);
 
 /// @brief prints a quote error to STDIN, adding input to history and
 /// freeing input.
 /// @param input Input to add to history and free
 /// @return Returns -1
-int			bad_quote(char *input);
+t_Command	bad_quote(char *input);
 
 /// @brief Prints parser error message and the token wich caused it
 /// @param err_token The unexpected token
 /// @return Returns -3
-int			unexpected_token(t_Token err_token);
+t_Command	unexpected_token(t_Token err_token);
 
-int			unclosed_pipe(void);
+t_Command	unclosed_pipe(void);
 
 #endif

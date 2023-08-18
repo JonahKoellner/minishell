@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 14:08:03 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 16:43:41 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_tokens(t_Token *tokens)
 	free(tokens);
 }
 
-int	input_to_lex(char *input, char **env)
+t_Command	input_to_lex(char *input, char **env)
 {
 	int		i;
 	int		j;
@@ -41,7 +41,7 @@ int	input_to_lex(char *input, char **env)
 		return (empty_input(input));
 	tokens = ft_calloc(i, sizeof(t_Token));
 	if (!tokens)
-		return (-2);
+		return ((t_Command){.err = -2});
 	while (i--)
 	{
 		tokens[j++] = get_next_token(input);
@@ -52,7 +52,7 @@ int	input_to_lex(char *input, char **env)
 	add_history(input);
 	free(input);
 	if (tokens[j - 1].type == ERR)
-		return (free_tokens(tokens), -3);
+		return (free_tokens(tokens), (t_Command){.err = -3});
 	return (parser(tokens));
 }
 

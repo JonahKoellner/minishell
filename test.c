@@ -42,27 +42,56 @@
 // 	return (len);
 // }
 
-void *map_length(void *s)
-{
-	char *str = malloc(30);
-	if (str != NULL)
-		sprintf(str, "__%lX", strlen((char *)s));
-	return str;
-}
+// void *map_length(void *s)
+// {
+// 	char *str = malloc(30);
+// 	if (str != NULL)
+// 		sprintf(str, "__%lX", strlen((char *)s));
+// 	return str;
+// }
 
-void delete(void *content)
+// void delete(void *content)
+// {
+// 	char *str = (char *)content;
+// 	if (str == NULL)
+// 		return;
+// 	if (str[0] != '_' || str[1] != '_')
+// 		printf("Hamburger \n");
+// 	free(content);
+// }
+
+// int	main(void)
+// {
+// 	memcpy(((void *)0), "segfaulter tu dois", 17);
+// 	ft_memcpy(((void *)0), ((void *)0), 3);
+// 	return (0);
+// }
+
+typedef struct Command
 {
-	char *str = (char *)content;
-	if (str == NULL)
-		return;
-	if (str[0] != '_' || str[1] != '_')
-		printf("Hamburger \n");
-	free(content);
+	// t_Token		type;
+	int			arg_i;
+	int			arg_count;
+	// t_Token		*arguments;
+	char		*in_file;
+	char		*out_file;
+	int			err;
+	// t_Command	*next;
+}	t_Command;
+
+t_Command	is(t_Command	i)
+{
+	i.arg_i += 1;
+	printf("%i\n", i.arg_i);
+	return (i);
 }
 
 int	main(void)
 {
-	memcpy(((void *)0), "segfaulter tu dois", 17);
-	ft_memcpy(((void *)0), ((void *)0), 3);
-	return (0);
+	t_Command	*i;
+
+	i = malloc(sizeof(t_Command));
+	i->arg_i = 5;
+	printf("%i\n", i->arg_i);
+	*i = is(*i);
 }

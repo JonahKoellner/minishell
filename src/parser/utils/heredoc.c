@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 20:49:24 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 11:51:35 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 17:17:22 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,3 @@ void	handle_heredoc(char *delimiter_full, int *fd)
 	free(input);
 	free(delimiter_full);
 }
-
-

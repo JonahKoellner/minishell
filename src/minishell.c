@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/18 14:32:06 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 15:21:16 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,14 @@ int	main(int argc, char **argv, char **envp)
 	// s_sigaction.sa_flags = SA_SIGINFO;
 	(void)argc;
 	(void)argv;
-	env = ft_vecdup((const char**)envp);
+	env = ft_vecdup((const char **)envp);
 	while (1)
 	{
 		// sigaction(SIGINT, &s_sigaction, 0);
 		// sigaction(SIGQUIT, &s_sigaction, 0);
 		inp = input();
-		if (inp == 0x00)
-			printf("0x00\n");
-		if (strcmp(inp, ""))
-			printf("''\n");
-		if (input_to_lex(inp, env) < 0)
-			break ;
+		input_to_lex(inp, env);
+
 
 	}
 
