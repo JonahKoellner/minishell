@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visual_prompt.c                                    :+:      :+:    :+:   */
+/*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 18:47:20 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/18 11:04:45 by jkollner         ###   ########.fr       */
+/*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
+/*   Updated: 2023/08/18 11:05:08 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * Prints a new line of the shell, with string appended
- *
- * @param string (char *) String to append after the minishell standard line.
- * @return Returns 0 on success, no failure catched for now.
- */
-int	new_line(char *string)
+int	executer()
 {
-	char	*pwd;
 
-	pwd = getcwd(NULL, 0);
-	printf("minishell>%s:$ %s", pwd, string);
-	free(pwd);
-	return (0);
 }

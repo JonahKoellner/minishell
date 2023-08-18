@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/17 10:43:41 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 13:40:47 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ typedef struct Command
 
 //Input
 
-/// @brief 
-/// @param input 
-/// @param env 
-/// @return 
+/// @brief
+/// @param input
+/// @param env
+/// @return
 int			input_to_lex(char *input, char **env);
 
 /// @brief Checks how many potential tokens there are in a string.
@@ -66,6 +66,10 @@ int			input_to_lex(char *input, char **env);
 /// @return Returns number of tokens in input.
 /// Returns negative number if unclosed quotes.
 int			tokencount(const char *s);
+
+/// @brief
+/// @param input
+char		*input(void);
 
 //Lexer
 

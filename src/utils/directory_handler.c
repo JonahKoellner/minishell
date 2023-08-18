@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/09 15:48:50 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/18 13:44:22 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	pwd(void)
 int	check_file(char *path, int rights)
 {
 	if (!path)
-		return (NULL);
-	if (open(path, NULL) == -1)
+		return (0);
+	if (open(path, 0) == -1)
 		return (-1);
 	if (open(path, rights) == -1)
 		return (-2);
