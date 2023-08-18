@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/17 12:18:15 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 13:43:06 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 #include "minishell.h"
 
-void	signal_setup(struct sigaction s_sigaction, struct sigaction *s_sigquit)
-{
+// void	signal_setup(struct sigaction s_sigaction, struct sigaction *s_sigquit)
+// {
 
-}
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -29,17 +29,21 @@ int	main(int argc, char **argv, char **envp)
 	s_sigaction.sa_flags = SA_SIGINFO;
 	(void)argc;
 	(void)argv;
-	env = ft_vecdup(envp);
+	env = ft_vecdup((const char**)envp);
 	while (1)
 	{
 		sigaction(SIGINT, &s_sigaction, 0);
 		sigaction(SIGQUIT, &s_sigaction, 0);
 		inp = input();
+		if (inp == 0x00)
+			printf("0x00\n");
+		if (strcmp(inp, ""))
+			printf("''\n");
 		if (input_to_lex(inp, env) < 0)
 			break ;
-		
+
 	}
-	
+
 }
 
 

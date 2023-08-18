@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/17 00:25:20 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 13:46:18 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	input_to_lex(char *input, char **env)
 	int		j;
 	t_Token	*tokens;
 
+	(void)env;
 	j = 0;
 	i = tokencount(input);
 	if (i < 0)
@@ -43,11 +44,11 @@ int	input_to_lex(char *input, char **env)
 		return (-2);
 	while (i--)
 	{
-		tokens[j++] = get_next_token(input, (t_Token){NULL, TOKEN_END});
+		tokens[j++] = get_next_token(input, (t_Token){TOKEN_END, NULL});
 		if (tokens[j - 1].type == TOKEN_END || tokens[j - 1].type == ERR)
 			break ;
 	}
-	get_next_token(0, (t_Token){NULL, TOKEN_END});
+	get_next_token(0, (t_Token){TOKEN_END, NULL});
 	add_history(input);
 	free(input);
 	if (tokens[j - 1].type == ERR)
@@ -60,8 +61,9 @@ char	*input(void)
 {
 	char	*input;
 
+	input = NULL;
 	if (isatty(STDIN))
-		input = readline("very small shell > "); 
+		input = readline("very small shell > ");
 				//readline(prompt)
 
 	// Put gnl fallback here for (testers)
