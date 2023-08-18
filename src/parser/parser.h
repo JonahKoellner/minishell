@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/17 10:43:41 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:03:22 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct Command
 	t_Token	*arguments;
 	char	*in_file;
 	char	*out_file;
+	int		err;
 }	t_Command;
 
 //Input
