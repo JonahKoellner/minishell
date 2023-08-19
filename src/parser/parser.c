@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 18:20:52 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:41:19 by jonahkollne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ t_Command	check_parsed(t_Command cmds, int n)
 t_Command	*parser_next(t_Token *tokens)
 {
 	int			i;
-	int			n;
+	//int			n;
 	t_Command	*cmd;
 
 	i = 0;
-	n = cmd_count(tokens);
+	//n = cmd_count(tokens);
 	cmd = ft_calloc(1, sizeof(t_Command));
 	while (tokens[i].type != TOKEN_END)
 	{

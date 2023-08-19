@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/18 14:01:17 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:38:22 by jonahkollne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 
 int	command_name(t_Command command, char **envp)
 {
+	int	child_pid;
+
+	child_pid = fork();
+	if (child_pid == 0)
+	{
+		// child code
+	}
+	else
+	{
+		// parent code
+	}
+	execute_path();
 	return (0);
 }
 
