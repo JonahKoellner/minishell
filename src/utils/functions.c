@@ -6,7 +6,7 @@
 /*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/19 15:35:04 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/08/19 16:28:45 by jonahkollne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,12 @@ void	custom_exit(void *to_clean)
  * 0 == no error;
  *
 */
-int	execute_path(char *path, char *args, char *env_var)
+int	execute_path(char *path, char *args, char **env_var)
 {
 	if (!path)
 		return (1);
-	if (execve(path, args, env_var) == )
-	return (execve(path, args, env_var));
+	//if (execve(path, args, env_var) == )
+	(void)args;
+	printf("executing in execute path\n");
+	return (execve(path, NULL, env_var));
 }

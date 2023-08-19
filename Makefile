@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 19:53:44 by jonahkollne       #+#    #+#              #
-#    Updated: 2023/08/18 14:31:41 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/08/19 16:27:24 by jonahkollne      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,11 @@ SRC_FILES		= minishell
 
 UTILS			= $(addprefix $(UTILS_DIR),$(addsuffix .c, $(UTILS_FILES)))
 UTILS_DIR		= $(addprefix $(SRC_DIR), utils/)
-UTILS_FILES		= visual_prompt signal_handler directory_handler
+UTILS_FILES		= visual_prompt signal_handler directory_handler executer functions
 
 PARSER			= $(addprefix $(PARSER_DIR),$(addsuffix .c, $(PARSER_FILES)))
 PARSER_DIR		= $(addprefix $(SRC_DIR), parser/)
-PARSER_FILES	= input lexer parser 
+PARSER_FILES	= input lexer parser
 
 PARSER_UTIL		= $(addprefix $(PARSER_UTIL_DIR),$(addsuffix .c, $(PARSER_UTIL_FIL)))
 PARSER_UTIL_DIR	= $(addprefix $(SRC_DIR), parser/utils/)

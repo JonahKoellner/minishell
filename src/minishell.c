@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/18 15:21:16 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:48:34 by jonahkollne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		// sigaction(SIGINT, &s_sigaction, 0);
 		// sigaction(SIGQUIT, &s_sigaction, 0);
 		inp = input();
-		input_to_lex(inp, env);
+		executer(input_to_lex(inp, env), envp);
 
 
 	}
