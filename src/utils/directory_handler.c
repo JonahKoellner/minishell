@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/21 10:24:07 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:34:52 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	pwd(void)
  * Check if file exists or create it
  *
  * @param path (char *) Path to the file.
- * @return Returns an error code. -1 == doesnt exist, -2 not given rights, 0 == ok
+ * @return Returns an error code. -1 == doesnt exist, -2
+ * not given rights, 0 == ok
 */
 int	check_file(char *path, int rights)
 {

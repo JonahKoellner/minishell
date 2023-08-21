@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/21 09:55:59 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:28:51 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	main(int argc, char **argv, char **envp)
 		// sigaction(SIGINT, &s_sigaction, 0);
 		// sigaction(SIGQUIT, &s_sigaction, 0);
 		inp = input();
-		// executer(input_to_lex(inp, env), envp);
-		t_Command com = (t_Command){.type.lexeme = inp};
-		executer(com, envp);
+		executer(input_to_lex(inp, env), envp);
+		// t_Command com = (t_Command){.type.lexeme = inp};
+		// executer(com, envp);
 
 
 	}
