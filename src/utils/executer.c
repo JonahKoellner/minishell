@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/19 16:29:10 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/08/21 10:05:49 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,43 @@ int	command_name(t_Command command, char **envp)
 {
 	int	child_pid;
 
-	(void)command;
-	(void)envp;
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		printf("hello from child\n");
+		printf("child starting command ...\n");
+		execute_path(command.type.lexeme, command.arguments[0].lexeme, envp);
 		// child code
 	}
 	else
 	{
 		// parent code
 	}
-	printf("after execute in command_name\n");
-	execute_path(command.arguments[0].lexeme, NULL, envp);
 	return (0);
 }
 
 int	executer(t_Command command, char **envp)
 {
+	// check for custom function
+	printf("%s\n", command.type.lexeme);
+	if (!ft_strncmp(command.type.lexeme, "cd", ft_strlen(command.type.lexeme)))
+		cd("/Users/jkollner/Dev");
+		// cd(command.arguments[0].lexeme);
+	if (!ft_strncmp(command.type.lexeme, "pwd", ft_strlen(command.type.lexeme)))
+		pwd();
+	// if (!ft_strncmp(command.type.lexeme, "export",
+	// 		ft_strlen(command.type.lexeme)))
+	// 	export();
+	// if (!ft_strncmp(command.type.lexeme, "unset",
+	// 		ft_strlen(command.type.lexeme)))
+	// 	unset();
+	if (!ft_strncmp(command.type.lexeme, "env", ft_strlen(command.type.lexeme)))
+		env();
+	if (!ft_strncmp(command.type.lexeme, "exit",
+			ft_strlen(command.type.lexeme)))
+		custom_exit(NULL);
 
 	//printf("%d\n", command.type.type);
-	command_name(command, envp);
-	//if (command.type.type == TOKEN_COMMAND_NAME)
+	if (command.type.type == TOKEN_COMMAND_NAME)
+		command_name(command, envp);
 	return (0);
 }

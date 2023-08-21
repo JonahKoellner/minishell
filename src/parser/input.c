@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/19 15:55:13 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/08/21 10:05:15 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ char	*input(void)
 
 	input = NULL;
 	if (isatty(STDIN))
-		input = readline("very small shell > ");
+	{
+		new_line("");
+		input = readline("");
 				//readline(prompt)
-
+	}
 	// Put gnl fallback here for (testers)
 
 	// free(prompt);
