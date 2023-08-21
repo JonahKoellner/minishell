@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/21 09:48:20 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:21:39 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,24 @@ int	execute_path(char *path, char *args, char **env_var)
 {
 	if (!path)
 		return (1);
-	//if (execve(path, args, env_var) == )
 	(void)args;
-	printf("executing in execute path\n");
-	return (execve(path, NULL, env_var));
+	// printf("executing in execute path\n");
+	if (access(path, X_OK) == 0)
+		execve(path, NULL, env_var);
+	else
+	{
+		if (errno == EACCES)
+			return (printf("No execution rights\n"), 1);
+		if (access(ft_strjoin("/bin/", path), X_OK) == 0)
+			execve(ft_strjoin("/bin/", path), NULL, env_var);
+		else
+		{
+			if (errno == EACCES)
+				return (printf("No execution rights\n"), 1);
+			if (errno == ENOENT)
+				return (printf("Command not found: %s\n",
+						ft_strjoin("/bin/", path)), 1);
+		}
+	}
+	return (0);
 }

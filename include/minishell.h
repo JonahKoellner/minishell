@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/19 12:19:13 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/08/21 10:25:49 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "../src/parser/parser.h"
 # include "../src/utils/utils.h"
 # include <fcntl.h>
+# include <errno.h>
 
 # define ERROR -1
 # define SUCCESS 0
