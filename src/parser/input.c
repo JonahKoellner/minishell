@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/19 17:08:49 by mreidenb         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/08/21 13:09:32 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -64,9 +65,11 @@ char	*input(void)
 
 	input = NULL;
 	if (isatty(STDIN))
-		input = readline("very small shell > ");
+	{
+		new_line("");
+		input = readline("");
 				//readline(prompt)
-
+	}
 	// Put gnl fallback here for (testers)
 
 	// free(prompt);

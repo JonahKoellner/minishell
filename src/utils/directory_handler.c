@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/18 13:44:22 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:24:07 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	pwd(void)
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
-	ft_printf("\n%s\n", pwd);
+	ft_printf("%s\n", pwd);
 	free(pwd);
 	return (0);
 }
@@ -51,9 +51,9 @@ int	check_file(char *path, int rights)
 {
 	if (!path)
 		return (0);
-	if (open(path, 0) == -1)
+	if (access(path, 0) == -1)
 		return (-1);
-	if (open(path, rights) == -1)
+	if (access(path, rights) == -1)
 		return (-2);
 	return (0);
 }
