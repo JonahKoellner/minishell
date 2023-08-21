@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 15:30:46 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 16:43:41 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:08:49 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_Command	input_to_lex(char *input, char **env)
 		return (bad_quote(input));
 	else if (i == 0)
 		return (empty_input(input));
-	tokens = ft_calloc(i, sizeof(t_Token));
+	tokens = ft_calloc(i + 1, sizeof(t_Token));
+	tokens[i].type = TOKEN_END;
 	if (!tokens)
 		return ((t_Command){.err = -2});
 	while (i--)

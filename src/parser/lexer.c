@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 14:15:44 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/19 16:40:26 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ t_Token	get_next_token_rst(char *input, int *i)
 	else if (input[*i] == '>' || input[*i] != '<' || input[*i] != '|')
 	{
 		token.type = TOKEN_REDIRECT;
-		token.lexeme = fillstr(input, *i, *i + 1);
+		token.lexeme = ft_substr(input, *i, 2);
 		*i += 1;
 		return (redirect_decide(token, i));
 	}

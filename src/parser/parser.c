@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/19 15:41:19 by jonahkollne      ###   ########.fr       */
+/*   Updated: 2023/08/19 17:16:35 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_Command	parser(t_Token *tokens)
 	int			n;
 	t_Command	cmds;
 
+	ft_printf("parser %i \n", tokens[1].type);
 	i = 0;
 	n = cmd_count(tokens);
 	cmds = (t_Command){{ERR, NULL}, 0, 0, NULL, NULL, NULL, 0, NULL};
@@ -81,16 +82,17 @@ t_Command	parser(t_Token *tokens)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
 		{
-			cmds.next = parser_next(&tokens[++i]);
+			return (cmds.next = parser_next(&tokens[++i]), cmds);
 		}
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
 			cmds = parse_redirect(tokens[i], tokens[i + 1], cmds);
-		else
+		else if (!is_allowed_token(tokens[i]))
 			return (unexpected_token(tokens[i + 1]));
 		if (is_allowed_token(tokens[i]) && !cmds.type.lexeme)
 			cmds.type = tokens[i];
 		else if (is_allowed_token(tokens[i]))
 			cmds.arguments[cmds.arg_i++] = tokens[i];
+		i++;
 	}
 	return (free_unused_tokens(tokens), free(tokens), check_parsed(cmds, n));
 }

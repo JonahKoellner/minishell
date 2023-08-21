@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 14:24:30 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:19:51 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_Command	std_command(t_Command command, t_Token *tokens)
 
 	i = 0;
 	command.type.type = ERR;
+	command.type.lexeme = NULL;
 	command.arg_count = cmd_arg_count(tokens);
 	command.arguments = malloc((command.arg_count + 1) * sizeof(t_Token));
 	while (i <= command.arg_count)
@@ -77,7 +78,7 @@ int	is_unquotable(char c)
 		|| c == '(' || c == ')' || c == '$' || c == '`' || c == '\\'
 		|| c == '"' || c == '\'')
 		return (2);
-	else if (c == ' ' || c == '\n' || c == '\t')
+	else if (c == ' ' || c == '\n' || c == '\t' || c == '\n')
 		return (1);
 	else
 		return (0);
@@ -99,7 +100,7 @@ int	tokencount(const char *s)
 			qte = *s;
 			i++;
 		}
-		if ((*s == ' ' || *s == '\n' || *s == '\t') && wrd == 0 && qte == 0)
+		if (!(*s == ' ' || *s == '\n' || *s == '\t') && wrd == 0 && qte == 0)
 			wrd = ++i;
 		if (*s == ' ' || *s == '\n' || *s == '\t')
 			wrd = 0;
@@ -107,6 +108,7 @@ int	tokencount(const char *s)
 		if (*s == qte)
 			qte = 0;
 	}
+	ft_printf("%i\n", i);
 	return (i * ((qte - 1) * -1));
 }
 
