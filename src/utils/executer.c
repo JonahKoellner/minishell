@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/21 13:31:27 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:15:59 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	command_name(t_Command command, char **envp)
 int	executer(t_Command command, char **envp)
 {
 	// check for custom function
-	printf("test %s\n", command.type.lexeme);
+	printf("test %s err %i \n", command.type.lexeme, command.err);
 	// if (!ft_strncmp(command.type.lexeme, "cd", ft_strlen(command.type.lexeme)))
 	// 	cd("/Users/jkollner/Dev");
 	// 	// cd(command.arguments[0].lexeme);

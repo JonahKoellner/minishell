@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/19 17:19:51 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:16:57 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ int	cmd_arg_count(t_Token *tokens)
 
 	i = 0;
 	n = -1;
-	while (tokens[i].type != TOKEN_PIPE || tokens[i].type != TOKEN_END)
+	while (tokens[i].type != TOKEN_PIPE && tokens[i].type != TOKEN_END)
 	{
 		if (is_allowed_token(tokens[i]))
 			n++;
+		i++;
 	}
+	//ft_printf("arg count %i \n", n);
 	return (n);
 }
 
@@ -51,6 +53,7 @@ int	cmd_count(t_Token *tokens)
 	{
 		if (tokens[i].type != TOKEN_PIPE)
 			n++;
+		i++;
 	}
 	return (n);
 }
