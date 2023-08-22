@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/19 16:40:26 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:57:48 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_Token	get_next_token(char *input)
 
 	if (!input || input[i] == '\0')
 		return (i = 0, (t_Token){TOKEN_END, NULL});
-	while (input[i] == ' ' || input[i] == '\t' || input[i] == '\n')
+	while (input[i] == ' ' || input[i] == '\t')
 		i++;
 	if (!strncmp(&input[i], "echo -n", 7))
 		return (command_decide('n', &i, 7));
@@ -125,7 +125,7 @@ t_Token	get_next_token_rst(char *input, int *i)
 		*i += 1;
 		return (redirect_decide(token, i));
 	}
-	else if (input[*i] == '\n')
+	else if (input[*i] == '\n' || input[*i] == '\0')
 		return ((t_Token){TOKEN_END, ft_substr(input, *i, 1)});
 	return ((t_Token){ERR, NULL});
 }

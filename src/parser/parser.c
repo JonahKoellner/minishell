@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/22 13:16:47 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:29:57 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_Command	parser(t_Token *tokens)
 
 	i = 0;
 	n = cmd_count(tokens);
-	//ft_printf("parser %s \n", tokens[0].lexeme);
+	ft_printf("parser %s \n", tokens[0].lexeme);
 	cmds = (t_Command){{ERR, NULL}, 0, 0, NULL, NULL, NULL, 0, NULL};
 	cmds = std_command(cmds, tokens);
 	while (tokens[i].type != TOKEN_END)
@@ -95,5 +95,5 @@ t_Command	parser(t_Token *tokens)
 		i++;
 	}
 	//ft_printf("parser end %s \n", cmds.type.lexeme);
-	return (free_unused_tokens(tokens), free(tokens), check_parsed(cmds, n));
+	return (free(tokens), check_parsed(cmds, n));
 }

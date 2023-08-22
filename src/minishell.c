@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/21 13:28:51 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:13:47 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char				*inp;
 	char				**env;
+	t_Command			cmd;
 	// struct sigaction	s_sigaction;
 
 	// s_sigaction.sa_sigaction = sig_decide;
@@ -35,7 +36,9 @@ int	main(int argc, char **argv, char **envp)
 		// sigaction(SIGINT, &s_sigaction, 0);
 		// sigaction(SIGQUIT, &s_sigaction, 0);
 		inp = input();
-		executer(input_to_lex(inp, env), envp);
+		cmd = input_to_lex(inp, env);
+		if (cmd.err == 0)
+			executer(cmd, envp);
 		// t_Command com = (t_Command){.type.lexeme = inp};
 		// executer(com, envp);
 

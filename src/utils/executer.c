@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/22 13:15:59 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:02:17 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	executer(t_Command command, char **envp)
 	// // 	unset();
 	// if (!ft_strncmp(command.type.lexeme, "env", ft_strlen(command.type.lexeme)))
 	// 	env();
-	// if (!ft_strncmp(command.type.lexeme, "exit",
-	// 		ft_strlen(command.type.lexeme)))
-	// 	custom_exit(NULL);
+	if (!ft_strncmp(command.type.lexeme, "exit",
+			ft_strlen(command.type.lexeme)))
+		custom_exit(NULL);
 
 	// //printf("%d\n", command.type.type);
 	// if (command.type.type == TOKEN_COMMAND_NAME)

@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/22 13:16:57 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:12:16 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_Command	std_command(t_Command command, t_Token *tokens)
 	command.arg_i = 0;
 	command.in_file = NULL;
 	command.out_file = NULL;
+	command.err = 0;
 	return (command);
 }
 
@@ -81,7 +82,7 @@ int	is_unquotable(char c)
 		|| c == '(' || c == ')' || c == '$' || c == '`' || c == '\\'
 		|| c == '"' || c == '\'')
 		return (2);
-	else if (c == ' ' || c == '\n' || c == '\t' || c == '\n')
+	else if (c == ' ' || c == '\n' || c == '\t' || c == '\n' || c == '\0')
 		return (1);
 	else
 		return (0);
