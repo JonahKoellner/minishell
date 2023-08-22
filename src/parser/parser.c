@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/22 13:29:57 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:50:41 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,20 @@ t_Command	*parser_next(t_Token *tokens)
 	i = 0;
 	//n = cmd_count(tokens);
 	cmd = ft_calloc(1, sizeof(t_Command));
+	*cmd = std_command(*cmd, tokens);
 	while (tokens[i].type != TOKEN_END)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
 			return (cmd->next = parser_next(&tokens[++i]), cmd);
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
 			parse_redirect(tokens[i], tokens[i + 1], *cmd);
-		else
+		else if (!is_allowed_token(tokens[i]))
 			return (*cmd = unexpected_token(tokens[i + 1]), cmd);
-		if (is_allowed_token(tokens[i]) && !cmd->type.lexeme)
+		if (is_allowed_token(tokens[i]) && cmd->type.lexeme == NULL)
 			cmd->type = tokens[i];
 		else if (is_allowed_token(tokens[i]))
 			cmd->arguments[cmd->arg_i++] = tokens[i];
+		i++;
 	}
 	return (cmd);
 }
