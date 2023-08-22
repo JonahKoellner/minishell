@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/22 14:12:16 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:42:09 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ t_Token	lex_dollar(char *input, int *i)
 	int		j;
 	t_Token	token;
 
-	i = 0;
+	j = 0;
 	token.type = TOKEN_WORD;
 	if (is_unquotable(input[*i + 1]) == 1)
 		token.lexeme = ft_strdup("$");
@@ -139,6 +139,7 @@ t_Token	lex_dollar(char *input, int *i)
 			}
 			*i += 1;
 		}
+		ft_printf("lex dollar i %i \n", *i);
 		token.lexeme = fillstr(input, j, *i);
 	}
 	return (token);
