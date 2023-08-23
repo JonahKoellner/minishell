@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/23 13:08:47 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:10:08 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	tokencount(const char *s)
 			qte = 0;
 		s++;
 	}
-	//ft_printf("%i\n", qte);
+	//ft_printf("%i\n", i);
 	return (i * ((qte - 1) * -1));
 }
 

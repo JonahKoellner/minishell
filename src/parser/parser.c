@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/22 14:50:41 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/23 09:56:57 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_Command	parser(t_Token *tokens)
 
 	i = 0;
 	n = cmd_count(tokens);
-	ft_printf("parser %s \n", tokens[0].lexeme);
+	// ft_printf("parser %s \n", tokens[0].lexeme);
 	cmds = (t_Command){{ERR, NULL}, 0, 0, NULL, NULL, NULL, 0, NULL};
 	cmds = std_command(cmds, tokens);
 	while (tokens[i].type != TOKEN_END)

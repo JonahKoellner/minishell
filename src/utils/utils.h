@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:09:08 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/21 09:56:34 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:13:59 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 //------------------ Functions ------------------//
 
 int	env(void);
-int	execute_path(char *path, char *args, char **env_var);
+int	execute_path(t_Command command, char **env_var, char *args[]);
 int	pwd(void);
 int	executer(t_Command command, char **envp);
+int	print_history(void);
 #endif

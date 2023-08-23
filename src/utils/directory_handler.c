@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/21 13:34:52 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:13:14 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@
  */
 int	cd(char *path)
 {
+	int	cd_ret;
+
 	if (!path)
 		return (chdir("~"));
-	return (chdir(path));
+	cd_ret = chdir(path);
+	if (cd_ret == -1)
+		printf("cd: no such file or directory: %s\n", path);
+	return (cd_ret);
 }
 
 /**
