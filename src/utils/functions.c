@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/23 11:15:56 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:47:50 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  */
 int	echo(char *string, int n_flag)
 {
-	printf("\n%s", string);
+	printf("%s", string);
 	if (n_flag)
 	{
 		printf("\n");

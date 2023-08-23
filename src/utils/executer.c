@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/23 11:13:47 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/23 14:57:23 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	execute_path(t_Command command, char **env_var, char *args[])
 {
 	if (!command.type.lexeme)
 		return (1);
+	// printf("executer with: %s\n", command.type.lexeme);
 	if (access(command.type.lexeme, X_OK) == 0)
 		execve(command.type.lexeme, NULL, env_var);
 	else
@@ -51,52 +52,60 @@ int	execute_path(t_Command command, char **env_var, char *args[])
 	return (0);
 }
 
-int	command_name(t_Command command, char **envp)
+int	check_customs(t_Command command, char **envp)
 {
-	int		child_pid;
-
-	child_pid = fork();
-	if (child_pid == 0)
-	{
-		execute_path(command, envp,
-			(char *[3]){command.type.lexeme,
-			command.arguments[0].lexeme, NULL});
-		_exit(0);
-	}
-	else
-	{
-		waitpid(child_pid, NULL, 0);
-	}
-	return (0);
+	(void)envp;
+	if (!ft_strncmp(command.type.lexeme, "cd", 3))
+		return (cd(command.arguments->lexeme), 0);
+	if (!ft_strncmp(command.type.lexeme, "pwd", 4))
+		return(pwd(), 0);
+	if (!ft_strncmp(command.type.lexeme, "echo", 5))
+		return (echo(command.arguments[0].lexeme, 0), 0);
+	if (!ft_strncmp(command.type.lexeme, "env", 4))
+		return (env(), 0);
+	if (!ft_strncmp(command.type.lexeme, "exit", 5))
+		return (custom_exit(NULL), 0);
+	if (!ft_strncmp(command.type.lexeme, "history", 5))
+		return (print_history(), 0);
+	return (1);
 }
 
 int	executer(t_Command command, char **envp)
 {
-	//printf("%d\n", command.type.type);
-	// if (command.type.type == TOKEN_COMMAND_NAME)
+	int	child_pid;
+
+	if (check_customs(command, envp) == 1)
+	{
+		child_pid = fork();
+		if (child_pid == 0)
+		{
+			execute_path(command, envp, (char *[3]){command.type.lexeme,
+				command.arguments[0].lexeme, NULL});
+			exit(0);
+		}else
+			waitpid(child_pid, NULL, 0);
+	}
+	// child_pid = fork();
+	// if (child_pid == 0)
 	// {
-		if (!ft_strncmp(command.type.lexeme, "cd", 3))
-			cd(command.arguments->lexeme);
-		else if (!ft_strncmp(command.type.lexeme, "pwd",
-				4))
-			pwd();
-		// if (!ft_strncmp(command.type.lexeme, "export",
-		// 		ft_strlen(command.type.lexeme)))
-		// 	export();
-		// if (!ft_strncmp(command.type.lexeme, "unset",
-		// 		ft_strlen(command.type.lexeme)))
-		// 	unset();
-		else if (!ft_strncmp(command.type.lexeme, "env",
-				4))
-			env();
-		else if (!ft_strncmp(command.type.lexeme, "exit",
-				5))
-			custom_exit(NULL);
-		else if (!ft_strncmp(command.type.lexeme, "history",
-				5))
-			print_history();
-		else
-			command_name(command, envp);
+	// 	// Child Code
+	// 	if (check_customs(command, envp) == 1)
+	// 	{
+	// 		execute_path(command, envp, (char *[3]){command.type.lexeme,
+	// 			command.arguments[0].lexeme, NULL});
+	// 	}
+	// 	exit(0); // Exit child Process
 	// }
+	// else
+	// 	waitpid(child_pid, NULL, 0);
+
+
+	// printf("%d\n", command.type.type);
+	// // if (command.type.type == TOKEN_COMMAND_NAME)
+	// // {
+
+	// 	else
+	// 		command_name(command, envp);
+	// // }
 	return (0);
 }
