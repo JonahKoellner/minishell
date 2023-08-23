@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/23 14:57:23 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/23 15:18:04 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,24 @@ int	check_customs(t_Command command, char **envp)
 
 int	executer(t_Command command, char **envp)
 {
-	int	child_pid;
+	int		child_pid;
+	char	**args;
+
 
 	if (check_customs(command, envp) == 1)
 	{
 		child_pid = fork();
 		if (child_pid == 0)
 		{
-			execute_path(command, envp, (char *[3]){command.type.lexeme,
-				command.arguments[0].lexeme, NULL});
-			exit(0);
+			args = ft_calloc(3, sizeof(char *));
+			if (args == NULL)
+				printf("fuck calloc\n");
+			args[0] = command.type.lexeme;
+			args[1] = command.arguments[0].lexeme;
+			args[2] = NULL;
+			execute_path(command, envp, args);
+			perror("execve");
+			exit(1);
 		}else
 			waitpid(child_pid, NULL, 0);
 	}
