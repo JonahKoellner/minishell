@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/23 09:56:04 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:27:24 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,13 @@ int	execute_path(t_Command command, char **env_var, char *args[])
 int	command_name(t_Command command, char **envp)
 {
 	int		child_pid;
-	char	**args;
-	int		index;
 
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		args = ft_calloc(3, sizeof(char *));
-		index = 0;
-		while (index < 3)
-			args[index++] = ft_calloc(1, sizeof(char *));
-		args[0] = command.type.lexeme;
-		args[1] = command.arguments[0].lexeme;
-		execute_path(command, envp, args);
+		execute_path(command, envp,
+			(char *[3]){command.type.lexeme,
+			command.arguments[0].lexeme, NULL});
 		_exit(0);
 	}
 	else
@@ -78,27 +72,28 @@ int	command_name(t_Command command, char **envp)
 
 int	executer(t_Command command, char **envp)
 {
-	if (!ft_strncmp(command.type.lexeme, "cd", 3))
-		cd(command.arguments->lexeme);
-	else if (!ft_strncmp(command.type.lexeme, "pwd",
-			4))
-		pwd();
-	// if (!ft_strncmp(command.type.lexeme, "export",
-	// 		ft_strlen(command.type.lexeme)))
-	// 	export();
-	// if (!ft_strncmp(command.type.lexeme, "unset",
-	// 		ft_strlen(command.type.lexeme)))
-	// 	unset();
-	else if (!ft_strncmp(command.type.lexeme, "env",
-			4))
-		env();
-	else if (!ft_strncmp(command.type.lexeme, "exit",
-			5))
-		custom_exit(NULL);
-	else
-		command_name(command, envp);
-
-	// //printf("%d\n", command.type.type);
+	//printf("%d\n", command.type.type);
 	// if (command.type.type == TOKEN_COMMAND_NAME)
+	// {
+		if (!ft_strncmp(command.type.lexeme, "cd", 3))
+			cd(command.arguments->lexeme);
+		else if (!ft_strncmp(command.type.lexeme, "pwd",
+				4))
+			pwd();
+		// if (!ft_strncmp(command.type.lexeme, "export",
+		// 		ft_strlen(command.type.lexeme)))
+		// 	export();
+		// if (!ft_strncmp(command.type.lexeme, "unset",
+		// 		ft_strlen(command.type.lexeme)))
+		// 	unset();
+		else if (!ft_strncmp(command.type.lexeme, "env",
+				4))
+			env();
+		else if (!ft_strncmp(command.type.lexeme, "exit",
+				5))
+			custom_exit(NULL);
+		else
+			command_name(command, envp);
+	// }
 	return (0);
 }

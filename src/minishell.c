@@ -6,18 +6,13 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/23 09:03:18 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:31:22 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "../lib/42-libft/libft.h"
 
 #include "minishell.h"
-
-// void	signal_setup(struct sigaction s_sigaction, struct sigaction *s_sigquit)
-// {
-
-// }
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -37,6 +32,8 @@ int	main(int argc, char **argv, char **envp)
 		// sigaction(SIGQUIT, &s_sigaction, 0);
 		inp = input();
 		cmd = input_to_lex(inp, env);
+		if (cmd.type.lexeme == NULL)
+			printf("\n");
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 			executer(cmd, envp);
 		// t_Command com = (t_Command){.type.lexeme = inp};
@@ -46,19 +43,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 
 }
-
-
-// int	main(void)
-// {
-// 	//char	*command;
-// 	char	*start_dir;
-
-// 	t_sys_val *sys = malloc(sizeof(t_sys_val));
-// 	start_dir = malloc(sizeof(char) * 16);
-// 	ft_strlcpy(start_dir, "Dev/42/minishell", 16);
-// 	cd_arg(sys, start_dir);
-// 	new_line(sys);
-// 	cd_back(sys);
-// 	new_line(sys);
-// 	return (1);
-// }
