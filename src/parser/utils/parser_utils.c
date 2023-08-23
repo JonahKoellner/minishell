@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/22 14:42:09 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:08:47 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,20 +99,20 @@ int	tokencount(const char *s)
 	i = 0;
 	while (*s)
 	{
-		if ((*s == '\'' || *s == '"') && qte == 0)
+		if ((*s == '\'' || *s == '\"') && qte == 0)
 		{
-			qte = *s;
+			qte = *s++;
 			i++;
 		}
 		if (!(*s == ' ' || *s == '\n' || *s == '\t') && wrd == 0 && qte == 0)
 			wrd = ++i;
 		if (*s == ' ' || *s == '\n' || *s == '\t')
 			wrd = 0;
-		s++;
 		if (*s == qte)
 			qte = 0;
+		s++;
 	}
-	ft_printf("%i\n", i);
+	//ft_printf("%i\n", qte);
 	return (i * ((qte - 1) * -1));
 }
 
