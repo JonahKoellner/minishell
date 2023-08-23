@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/22 14:42:09 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/23 09:57:04 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	tokencount(const char *s)
 		if (*s == qte)
 			qte = 0;
 	}
-	ft_printf("%i\n", i);
+	// ft_printf("%i\n", i);
 	return (i * ((qte - 1) * -1));
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jonahkollner <jonahkollner@student.42.f    +#+  +:+       +#+         #
+#    By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 19:53:44 by jonahkollne       #+#    #+#              #
-#    Updated: 2023/08/19 16:27:24 by jonahkollne      ###   ########.fr        #
+#    Updated: 2023/08/23 09:58:15 by jkollner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ clean:
 	$(RM) $(OBJ)
 
 fclean:	clean
-	@${RM} ${NAME}
+	${RM} ${NAME}
 
 re:		fclean all
 

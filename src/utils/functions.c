@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/21 11:21:39 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/23 09:36:41 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,44 +60,4 @@ void	custom_exit(void *to_clean)
 	if (to_clean)
 		free(to_clean);
 	exit(0);
-}
-
-/**
- * Executes the programm
- *
- * @param path (char *) Path to the executeable
- * @param args (char *) Array containing the arguments for the programm,
- *  starting with its own name and ending with null.
- * @param env_var (char *) Enviroment Variables (Nullable)
- *
- * @return (int) Returns value of executing the path.
- * 1 == function error,
- * -1 == execve error,
- * 0 == no error;
- *
-*/
-int	execute_path(char *path, char *args, char **env_var)
-{
-	if (!path)
-		return (1);
-	(void)args;
-	// printf("executing in execute path\n");
-	if (access(path, X_OK) == 0)
-		execve(path, NULL, env_var);
-	else
-	{
-		if (errno == EACCES)
-			return (printf("No execution rights\n"), 1);
-		if (access(ft_strjoin("/bin/", path), X_OK) == 0)
-			execve(ft_strjoin("/bin/", path), NULL, env_var);
-		else
-		{
-			if (errno == EACCES)
-				return (printf("No execution rights\n"), 1);
-			if (errno == ENOENT)
-				return (printf("Command not found: %s\n",
-						ft_strjoin("/bin/", path)), 1);
-		}
-	}
-	return (0);
 }

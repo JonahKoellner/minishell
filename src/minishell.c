@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/22 14:13:47 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/23 09:03:18 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv, char **envp)
 		// sigaction(SIGQUIT, &s_sigaction, 0);
 		inp = input();
 		cmd = input_to_lex(inp, env);
-		if (cmd.err == 0)
+		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 			executer(cmd, envp);
 		// t_Command com = (t_Command){.type.lexeme = inp};
 		// executer(com, envp);
