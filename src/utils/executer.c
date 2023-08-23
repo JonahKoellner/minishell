@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/23 10:27:24 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:13:47 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ int	executer(t_Command command, char **envp)
 		else if (!ft_strncmp(command.type.lexeme, "exit",
 				5))
 			custom_exit(NULL);
+		else if (!ft_strncmp(command.type.lexeme, "history",
+				5))
+			print_history();
 		else
 			command_name(command, envp);
 	// }

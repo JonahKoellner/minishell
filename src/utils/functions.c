@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/23 09:36:41 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:15:56 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,26 @@ void	custom_exit(void *to_clean)
 	if (to_clean)
 		free(to_clean);
 	exit(0);
+}
+
+/**
+ * Prints the history of commands
+ * @param void (void) No Parameter.
+ * @return Returns 0 on success, no failure catched for now.
+ */
+int	print_history(void)
+{
+	HIST_ENTRY		**hist;
+	HISTORY_STATE	*hist_state;
+	int				index;
+
+	hist = history_list();
+	hist_state = history_get_history_state();
+	index = 0;
+	while (index < hist_state->length)
+	{
+		printf("\t%d\t%s\n", index + 1, hist[index]->line);
+		index++;
+	}
+	return (0);
 }
