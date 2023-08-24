@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/23 15:18:04 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:39:19 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	check_customs(t_Command command, char **envp)
 		return (env(), 0);
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))
 		return (custom_exit(NULL), 0);
-	if (!ft_strncmp(command.type.lexeme, "history", 5))
-		return (print_history(), 0);
+	//if (!ft_strncmp(command.type.lexeme, "history", 5))
+	//	return (print_history(), 0);
 	return (1);
 }
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 20:49:24 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 17:17:22 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:42:51 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_heredoc(char *delimiter_full, int *fd)
+void	handle_heredoc(char *delimiter_full, int *fd, const char **env)
 {
 	char	*input;
 	char	*delimiter_cut;
@@ -31,7 +31,7 @@ void	handle_heredoc(char *delimiter_full, int *fd)
 		if (ft_strlen(delimiter_full) != ft_strlen(delimiter_cut))
 			ft_putendl_fd(input, fd[1]);
 		else
-			expand();
+			var_expander(input, env);
 		free(input);
 	}
 	free(input);

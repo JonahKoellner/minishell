@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:57:44 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/17 08:17:21 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:25:56 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,6 +316,14 @@ int		ft_isascii(int c);
 /// @return Returns pointer to the new string. NULL if allocation fails.
 char	*ft_strjoin(char const *s1, char const *s2);
 
+/// @brief Allocates and returns a new string, consisting of \p [s1]
+/// (prefix) and \p [s2] (sufix). Frees \p [s1] and \p [s2].
+/// @details Dosen't free if allocation fails.
+/// @param s1 Prefix String.
+/// @param s2 Sufix String.
+/// @return Returns pointer to the new string. NULL if allocation fails.
+char	*ft_strjoin_free(char *s1, char *s2);
+
 /// @brief Appends string \p [src] to the remaining size in \p [dst] and
 /// NUL-terminates the result.
 /// @details It will append at most \p dstsize - strlen(dst) - 1 characters.
@@ -325,7 +333,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 /// string). Also note that ft_strlcat() only operates on true 'C' strings that
 /// means both \p src and \p dst must be NUL-terminated.
 /// If the \p src and \p dst strings overlap, the behavior is undefined.
-/// @param dst Pointer to the destination including the dst string.
+/// @param dst Pointer to the destination including the dst string.xx
 /// @param src Pointer to the append string.
 /// @param dstsize Total size in \p [dst].
 /// @return Returns total length of the string tried to create (strlen(dst)
@@ -341,7 +349,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 /// @return Returns pointer to the trimmed string. NULL if the allocation fails.
 char	*ft_strtrim(char const *s1, char const *set);
 
-/// @brief Allocates and returns a substring from the string \p [s].
+/// @brief Allocates and returns a nul-terminated substring from \p [s].
 /// The substring begins at index \p [start] and is of maximum size \p [len].
 /// @param s String that the substr is created from.
 /// @param start Index of byte where the substr begins.

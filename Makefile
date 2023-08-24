@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+         #
+#    By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 19:53:44 by jonahkollne       #+#    #+#              #
-#    Updated: 2023/08/23 09:58:15 by jkollner         ###   ########.fr        #
+#    Updated: 2023/08/24 19:43:55 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ PARSER_FILES	= input lexer parser
 
 PARSER_UTIL		= $(addprefix $(PARSER_UTIL_DIR),$(addsuffix .c, $(PARSER_UTIL_FIL)))
 PARSER_UTIL_DIR	= $(addprefix $(SRC_DIR), parser/utils/)
-PARSER_UTIL_FIL	= lexer_error parser_error parser_utils quotes
+PARSER_UTIL_FIL	= lexer_error parser_error parser_utils quotes expander
 
 ##################################-HEADER-######################################
 
@@ -64,6 +64,7 @@ $(NAME):$(ALL_OBJ_DIR) $(ALL_OBJ)
 
 clean:
 	$(RM) $(OBJ)
+	$(RM) -r $(OBJ_DIR)
 
 fclean:	clean
 	${RM} ${NAME}

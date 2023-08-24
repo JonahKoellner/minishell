@@ -8,90 +8,75 @@
 #include "lib/42-libft/libft.h"
 //#include "src/minishell.h"
 
-// int	main(void)
-// {
-// 	//int	fd;
-
-// 	//fd = open("WoW", O_WRONLY | O_CREAT | O_TRUNC);
-// 	//printf("Hey %i", fd);
-// 	//write(fd, "Hey wassup", 12);
-// 	char *input = {"echo $(cat burger) >>burger"};
-// 	printf("%i \n", input_to_lex(input));
-// }
-
-
-// void	ft_vecfree(char **vec)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	if (vec == NULL)
-// 		return ;
-// 	while (vec[i] != NULL)
-// 		free(vec[i++]);
-// 	free(vec);
-// }
-
-// size_t	ft_veclen(const char **vec)
-// {
-// 	size_t	len;
-
-// 	len = 0;
-// 	while (vec && vec[len])
-// 		len++;
-// 	return (len);
-// }
-
-// void *map_length(void *s)
-// {
-// 	char *str = malloc(30);
-// 	if (str != NULL)
-// 		sprintf(str, "__%lX", strlen((char *)s));
-// 	return str;
-// }
-
-// void delete(void *content)
-// {
-// 	char *str = (char *)content;
-// 	if (str == NULL)
-// 		return;
-// 	if (str[0] != '_' || str[1] != '_')
-// 		printf("Hamburger \n");
-// 	free(content);
-// }
-
-// int	main(void)
-// {
-// 	memcpy(((void *)0), "segfaulter tu dois", 17);
-// 	ft_memcpy(((void *)0), ((void *)0), 3);
-// 	return (0);
-// }
-
-typedef struct Command
+int	is_unquotable(char c)
 {
-	// t_Token		type;
-	int			arg_i;
-	int			arg_count;
-	// t_Token		*arguments;
-	char		*in_file;
-	char		*out_file;
-	int			err;
-	// t_Command	*next;
-}	t_Command;
-
-t_Command	is(t_Command	i)
-{
-	i.arg_i += 1;
-	printf("%i\n", i.arg_i);
-	return (i);
+	if (c == '|' || c == '&' || c == ';' || c == '<' || c == '>'
+		|| c == '(' || c == ')' || c == '$' || c == '`' || c == '\\'
+		|| c == '"' || c == '\'')
+		return (2);
+	else if (c == ' ' || c == '\n' || c == '\t' || c == '\n' || c == '\0')
+		return (1);
+	else
+		return (0);
 }
 
-int	main(void)
+char	*var_search(char *var, const char **env)
 {
-	t_Command	*i;
+	int	i;
+	int	env_len;
+	int	var_len;
 
-	i = malloc(sizeof(t_Command));
-	i->arg_i = 5;
-	printf("%i\n", i->arg_i);
-	*i = is(*i);
+	i = 0;
+	var_len = ft_strlen(var);
+	env_len = ft_veclen(env);
+	while (i < env_len)
+	{
+		if (ft_memcmp(env[i], var, var_len + 1) == '=')
+		{
+			free(var);
+			return (ft_substr(env[i], var_len + 1,
+					ft_strlen(env[i]) - (var_len + 1)));
+		}
+		i++;
+	}
+	return (free(var), ft_strdup(""));
+}
+
+char	*expander(char *input, const char **env)
+{
+	char	*result;
+	char	*tmp;
+	size_t	e;
+	size_t	i;
+
+	i = 0;
+	e = 0;
+	result = ft_strdup("");
+	while (i < ft_strlen(input))
+	{
+		e = i;
+		if (input[i++] == '$')
+		{
+			e = i;
+			while (!is_unquotable(input[i]))
+				i++;
+			tmp = var_search(ft_substr(input, e, i - e), env);
+			result = ft_strjoin(result, tmp);
+			free(tmp);
+		}
+		else
+			result = ft_strjoin_free(result, ft_substr(input, e, i - e));
+	}
+	return (result);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	//t_Command	*i;
+
+	//i = malloc(sizeof(t_Command));
+	//i->arg_i = 5;
+	char *str = var_search("$burger", (const char **)envp);
+	printf("%s\n", str);
+	//*i = is(*i);
 }

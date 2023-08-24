@@ -10,7 +10,8 @@
 		"libft.h": "c",
 		"my_utils.h": "c",
 		"utils.h": "c",
-		"list_utils.h": "c"
+		"list_utils.h": "c",
+		"minishell.h": "c"
 	},
 	"workbench.settings.openDefaultKeybindings": true
 }
