@@ -18,12 +18,13 @@
  * @param string (char *) String to append after the minishell standard line.
  * @return Returns 0 on success, no failure catched for now.
  */
-int	new_line(char *string)
+char	*new_line(void)
 {
 	char	*pwd;
+	char	*prefix;
 
+	prefix = ft_strdup("\e[0;32mminishell> \e[0;94m");
 	pwd = getcwd(NULL, 0);
-	printf("\e[0;32mminishell> \e[0;94m%s\e[0m:$ %s", pwd, string);
-	free(pwd);
-	return (0);
+	prefix = ft_strjoin_free(prefix, pwd);
+	return (ft_strjoin_free(prefix, ft_strdup("\e[0m:$ ")));
 }

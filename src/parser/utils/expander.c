@@ -20,7 +20,7 @@ char	*var_search(char *var, char **env)
 
 	i = 0;
 	var_len = ft_strlen(var);
-	env_len = ft_veclen((const char **)(const char **)env);
+	env_len = ft_veclen((const char **)env);
 	while (i < env_len)
 	{
 		if (ft_memcmp(env[i], var, var_len + 1) == '=')

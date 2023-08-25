@@ -48,6 +48,8 @@ typedef struct Command
 	int			arg_i;
 	int			arg_count;
 	t_Token		*arguments;
+	int			in_fd;
+	int			out_fd;
 	char		*in_file;
 	char		*out_file;
 	int			err;

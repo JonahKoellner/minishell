@@ -31,7 +31,7 @@ int	execute_path(t_Command cmd, char **env_var, char *args[])
 	if (!cmd.type.lexeme)
 		return (1);
 	if (access(cmd.type.lexeme, X_OK) == 0)
-		execve(cmd.type.lexeme, NULL, env_var);
+		execve(cmd.type.lexeme, args, env_var);
 	else
 	{
 		if (errno == EACCES)
