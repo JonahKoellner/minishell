@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/21 13:09:32 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:57:29 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_Command	input_to_lex(char *input, char **env)
 	free(input);
 	if (tokens[j - 1].type == ERR)
 		return (free_tokens(tokens), (t_Command){.err = -3});
-	return (parser(tokens));
+	return (parser(tokens, env));
 }
 
 //char	*input(char *prompt)

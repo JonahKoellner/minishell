@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/25 10:12:02 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:45:30 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*var_search(char *var, char **env)
 
 	i = 0;
 	var_len = ft_strlen(var);
-	env_len = ft_veclen((const char **)env);
+	env_len = ft_veclen((const char **)(const char **)env);
 	while (i < env_len)
 	{
 		if (ft_memcmp(env[i], var, var_len + 1) == '=')
