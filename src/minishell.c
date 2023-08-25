@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/25 13:33:28 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:39:37 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	main(int argc, char **argv, char **envp)
 		// sigaction(SIGQUIT, &s_sigaction, 0);
 		inp = input();
 		cmd = input_to_lex(inp, env);
-		if (cmd.type.lexeme == NULL)
-			printf("\n");
+		// if (cmd.type.lexeme == NULL)
+		// 	printf("\n");
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 			executer(cmd, envp);
 		// t_Command com = (t_Command){.type.lexeme = inp};

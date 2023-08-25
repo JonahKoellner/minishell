@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/25 13:05:53 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/25 16:36:44 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,10 @@ int	executer(t_Command command, char **envp)
 	if (check_customs(command, envp) == 1)
 	{
 		child_pid = fork();
+		signal(SIGINT, SIG_IGN);
 		if (child_pid == 0)
 		{
+			signal(SIGINT, SIG_DFL);
 			args = ft_calloc(3, sizeof(char *));
 			if (args == NULL)
 				printf("fuck calloc\n");
@@ -109,13 +111,15 @@ int	executer(t_Command command, char **envp)
 			if (command.arg_count == 0)
 				args[1] = NULL;
 			args[2] = NULL;
-			printf("%p\t%p\n", args[0], args[1]);
 			execute_path(command, envp, args);
 			perror("execve");
 			free(args);
 			exit(1);
 		}else
+		{
 			waitpid(child_pid, NULL, 0);
+			signal(SIGINT, sig_decide);
+		}
 	}
 	return (0);
 }
