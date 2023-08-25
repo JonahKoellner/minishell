@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/21 10:25:49 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:34:56 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ int		new_line(char *string);
 
 //#--------- signal_handler ----------#//
 
-void	sig_decide(int signo, siginfo_t *client_info, void *param);
-void	sig_ctrl_c(int signo, siginfo_t *client_info, void *param);
-void	sig_ctrl_d(int signo, siginfo_t *client_info, void *param);
+void	sig_decide(int sig);
+// void	sig_ctrl_c(siginfo_t *client_info, void *param);
+void	sig_ctrl_c(void);
+// void	sig_ctrl_d(siginfo_t *client_info, void *param);
+void	sig_ctrl_d(void);
 
 //#--------- Buildin Functions ----------#//
 
@@ -64,5 +66,6 @@ int		echo(char *string, int n_flag);
 
 int		cd(char *path);
 int		pwd(void);
+
 
 #endif

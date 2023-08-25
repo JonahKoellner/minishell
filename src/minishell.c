@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/23 10:31:22 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:33:28 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv, char **envp)
 
 	// s_sigaction.sa_sigaction = sig_decide;
 	// s_sigaction.sa_flags = SA_SIGINFO;
+	signal(SIGINT, sig_decide);
 	(void)argc;
 	(void)argv;
 	env = ft_vecdup((const char **)envp);
