@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/24 19:41:12 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:12:02 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*var_search(char *var, const char **env)
+char	*var_search(char *var, char **env)
 {
 	int	i;
 	int	env_len;
@@ -20,7 +20,7 @@ char	*var_search(char *var, const char **env)
 
 	i = 0;
 	var_len = ft_strlen(var);
-	env_len = ft_veclen(env);
+	env_len = ft_veclen((const char **)env);
 	while (i < env_len)
 	{
 		if (ft_memcmp(env[i], var, var_len + 1) == '=')

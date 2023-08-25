@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/24 15:39:19 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:26:40 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	executer(t_Command command, char **envp)
 	int		child_pid;
 	char	**args;
 
-
 	if (check_customs(command, envp) == 1)
 	{
 		child_pid = fork();
@@ -86,34 +85,16 @@ int	executer(t_Command command, char **envp)
 				printf("fuck calloc\n");
 			args[0] = command.type.lexeme;
 			args[1] = command.arguments[0].lexeme;
+			if (command.arg_count == 0)
+				args[1] = NULL;
 			args[2] = NULL;
+			printf("%p\t%p\n", args[0], args[1]);
 			execute_path(command, envp, args);
 			perror("execve");
+			free(args);
 			exit(1);
 		}else
 			waitpid(child_pid, NULL, 0);
 	}
-	// child_pid = fork();
-	// if (child_pid == 0)
-	// {
-	// 	// Child Code
-	// 	if (check_customs(command, envp) == 1)
-	// 	{
-	// 		execute_path(command, envp, (char *[3]){command.type.lexeme,
-	// 			command.arguments[0].lexeme, NULL});
-	// 	}
-	// 	exit(0); // Exit child Process
-	// }
-	// else
-	// 	waitpid(child_pid, NULL, 0);
-
-
-	// printf("%d\n", command.type.type);
-	// // if (command.type.type == TOKEN_COMMAND_NAME)
-	// // {
-
-	// 	else
-	// 		command_name(command, envp);
-	// // }
 	return (0);
 }
