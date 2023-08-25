@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/25 12:49:43 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:05:53 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	execute_path(t_Command cmd, char **env_var, char *args[])
 {
 	if (!cmd.type.lexeme)
 		return (1);
-	// printf("executer with: %s\n", command.type.lexeme);
 	if (access(cmd.type.lexeme, X_OK) == 0)
 		execve(cmd.type.lexeme, NULL, env_var);
 	else
@@ -70,7 +69,7 @@ int	check_customs(t_Command command, char **envp)
 	if (!ft_strncmp(command.type.lexeme, "cd", 3))
 		return (cd(command.arguments->lexeme), 0);
 	if (!ft_strncmp(command.type.lexeme, "pwd", 4))
-		return(pwd(), 0);
+		return (pwd(), 0);
 	if (!ft_strncmp(command.type.lexeme, "echo", 5))
 		return (echo(command.arguments[0].lexeme, 0), 0);
 	if (!ft_strncmp(command.type.lexeme, "env", 4))
