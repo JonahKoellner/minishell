@@ -46,7 +46,7 @@ typedef struct sys_val
 
 //#--------- visual_prompt ----------#//
 
-int		new_line(char *string);
+char	*new_line(void);
 
 //#--------- signal_handler ----------#//
 

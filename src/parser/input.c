@@ -58,20 +58,17 @@ t_Command	input_to_lex(char *input, char **env)
 	return (parser(tokens, env));
 }
 
-//char	*input(char *prompt)
 char	*input(void)
 {
 	char	*input;
+	char	*prompt;
 
 	input = NULL;
+	prompt = new_line();
 	if (isatty(STDIN))
-	{
-		new_line("");
-		input = readline("");
-				//readline(prompt)
-	}
+		input = readline(prompt);
 	// Put gnl fallback here for (testers)
 
-	// free(prompt);
+	free(prompt);
 	return (input);
 }

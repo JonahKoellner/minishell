@@ -66,7 +66,7 @@ t_Command	std_command(t_Command command, t_Token *tokens)
 	command.type.type = ERR;
 	command.type.lexeme = NULL;
 	command.arg_count = cmd_arg_count(tokens);
-	command.arguments = malloc((command.arg_count + 1) * sizeof(t_Token));
+	command.arguments = ft_calloc((command.arg_count + 1), sizeof(t_Token));
 	while (i <= command.arg_count)
 		command.arguments[i++].type = ERR;
 	command.arg_i = 0;

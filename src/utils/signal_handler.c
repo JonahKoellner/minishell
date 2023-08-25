@@ -24,12 +24,10 @@ void	sig_ctrl_c(void)
 {
 	// (void)client_info;
 	// (void)param;
-	// write(1, "\n", 1);
-	// rl_on_new_line();
-	// rl_replace_line("", 0);
-	// rl_redisplay();
 	write(1, "\n", 1);
-	new_line("");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 /**

@@ -37,9 +37,7 @@ t_Token	command_decide(char c, int *i, int l)
 
 	token.type = TOKEN_COMMAND_NAME;
 	*i += l;
-	if (c == 'n')
-		token.lexeme = ft_strdup("echo -n");
-	else if (c == 'e')
+	if (c == 'e')
 		token.lexeme = ft_strdup("echo");
 	else if (c == 'c')
 		token.lexeme = ft_strdup("cd");
@@ -64,8 +62,6 @@ t_Token	get_next_token(char *input)
 		return (i = 0, (t_Token){TOKEN_END, NULL});
 	while (input[i] == ' ' || input[i] == '\t')
 		i++;
-	if (!strncmp(&input[i], "echo -n", 7))
-		return (command_decide('n', &i, 7));
 	if (!strncmp(&input[i], "echo", 4))
 		return (command_decide('e', &i, 4));
 	else if (!strncmp(&input[i], "cd", 2))
