@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/22 14:42:02 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:55:04 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,13 @@ t_Token	get_next_token_qte(char *input, int *i)
 
 	if (input[*i] == '\'')
 	{
-		token.type = TOKEN_LITERAL_CHARS;
+		token.type = TOKEN_CHARS;
 		token.lexeme = quote(input, i);
 		return (token);
 	}
 	else if (input[*i] == '\"')
 	{
-		token.type = TOKEN_LITERAL_STRING;
+		token.type = TOKEN_STRING;
 		token.lexeme = quote(input, i);
 		return (token);
 	}

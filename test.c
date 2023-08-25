@@ -76,7 +76,8 @@ int	main(int argc, char **argv, char **envp)
 
 	//i = malloc(sizeof(t_Command));
 	//i->arg_i = 5;
-	char *str = var_search("$burger", (const char **)envp);
+	char *str = expander("$$", (const char **)envp);
 	printf("%s\n", str);
+	printf("%s\n", getenv("$$"));
 	//*i = is(*i);
 }

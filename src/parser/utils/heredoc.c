@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 20:49:24 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/24 19:42:51 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:26:13 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ void	handle_heredoc(char *delimiter_full, int *fd, const char **env)
 		if (ft_strlen(delimiter_full) != ft_strlen(delimiter_cut))
 			ft_putendl_fd(input, fd[1]);
 		else
-			var_expander(input, env);
+			ft_putendl_fd(var_expander(input, env), fd[1]);
 		free(input);
 	}
 	free(input);
 	free(delimiter_full);
 }
+

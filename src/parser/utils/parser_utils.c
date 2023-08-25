@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/23 13:10:08 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:07:50 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,11 @@ t_Token	lex_dollar(char *input, int *i)
 	else
 	{
 		j = *i;
+		*i += 1;
 		token.type = TOKEN_VARIABLE;
 		while (is_unquotable(input[*i]) == 0 || is_unquotable(input[*i]) == 2)
 		{
-			if (is_unquotable(input[*i] == 2))
+			if (is_unquotable(input[*i]) == 2)
 			{
 				unexpected_token((t_Token){ERR, ft_substr(input, *i, 1)});
 				token.type = ERR;
@@ -139,7 +140,6 @@ t_Token	lex_dollar(char *input, int *i)
 			}
 			*i += 1;
 		}
-		ft_printf("lex dollar i %i \n", *i);
 		token.lexeme = fillstr(input, j, *i);
 	}
 	return (token);
@@ -149,8 +149,8 @@ int	is_allowed_token(t_Token token)
 {
 	if (token.type == TOKEN_WORD
 		|| token.type == TOKEN_VARIABLE
-		|| token.type == TOKEN_LITERAL_CHARS
-		|| token.type == TOKEN_LITERAL_STRING
+		|| token.type == TOKEN_CHARS
+		|| token.type == TOKEN_STRING
 		|| token.type == TOKEN_COMMAND_NAME)
 		return (1);
 	else

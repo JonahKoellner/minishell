@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/24 19:42:33 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/24 21:59:18 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef enum TokenType
 	TOKEN_WORD,
 	TOKEN_VARIABLE,
 	TOKEN_COMMAND_NAME,
-	TOKEN_LITERAL_CHARS,
-	TOKEN_LITERAL_STRING,
+	TOKEN_CHARS,
+	TOKEN_STRING,
 	TOKEN_REDIRECT,
 	TOKEN_GREAT,
 	TOKEN_LESS,
@@ -107,7 +107,7 @@ t_Token		get_next_token_qte(char *input, int *i);
 t_Token		get_next_token_rst(char *input, int *i);
 
 //Parser
-t_Command	parser(t_Token *tokens);
+t_Command	parser(t_Token *tokens, char **env);
 
 /// @brief Checks if the token is valid for redirect meaning
 /// Word, Variable, String, Name of a command
@@ -151,8 +151,8 @@ t_Command	unclosed_pipe(void);
 
 //expander
 
-char	*var_search(char *var, const char **env);
+char		*var_search(char *var, char **env);
 
-char	*var_expander(char *input, char **env);
+char		*var_expander(char *input, char **env);
 
 #endif

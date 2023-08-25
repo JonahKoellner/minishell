@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/24 15:45:27 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/24 22:09:42 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 int	echo(char *string, int n_flag)
 {
 	printf("%s", string);
-	if (n_flag)
+	if (!n_flag)
 	{
 		printf("\n");
 	}
