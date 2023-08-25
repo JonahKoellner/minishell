@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/24 15:45:27 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:56:59 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	echo(char *string, int n_flag)
 }
 
 /**
- * @brief Prints the enviroment variables taken from extern char**environ
+ * @brief Prints enviorment
  *
  * @param void (void) No Parameter.
  * @return Returns 0 on success, no failure catched for now.
@@ -39,11 +39,33 @@ int	echo(char *string, int n_flag)
 int	env(void)
 {
 	extern char	**environ;
+	int			index;
 
-	while (*environ)
+	index = 0;
+	while (environ[index])
 	{
-		printf("%s\n", *environ);
-		environ++;
+		printf("%s\n", environ[index]);
+		index++;
+	}
+	return (0);
+}
+
+/**
+ * @brief Prints or sets the enviroment variables for the current shell session
+ *
+ * @param envp (char **) enviorment of the system;
+ * given by the main function.
+ * @return Returns 0 on success, no failure catched for now.
+ */
+int	export(char **envp)
+{
+	int	index;
+
+	index = 0;
+	while (envp[index])
+	{
+		printf("%s\n", envp[index]);
+		index++;
 	}
 	return (0);
 }

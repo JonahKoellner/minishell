@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/25 10:26:40 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:49:43 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,22 @@
  * 0 == no error;
  *
 */
-int	execute_path(t_Command command, char **env_var, char *args[])
+int	execute_path(t_Command cmd, char **env_var, char *args[])
 {
-	if (!command.type.lexeme)
+	if (!cmd.type.lexeme)
 		return (1);
 	// printf("executer with: %s\n", command.type.lexeme);
-	if (access(command.type.lexeme, X_OK) == 0)
-		execve(command.type.lexeme, NULL, env_var);
+	if (access(cmd.type.lexeme, X_OK) == 0)
+		execve(cmd.type.lexeme, NULL, env_var);
 	else
 	{
 		if (errno == EACCES)
 			return (printf("No execution rights\n"), 1);
-		if (access(ft_strjoin("/bin/", command.type.lexeme), X_OK) == 0)
-			execve(ft_strjoin("/bin/", command.type.lexeme),
+		if (access(ft_strjoin("/bin/", cmd.type.lexeme), X_OK) == 0)
+			execve(ft_strjoin("/bin/", cmd.type.lexeme),
+				args, env_var);
+		else if (access(ft_strjoin("/usr/bin/", cmd.type.lexeme), X_OK) == 0)
+			execve(ft_strjoin("/usr/bin/", cmd.type.lexeme),
 				args, env_var);
 		else
 		{
@@ -46,12 +49,21 @@ int	execute_path(t_Command command, char **env_var, char *args[])
 				return (printf("No execution rights\n"), 1);
 			if (errno == ENOENT)
 				return (printf("Command not found: %s\n",
-						command.type.lexeme), 1);
+						cmd.type.lexeme), 1);
 		}
 	}
 	return (0);
 }
 
+/**
+ * Checks if the given command is a custom build function
+ *
+ * @param command (t_Command) Command from the parser
+ * @param envp (char **) Enviourment variables given by the main function
+ *
+ * @return (int) 0 if it was a custom command, 1 if not.
+ *
+*/
 int	check_customs(t_Command command, char **envp)
 {
 	(void)envp;
@@ -65,11 +77,21 @@ int	check_customs(t_Command command, char **envp)
 		return (env(), 0);
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))
 		return (custom_exit(NULL), 0);
-	//if (!ft_strncmp(command.type.lexeme, "history", 5))
-	//	return (print_history(), 0);
+	if (!ft_strncmp(command.type.lexeme, "export", 7))
+		return (export(envp), 0);
 	return (1);
 }
 
+/**
+ * Executes the custom command (giving it to the respective function)
+ * or creates child Process and executes the path command in them
+ * (again giving it to the functions)
+ * @param command (t_Command) Command from the parser
+ * @param envp (char **) Enviourment variables given by the main function
+ *
+ * @return (int) 0
+ *
+*/
 int	executer(t_Command command, char **envp)
 {
 	int		child_pid;
