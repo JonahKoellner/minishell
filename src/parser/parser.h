@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/25 12:45:53 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:14:29 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ void		free_unused_tokens(t_Token *tokens);
 
 t_Command	std_command(t_Command command, t_Token *tokens);
 
+t_Command	in_out(t_Token type, t_Token where, t_Command cmd, char **env);
+
 //Error
 
 /// @brief Just frees the input
@@ -156,5 +158,15 @@ t_Command	unclosed_pipe(void);
 char		*var_search(char *var, char **env);
 
 char		*var_expander(char *input, char **env);
+
+//heredoc
+
+void		end_heredoc(char *delimiter_full, int *fd, char **env);
+
+void		handle_heredoc(char *delimiter_full, int *fd, char **env);
+
+t_Command	end_heredoc_parent(int status, int *fd, t_Command Command);
+
+t_Command	make_heredoc(t_Command Command, char **env, char *delimiter);
 
 #endif

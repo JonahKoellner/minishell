@@ -11,7 +11,8 @@
 		"my_utils.h": "c",
 		"utils.h": "c",
 		"list_utils.h": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"parser.h": "c"
 	},
 	"workbench.settings.openDefaultKeybindings": true
 }

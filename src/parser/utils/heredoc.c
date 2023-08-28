@@ -6,21 +6,30 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 20:49:24 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/24 21:26:13 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:22:23 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_heredoc(char *delimiter_full, int *fd, const char **env)
+void	end_heredoc(char *delimiter_full, int *fd, char **env)
+{
+	free(delimiter_full);
+	if (fd[0] > 2)
+		close(fd[0]);
+	if (fd[1] > 2)
+		close(fd[1]);
+	ft_vecfree(env);
+	exit(0);
+}
+
+void	handle_heredoc(char *delimiter_full, int *fd, char **env)
 {
 	char	*input;
 	char	*delimiter_cut;
-	size_t	heredoc_size;
 
-	heredoc_size = 0;
 	delimiter_cut = quote(delimiter_full, &(int){0});
-	*delimiter_cut = NULL;
+	signal(SIGINT, SIG_DFL);
 	while (1)
 	{
 		input = readline("heredoc> ");
@@ -35,6 +44,37 @@ void	handle_heredoc(char *delimiter_full, int *fd, const char **env)
 		free(input);
 	}
 	free(input);
-	free(delimiter_full);
+	//free(delimiter_cut);
+	end_heredoc(delimiter_full, fd, env);
 }
 
+t_Command	end_heredoc_parent(int status, int *fd, t_Command Command)
+{
+	if (WIFSIGNALED(status))
+	{
+		write(STDOUT, "\n", 1);
+		Command.err = 1;
+	}
+	else
+	{
+		signal(SIGINT, sig_decide);
+		close(fd[1]);
+		Command.in_fd = fd[0];
+	}
+	return (Command);
+}
+
+t_Command	make_heredoc(t_Command Command, char **env, char *delimiter)
+{
+	int		fd[2];
+	pid_t	pid;
+	int		status;
+
+	pipe(fd);
+	signal(SIGINT, SIG_IGN);
+	pid = fork();
+	if (pid == 0)
+		handle_heredoc(delimiter, fd, env);
+	waitpid(pid, &status, 0);
+	return (end_heredoc_parent(status, fd, Command));
+}
