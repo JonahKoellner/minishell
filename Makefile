@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+         #
+#    By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 19:53:44 by jonahkollne       #+#    #+#              #
-#    Updated: 2023/08/24 19:43:55 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/08/28 15:37:44 by jkollner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+RM	= rm -f
 
 ################################################################################
 ###########################-Files.c by Folder-##################################
@@ -50,9 +51,6 @@ OBJ_DIR			=	obj/
 ALL_OBJ			=	$(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(ALL_C))
 ALL_OBJ_DIR		=	$(sort $(dir $(ALL_OBJ)))
 
-##
-
-RM	= rm -f
 
 all: libft $(NAME)
 

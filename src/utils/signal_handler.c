@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:18:23 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/28 13:19:34 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:24:33 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 ///  @return No return value.
 void	sig_ctrl_c(void)
 {
-	// (void)client_info;
-	// (void)param;
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -32,9 +30,6 @@ void	sig_ctrl_c(void)
 ///  @return No return value.
 void	sig_ctrl_d(void)
 {
-	// (void)client_info;
-	// (void)param;
-	// custom_exit(param);
 	custom_exit(NULL);
 }
 
@@ -44,8 +39,6 @@ void	sig_ctrl_d(void)
 /// @return No return value.
 void	sig_ctrl_quit(void)
 {
-	// (void)client_info;
-	// (void)param;
 	printf("Quititng with SGIQUIT\n");
 	custom_exit(NULL);
 }

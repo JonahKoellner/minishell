@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/28 15:08:56 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:22:48 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*var_search(char *var, char **env)
 	{
 		if (ft_memcmp(env[i], var, var_len + 1) == '=')
 		{
-			// free(var)
 			return (ft_substr(env[i], var_len + 1,
 					ft_strlen(env[i]) - (var_len + 1)));
 		}

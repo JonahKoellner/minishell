@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/28 11:03:29 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:25:52 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	char				*inp;
 	char				**env;
 	t_Command			cmd;
-	// struct sigaction	s_sigaction;
 
-	// s_sigaction.sa_sigaction = sig_decide;
-	// s_sigaction.sa_flags = SA_SIGINFO;
 	signal(SIGINT, sig_decide);
 	signal(SIGQUIT, sig_decide);
 	// signal(EOF, sig_decide);
@@ -31,16 +28,12 @@ int	main(int argc, char **argv, char **envp)
 	env = ft_vecdup((const char **)envp);
 	while (1)
 	{
-		// sigaction(SIGINT, &s_sigaction, 0);
-		// sigaction(SIGQUIT, &s_sigaction, 0);
 		inp = input();
 		cmd = input_to_lex(inp, env);
 		// if (cmd.type.lexeme == NULL)
 		// 	printf("\n");
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 			executer(cmd, env);
-		// t_Command com = (t_Command){.type.lexeme = inp};
-		// executer(com, envp);
 	}
 
 }

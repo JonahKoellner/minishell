@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/28 15:07:20 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:54:27 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	check_customs(t_Command command, char **envp)
 		return (custom_exit(NULL), 0);
 	if (!ft_strncmp(command.type.lexeme, "export", 7))
 		return (export(command.arguments, command.arg_count, envp), 0);
+	if (!ft_strncmp(command.type.lexeme, "unset", 6))
+		return (unset());
 	return (1);
 }
 

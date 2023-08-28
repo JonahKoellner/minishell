@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/28 13:19:23 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:07:24 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,16 @@ int	export(t_Token *input, int c_arg, char **envp)
 			index++;
 		}
 	}
+	return (0);
+}
+
+/// @brief Unsets the given enviroment varible fromt the given eniroment
+/// @param var (char *) Name of variable to unset
+/// @param envp (char **) The enviroment where to unset
+/// @return int
+int	unset(char *var, char **envp)
+{
+
 	return (0);
 }
 
