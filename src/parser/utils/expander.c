@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/28 11:04:25 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:08:56 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ char	*var_search(char *var, char **env)
 	{
 		if (ft_memcmp(env[i], var, var_len + 1) == '=')
 		{
-			free(var);
+			// free(var)
 			return (ft_substr(env[i], var_len + 1,
 					ft_strlen(env[i]) - (var_len + 1)));
 		}
 		i++;
 	}
-	return (free(var), ft_strdup(""));
+	return (ft_strdup(""));
 }
 
 char	*var_expander(char *input, char **env)

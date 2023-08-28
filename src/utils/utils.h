@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:09:08 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/28 13:07:38 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:06:39 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		echo(t_Token *arguments, int arg_count);
 
 //#--------- Directory Handling ----------#//
 
-int		cd(char *path);
+int		cd(char *path, char **envp);
 int		pwd(void);
 
 //#--------- Execution ----------#//
