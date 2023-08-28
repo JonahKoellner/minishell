@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:09:08 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/28 11:14:30 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:47:50 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	pwd(void);
 int	executer(t_Command command, char **envp);
 int	print_history(void);
 int	export(t_Token *input, int c_arg, char **envp);
+int	echo(t_Token *arguments, int arg_count);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/28 11:14:48 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:51:45 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,28 @@
  * @param n_flag (int) New line flag (0 = no new line, 1 = new line)
  * @return Returns 0 on success, no failure catched for now.
  */
-int	echo(char *string, int n_flag)
+int	echo(t_Token *arguments, int arg_count)
 {
-	printf("%s", string);
-	if (!n_flag)
+	int	index;
+	int	n_flag;
+
+	index = 0;
+	n_flag = 0;
+	if (!arg_count)
+		return (printf("\n"), 0);
+	if (!ft_strncmp(arguments[0].lexeme, "-n", 3))
 	{
-		printf("\n");
+		index++;
+		n_flag = 1;
 	}
+	while (arguments[index].lexeme)
+	{
+		printf("%s", arguments[index++].lexeme);
+		if (index != arg_count)
+			printf(" ");
+	}
+	if (!n_flag)
+		printf("\n");
 	return (0);
 }
 

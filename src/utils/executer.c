@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/28 11:40:55 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:58:09 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	check_customs(t_Command command, char **envp)
 	if (!ft_strncmp(command.type.lexeme, "pwd", 4))
 		return (pwd(), 0);
 	if (!ft_strncmp(command.type.lexeme, "echo", 5))
-		return (echo(command.arguments[0].lexeme, 0), 0);
+		return (echo(command.arguments, command.arg_count));
 	if (!ft_strncmp(command.type.lexeme, "env", 4))
 		return (env(), 0);
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))

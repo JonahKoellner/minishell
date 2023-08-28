@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:35:46 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/25 13:34:56 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:41:45 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	sig_ctrl_d(void);
 
 void	custom_exit(void *to_clean);
 int		env(void);
-int		echo(char *string, int n_flag);
 
 //#--------- Directory Handling ----------#//
 
