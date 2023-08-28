@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/25 12:51:05 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:14:48 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,24 @@ int	env(void)
  * given by the main function.
  * @return Returns 0 on success, no failure catched for now.
  */
-int	export(char **envp)
+int	export(t_Token *input, int c_arg, char **envp)
 {
 	int	index;
 
-	index = 0;
-	while (envp[index])
+	if (c_arg)
 	{
-		printf("%s\n", envp[index]);
-		index++;
+		index = -1;
+		while (input[++index].lexeme)
+			printf("%s\n",var_expander(input[index].lexeme, envp));
+	}
+	else
+	{
+		index = 0;
+		while (envp[index])
+		{
+			printf("%s\n", envp[index]);
+			index++;
+		}
 	}
 	return (0);
 }

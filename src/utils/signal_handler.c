@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:18:23 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/25 16:31:29 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:47:47 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	sig_ctrl_quit(void)
 {
 	// (void)client_info;
 	// (void)param;
+	printf("Quititng with SGIQUIT\n");
 	custom_exit(NULL);
 }
 

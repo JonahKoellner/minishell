@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/25 16:36:44 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:40:55 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,34 @@ int	check_customs(t_Command command, char **envp)
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))
 		return (custom_exit(NULL), 0);
 	if (!ft_strncmp(command.type.lexeme, "export", 7))
-		return (export(envp), 0);
+		return (export(command.arguments, command.arg_count, envp), 0);
 	return (1);
+}
+
+int	process_executer(t_Command command, char **envp)
+{
+	char	**args;
+	int		index;
+
+	signal(SIGINT, SIG_DFL);
+	if (command.arg_count == 0)
+		args = ft_calloc(3, sizeof(char *));
+	else
+		args = ft_calloc(command.arg_count + 2, sizeof(char *));
+	if (args == NULL)
+		return (printf("ft_calloc error !\n"), 1);
+	args[0] = command.type.lexeme;
+	index = 0;
+	while (index <= command.arg_count)
+	{
+		args[index + 1] = command.arguments[index].lexeme;
+		index++;
+	}
+	args[index] = NULL;
+	execute_path(command, envp, args);
+	// perror("execve");
+	free(args);
+	exit(1);
 }
 
 /**
@@ -94,7 +120,6 @@ int	check_customs(t_Command command, char **envp)
 int	executer(t_Command command, char **envp)
 {
 	int		child_pid;
-	char	**args;
 
 	if (check_customs(command, envp) == 1)
 	{
@@ -102,19 +127,7 @@ int	executer(t_Command command, char **envp)
 		signal(SIGINT, SIG_IGN);
 		if (child_pid == 0)
 		{
-			signal(SIGINT, SIG_DFL);
-			args = ft_calloc(3, sizeof(char *));
-			if (args == NULL)
-				printf("fuck calloc\n");
-			args[0] = command.type.lexeme;
-			args[1] = command.arguments[0].lexeme;
-			if (command.arg_count == 0)
-				args[1] = NULL;
-			args[2] = NULL;
-			execute_path(command, envp, args);
-			perror("execve");
-			free(args);
-			exit(1);
+			process_executer(command, envp);
 		}else
 		{
 			waitpid(child_pid, NULL, 0);
