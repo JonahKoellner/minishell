@@ -6,7 +6,7 @@
 #    By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 19:53:44 by jonahkollne       #+#    #+#              #
-#    Updated: 2023/08/24 19:43:55 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/08/28 15:14:01 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ PARSER_FILES	= input lexer parser
 
 PARSER_UTIL		= $(addprefix $(PARSER_UTIL_DIR),$(addsuffix .c, $(PARSER_UTIL_FIL)))
 PARSER_UTIL_DIR	= $(addprefix $(SRC_DIR), parser/utils/)
-PARSER_UTIL_FIL	= lexer_error parser_error parser_utils quotes expander
+PARSER_UTIL_FIL	= lexer_error parser_error parser_utils quotes expander heredoc
 
 ##################################-HEADER-######################################
 

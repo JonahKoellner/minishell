@@ -6,24 +6,23 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/24 21:58:09 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:11:52 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_Command	parse_redirect(t_Token type, t_Token where, t_Command command_pre)
+t_Command	in_out(t_Token type, t_Token where, t_Command cmd, char **env)
 {
-	t_Command	command;
-
-	command = command_pre;
 	if (type.type == TOKEN_GREAT)
-		command.out_file = ft_strdup(where.lexeme);
-	if (type.type == TOKEN_LESS)
-		command.in_file = ft_strdup(where.lexeme);
+		cmd.out_file = ft_strdup(where.lexeme);
+	else if (type.type == TOKEN_LESS)
+		cmd.in_file = ft_strdup(where.lexeme);
+	else if (type.type == TOKEN_LESS_LESS)
+		cmd = make_heredoc(cmd, env, ft_strdup(where.lexeme));
 	free(where.lexeme);
 	free(type.lexeme);
-	return (command);
+	return (cmd);
 }
 
 t_Command	check_parsed(t_Command cmds, int n)
@@ -42,7 +41,7 @@ t_Command	check_parsed(t_Command cmds, int n)
 	return (cmds);
 }
 
-t_Command	*parser_next(t_Token *tokens)
+t_Command	*parser_next(t_Token *tokens, char **env)
 {
 	int			i;
 	//int			n;
@@ -55,9 +54,9 @@ t_Command	*parser_next(t_Token *tokens)
 	while (tokens[i].type != TOKEN_END)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
-			return (cmd->next = parser_next(&tokens[++i]), cmd);
+			return (cmd->next = parser_next(&tokens[++i], env), cmd);
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
-			parse_redirect(tokens[i], tokens[i + 1], *cmd);
+			in_out(tokens[i], tokens[i + 1], *cmd, env);
 		else if (!is_allowed_token(tokens[i]))
 			return (*cmd = unexpected_token(tokens[i + 1]), cmd);
 		if (is_allowed_token(tokens[i]) && cmd->type.lexeme == NULL)
@@ -77,19 +76,19 @@ t_Command	parser(t_Token *tokens, char **env)
 
 	i = 0;
 	n = cmd_count(tokens);
-	cmds = (t_Command){{ERR, NULL}, 0, 0, NULL, NULL, NULL, 0, NULL};
+	cmds = (t_Command){{ERR, NULL}, 0, 0, NULL, 0, 0, NULL, NULL, 0, NULL};
 	cmds = std_command(cmds, tokens);
-	while (tokens[i].type != TOKEN_END)
+	while (tokens[i].type != TOKEN_END && cmds.err == 0)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
-			return (cmds.next = parser_next(&tokens[++i]), cmds);
+			return (cmds.next = parser_next(&tokens[++i], env), cmds);
 		if (tokens[i].type == TOKEN_STRING || tokens[i].type == TOKEN_VARIABLE)
 			tokens[i].lexeme = var_expander(tokens[i].lexeme, env);
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
-			cmds = parse_redirect(tokens[i], tokens[i + 1], cmds);
+			cmds = in_out(tokens[i], tokens[i + 1], cmds, env);
 		else if (!is_allowed_token(tokens[i]))
 			return (unexpected_token(tokens[i + 1]));
-		if (is_allowed_token(tokens[i]) && cmds.type.lexeme == NULL)
+		else if (is_allowed_token(tokens[i]) && cmds.type.lexeme == NULL)
 			cmds.type = tokens[i];
 		else if (is_allowed_token(tokens[i]))
 			cmds.arguments[cmds.arg_i++] = tokens[i];
