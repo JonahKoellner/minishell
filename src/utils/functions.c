@@ -6,20 +6,17 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/28 12:51:45 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:19:23 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * Build in Function Echo
- * Prints given string with or without new line
- *
- * @param string (char *) String to be printed.
- * @param n_flag (int) New line flag (0 = no new line, 1 = new line)
- * @return Returns 0 on success, no failure catched for now.
- */
+/// Build in Function Echo
+/// Prints given string with or without new line
+/// @param string (char *) String to be printed.
+/// @param n_flag (int) New line flag (0 = no new line, 1 = new line)
+/// @return Returns 0 on success, no failure catched for now.
 int	echo(t_Token *arguments, int arg_count)
 {
 	int	index;
@@ -45,12 +42,9 @@ int	echo(t_Token *arguments, int arg_count)
 	return (0);
 }
 
-/**
- * @brief Prints enviorment
- *
- * @param void (void) No Parameter.
- * @return Returns 0 on success, no failure catched for now.
- */
+/// @brief Prints enviorment
+/// @param void (void) No Parameter.
+/// @return Returns 0 on success, no failure catched for now.
 int	env(void)
 {
 	extern char	**environ;
@@ -65,13 +59,10 @@ int	env(void)
 	return (0);
 }
 
-/**
- * @brief Prints or sets the enviroment variables for the current shell session
- *
- * @param envp (char **) enviorment of the system;
- * given by the main function.
- * @return Returns 0 on success, no failure catched for now.
- */
+/// @brief Prints or sets the enviroment variables for the current shell session
+/// @param envp (char **) enviorment of the system;
+/// given by the main function.
+/// @return Returns 0 on success, no failure catched for now.
 int	export(t_Token *input, int c_arg, char **envp)
 {
 	int	index;
@@ -80,7 +71,7 @@ int	export(t_Token *input, int c_arg, char **envp)
 	{
 		index = -1;
 		while (input[++index].lexeme)
-			printf("%s\n",var_expander(input[index].lexeme, envp));
+			printf("%s\n", var_expander(input[index].lexeme, envp));
 	}
 	else
 	{
@@ -94,13 +85,10 @@ int	export(t_Token *input, int c_arg, char **envp)
 	return (0);
 }
 
-/**
- * Exits the Shell and cleans up the remainders
- *
- * @param to_clean (void *) Pointer to anything that needs to be cleaned
- * when exitin the shell. When nothing to clear pass NULL
- * @return (void) No return.
- */
+/// Exits the Shell and cleans up the remainders
+/// @param to_clean (void *) Pointer to anything that needs to be cleaned
+/// when exitin the shell. When nothing to clear pass NULL
+/// @return (void) No return.
 void	custom_exit(void *to_clean)
 {
 	if (to_clean)
@@ -108,11 +96,10 @@ void	custom_exit(void *to_clean)
 	exit(0);
 }
 
-/**
- * Prints the history of commands
- * @param void (void) No Parameter.
- * @return Returns 0 on success, no failure catched for now.
- */
+///
+/// Prints the history of commands
+/// @param void (void) No Parameter.
+/// @return Returns 0 on success, no failure catched for now.
 //int	print_history(void)
 //{
 //	HIST_ENTRY		**hist;

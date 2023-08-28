@@ -6,26 +6,21 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/28 12:58:09 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:19:12 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * Executes the programm
- *
- * @param path (char *) Path to the executeable
- * @param args (char *) Array containing the arguments for the programm,
- *  starting with its own name and ending with null.
- * @param env_var (char *) Enviroment Variables (Nullable)
- *
- * @return (int) Returns value of executing the path.
- * 1 == function error,
- * -1 == execve error,
- * 0 == no error;
- *
-*/
+/// Executes the programm
+/// @param path (char *) Path to the executeable
+/// @param args (char *) Array containing the arguments for the programm,
+///  starting with its own name and ending with null.
+/// @param env_var (char *) Enviroment Variables (Nullable)
+/// @return (int) Returns value of executing the path.
+/// 1 == function error,
+/// -1 == execve error,
+/// 0 == no error;
 int	execute_path(t_Command cmd, char **env_var, char *args[])
 {
 	if (!cmd.type.lexeme)
@@ -54,15 +49,10 @@ int	execute_path(t_Command cmd, char **env_var, char *args[])
 	return (0);
 }
 
-/**
- * Checks if the given command is a custom build function
- *
- * @param command (t_Command) Command from the parser
- * @param envp (char **) Enviourment variables given by the main function
- *
- * @return (int) 0 if it was a custom command, 1 if not.
- *
-*/
+/// Checks if the given command is a custom build function
+/// @param command (t_Command) Command from the parser
+/// @param envp (char **) Enviourment variables given by the main function
+/// @return (int) 0 if it was a custom command, 1 if not.
 int	check_customs(t_Command command, char **envp)
 {
 	(void)envp;
@@ -107,16 +97,12 @@ int	process_executer(t_Command command, char **envp)
 	exit(1);
 }
 
-/**
- * Executes the custom command (giving it to the respective function)
- * or creates child Process and executes the path command in them
- * (again giving it to the functions)
- * @param command (t_Command) Command from the parser
- * @param envp (char **) Enviourment variables given by the main function
- *
- * @return (int) 0
- *
-*/
+/// Executes the custom command (giving it to the respective function)
+/// or creates child Process and executes the path command in them
+/// (again giving it to the functions)
+/// @param command (t_Command) Command from the parser
+/// @param envp (char **) Enviourment variables given by the main function
+/// @return (int) 0
 int	executer(t_Command command, char **envp)
 {
 	int		child_pid;
@@ -128,7 +114,8 @@ int	executer(t_Command command, char **envp)
 		if (child_pid == 0)
 		{
 			process_executer(command, envp);
-		}else
+		}
+		else
 		{
 			waitpid(child_pid, NULL, 0);
 			signal(SIGINT, sig_decide);

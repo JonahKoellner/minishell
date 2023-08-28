@@ -6,18 +6,15 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/23 14:45:40 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:16:46 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * Change Path of Current Working Directory
- *
- * @param path (char *) The Directory to change to.
- * @return Return Value from chdir (lib function).
- */
+/// Change Path of Current Working Directory
+/// @param path (char *) The Directory to change to.
+/// @return Return Value from chdir (lib function).
 int	cd(char *path)
 {
 	int	cd_ret;
@@ -30,12 +27,9 @@ int	cd(char *path)
 	return (0);
 }
 
-/**
- * Print the current working Directory
- *
- * @param void (void) No Parameter.
- * @return Returns 0 on success, no failure catched for now.
- */
+/// Print the current working Directory
+/// @param void (void) No Parameter.
+/// @return Returns 0 on success, no failure catched for now.
 int	pwd(void)
 {
 	char	*pwd;
@@ -46,13 +40,10 @@ int	pwd(void)
 	return (0);
 }
 
-/**
- * Check if file exists or create it
- *
- * @param path (char *) Path to the file.
- * @return Returns an error code. -1 == doesnt exist, -2
- * not given rights, 0 == ok
-*/
+/// Check if file exists or create it
+/// @param path (char *) Path to the file.
+/// @return Returns an error code. -1 == doesnt exist, -2
+/// not given rights, 0 == ok
 int	check_file(char *path, int rights)
 {
 	if (!path)

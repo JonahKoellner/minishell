@@ -6,18 +6,16 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:47:20 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/21 10:15:59 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:18:08 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * Prints a new line of the shell, with string appended
- *
- * @param string (char *) String to append after the minishell standard line.
- * @return Returns 0 on success, no failure catched for now.
- */
+/// Prints a new line of the shell, with string appended
+/// @param string (char *) String to append after the minishell standard line.
+/// @return Returns 0 on success, no failure catched for now.
+///
 char	*new_line(void)
 {
 	char	*pwd;

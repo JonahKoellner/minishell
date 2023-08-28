@@ -6,20 +6,16 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:18:23 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/28 10:47:47 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:19:34 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * Signal Handler function for ctrl_c.
- * Function prints a new line.
- * @param signo (int).
- * @param client_info (siginfo_t *).
- * @param param (void *).
- * @return No return value.
- */
+///  Signal Handler function for ctrl_c.
+///  Function prints a new line.
+///  @param void (void)
+///  @return No return value.
 void	sig_ctrl_c(void)
 {
 	// (void)client_info;
@@ -30,15 +26,10 @@ void	sig_ctrl_c(void)
 	rl_redisplay();
 }
 
-/**
- * Signal Handler function for ctrl_d.
- * Function exits the Shell.
- *
- * @param signo (int).
- * @param client_info (siginfo_t *).
- * @param param (void *).
- * @return No return value.
- */
+///  Signal Handler function for ctrl_d.
+///  Exits shell, by sendin EOF
+///  @param void (void)
+///  @return No return value.
 void	sig_ctrl_d(void)
 {
 	// (void)client_info;
@@ -47,6 +38,10 @@ void	sig_ctrl_d(void)
 	custom_exit(NULL);
 }
 
+/// Signal Handler function for ctrl_\.
+/// Exits shell by sending SIGQUIT singal.
+/// @param void (void)
+/// @return No return value.
 void	sig_ctrl_quit(void)
 {
 	// (void)client_info;
@@ -55,6 +50,12 @@ void	sig_ctrl_quit(void)
 	custom_exit(NULL);
 }
 
+/// Signal Handler function for ctrl_d.
+/// Function exits the Shell.
+///  @param signo (int).
+///  @param client_info (siginfo_t *).
+///  @param param (void *).
+///  @return No return value.
 void	sig_decide(int sig)
 {
 	if (sig == SIGINT)
