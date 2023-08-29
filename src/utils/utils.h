@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:09:08 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/28 15:06:39 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:49:14 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		env(void);
 int		pwd(void);
 int		export(t_Token *input, int c_arg, char **envp);
 int		echo(t_Token *arguments, int arg_count);
+int		unset(char *var, char **envp);
 
 //#--------- Directory Handling ----------#//
 
@@ -40,5 +41,11 @@ int		pwd(void);
 
 int		executer(t_Command command, char **envp);
 int		execute_path(t_Command cmd, char **env_var, char *args[]);
+
+//#--------- Vectors ----------#//
+
+int		vec_replace(char *var, char	**vector);
+char	**vec_resize(char **old_vec, size_t size);
+char	**vector_add(char	**vec, char *var);
 
 #endif

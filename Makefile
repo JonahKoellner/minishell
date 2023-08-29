@@ -6,7 +6,7 @@
 #    By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 19:53:44 by jonahkollne       #+#    #+#              #
-#    Updated: 2023/08/28 16:34:34 by jkollner         ###   ########.fr        #
+#    Updated: 2023/08/29 11:47:58 by jkollner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_FILES		= minishell
 
 UTILS			= $(addprefix $(UTILS_DIR),$(addsuffix .c, $(UTILS_FILES)))
 UTILS_DIR		= $(addprefix $(SRC_DIR), utils/)
-UTILS_FILES		= visual_prompt signal_handler directory_handler executer functions
+UTILS_FILES		= visual_prompt signal_handler directory_handler executer functions vectors
 
 PARSER			= $(addprefix $(PARSER_DIR),$(addsuffix .c, $(PARSER_FILES)))
 PARSER_DIR		= $(addprefix $(SRC_DIR), parser/)

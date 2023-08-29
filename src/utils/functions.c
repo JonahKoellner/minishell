@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/28 16:34:42 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:51:01 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int	export(t_Token *input, int c_arg, char **envp)
 /// @return int
 int	unset(char *var, char **envp)
 {
-
+	(void)var;
+	(void)envp;
 	return (0);
 }
 
