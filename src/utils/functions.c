@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 14:09:04 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:56:07 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ int	export(t_Token *input, int c_arg)
 	{
 		index = -1;
 		while (input[++index].lexeme)
+		{
+
 			add_environ(input[index].lexeme);
+
+		}
 	}
 	else
 	{
@@ -91,11 +95,9 @@ int	export(t_Token *input, int c_arg)
 /// @param var (char *) Name of variable to unset
 /// @param envp (char **) The enviroment where to unset
 /// @return int
-int	unset(char *var, char **envp)
+int	unset(char *var)
 {
-	(void)var;
-	(void)envp;
-	return (0);
+	return (remove_environ(var));
 }
 
 /// Exits the Shell and cleans up the remainders

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vecdelete.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 09:55:17 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 13:12:09 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:58:40 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ char	**ft_vecdelete(char *var, char **vector)
 	index = 0;
 	new_i = 0;
 	new_vec = ft_calloc(vec_len, sizeof(char *));
-	while (index < vec_len)
+	while (vector[index] != NULL)
 	{
-		if (vector[index] != NULL)
-		{
 			if (ft_memcmp(vector[index], var, var_len) == 0)
 				index++;
-		}
-		new_vec[new_i++] = ft_strdup(vector[index++]);
+			new_vec[new_i++] = ft_strdup(vector[index++]);
+			ft_printf("%d\n", index);
 	}
 	if (new_i == index)
 		return (ft_vecfree(new_vec), vector);

@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:07:37 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 14:19:55 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:56:34 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,8 @@ char	**enviroment(char	**envp)
 
 	if (envp)
 	{
-		//if (env)
-		//	ft_vecfree(env);
-		printf("test\n");
 		env = ft_vecdup(envp);
 		ft_vecfree(envp);
-		printf("set envp\n");
 	}
 	return (env);
 }
@@ -36,11 +32,16 @@ char	**enviroment(char	**envp)
 /// so its only one realloc for multiple add
 int	add_environ(char	*var)
 {
-	enviroment(ft_vectoradd(enviroment(NULL), var));
+	if (!ft_vecreplace(var, enviroment(NULL)))
+		enviroment(ft_vectoradd(enviroment(NULL), var));
 	return (0);
 }
 
-
+int	remove_environ(char	*var)
+{
+	enviroment(ft_vecdelete(var, enviroment(NULL)));
+	return (0);
+}
 
 //
 //char	**env(char	**envp_org)
