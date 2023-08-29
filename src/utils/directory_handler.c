@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/29 16:00:56 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:53:13 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 /// Change Path of Current Working Directory
 /// @param path (char *) The Directory to change to.
 /// @return Return Value from chdir (lib function).
-int	cd(char *path, char **envp)
+int	cd(char *path)
 {
 	int	cd_ret;
-	(void)envp;
 	if (!path)
 		return (chdir(var_search("HOME")));
 	cd_ret = chdir(path);

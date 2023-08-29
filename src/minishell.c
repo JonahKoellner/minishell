@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/29 14:04:09 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:15:39 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 int	main(int argc, char **argv, char **envp)
 {
 	char				*inp;
-	char				**env;
 	t_Command			cmd;
 
 	signal(SIGINT, sig_decide);
@@ -25,7 +24,7 @@ int	main(int argc, char **argv, char **envp)
 	// signal(EOF, sig_decide);
 	(void)argc;
 	(void)argv;
-	env = enviroment(ft_vecdup(envp));
+	enviroment(ft_vecdup(envp));
 	while (1)
 	{
 		inp = input();
@@ -33,6 +32,6 @@ int	main(int argc, char **argv, char **envp)
 		// if (cmd.type.lexeme == NULL)
 		// 	printf("\n");
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
-			executer(cmd, env);
+			executer(cmd);
 	}
 }
