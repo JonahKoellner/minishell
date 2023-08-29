@@ -67,7 +67,8 @@ char	*input(void)
 	if (isatty(STDIN))
 		input = readline(prompt);
 	// Put gnl fallback here for (testers)
-
 	free(prompt);
+	if (!input)
+		custom_exit(NULL);
 	return (input);
 }

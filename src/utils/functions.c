@@ -106,6 +106,7 @@ int	unset(char *var)
 /// @return (void) No return.
 void	custom_exit(void *to_clean)
 {
+	free(enviroment(NULL));
 	if (to_clean)
 		free(to_clean);
 	exit(0);
