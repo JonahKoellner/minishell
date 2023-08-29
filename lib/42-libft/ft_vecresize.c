@@ -22,7 +22,7 @@ char	**ft_vecresize(char **old_vec, size_t size)
 	if (new_vec == NULL)
 		return (NULL);
 	index = 0;
-	smaller_size = ft_veclen((const char **)old_vec);
+	smaller_size = ft_veclen(old_vec);
 	if (smaller_size > (int)size)
 		smaller_size = size;
 	while (index < smaller_size)

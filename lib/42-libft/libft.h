@@ -265,7 +265,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 /// @param s1 String 1 as unsigned char*.
 /// @param s2 String 2 as unsigned char*.
 /// @param n Amount of bytes to be compared.
-/// @return Returns NULL if strings are identical. (s1[i] - s2[i]) if not.
+/// @return Returns 0 if strings are identical. (s1[i] - s2[i]) if not.
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 /// @brief Compares String \p [s1] to String \p [s2] for \p [n] amount of bytes.
@@ -273,7 +273,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 /// @param s1 String 1 as unsigned char*.
 /// @param s2 String 2 as unsigned char*.
 /// @param n Amount of bytes to be compared.
-/// @return return NULL if strings are identical. (s1[i] - s2[i]) if not.
+/// @return return 0 if strings are identical. (s1[i] - s2[i]) if not.
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /*----------------------------------------------------------------------------*/

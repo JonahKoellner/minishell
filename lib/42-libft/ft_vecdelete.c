@@ -29,7 +29,7 @@ char	**ft_vecdelete(char *var, char **vector)
 	{
 		if (vector[index] != NULL)
 		{
-			if (ft_memcmp(vector[index], var, var_len) == NULL)
+			if (ft_memcmp(vector[index], var, var_len) == 0)
 				index++;
 		}
 		new_vec[new_i++] = ft_strdup(vector[index++]);

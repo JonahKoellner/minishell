@@ -33,7 +33,6 @@ t_Command	input_to_lex(char *input, char **env)
 	int		j;
 	t_Token	*tokens;
 
-	(void)env;
 	j = 0;
 	i = tokencount(input);
 	if (i < 0)

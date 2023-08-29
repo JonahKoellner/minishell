@@ -16,7 +16,7 @@ char	**ft_vectoradd(char	**vec, char *var)
 {
 	char	**new_vec;
 
-	new_vec = vec_resize(vec, ft_veclen(vec) + 1);
+	new_vec = ft_vecresize(vec, ft_veclen(vec) + 1);
 	ft_vecfree(vec);
 	return (new_vec[ft_veclen(new_vec)] = ft_strdup(var), new_vec);
 }

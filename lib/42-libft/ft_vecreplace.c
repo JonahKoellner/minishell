@@ -31,7 +31,7 @@ int	ft_vecreplace(char *var, char **vector)
 	{
 		if (vector[index] != NULL)
 		{
-			if (ft_memcmp(vector[index], var, equal_pos) == NULL)
+			if (ft_memcmp(vector[index], var, equal_pos) == 0)
 			{
 				free(vector[index]);
 				vector[index] = ft_strdup(var);
