@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 15:48:13 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:57:17 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_customs(t_Command command, char **envp)
 {
 	(void)envp;
 	if (!ft_strncmp(command.type.lexeme, "cd", 3))
-		return (cd(command.arguments->lexeme, envp), 0);
+		return (cd(command.arguments->lexeme), 0);
 	if (!ft_strncmp(command.type.lexeme, "pwd", 4))
 		return (pwd(), 0);
 	if (!ft_strncmp(command.type.lexeme, "echo", 5))
@@ -69,7 +69,7 @@ int	check_customs(t_Command command, char **envp)
 	if (!ft_strncmp(command.type.lexeme, "export", 7))
 		return (export(command.arguments, command.arg_count), 0);
 	if (!ft_strncmp(command.type.lexeme, "unset", 6))
-		return (unset(command.arguments[0].lexeme));
+		return (unset(command.arguments, command.arg_count));
 	return (1);
 }
 
