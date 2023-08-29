@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 09:55:17 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 15:58:40 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 16:32:00 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ char	**ft_vecdelete(char *var, char **vector)
 	new_vec = ft_calloc(vec_len, sizeof(char *));
 	while (vector[index] != NULL)
 	{
-			if (ft_memcmp(vector[index], var, var_len) == 0)
+			if (ft_memcmp(vector[index], var, var_len) == 0
+				&& vector[index][var_len] == '=')
 				index++;
-			new_vec[new_i++] = ft_strdup(vector[index++]);
-			ft_printf("%d\n", index);
+			else
+				new_vec[new_i++] = ft_strdup(vector[index++]);
 	}
 	if (new_i == index)
-		return (ft_vecfree(new_vec), vector);
+		return (new_vec[new_i - 1] = NULL, ft_vecfree(new_vec), vector);
 	new_vec[new_i] = NULL;
-	return (ft_vecfree(vector), new_vec);
+	return (new_vec);
 }
