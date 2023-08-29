@@ -585,7 +585,7 @@ char	**ft_vectoradd(char	**vec, char *var);
 /// @param vec Null-terminated string vector.
 /// @return Returns pointer to the duplicated string vector.
 /// Returns 0 and frees if memory allocation fails while duplicating.
-char	**ft_vecdup(const char **vec);
+char	**ft_vecdup(char **vec);
 
 /// @brief Frees every Element in \p [vec] until null-pointer is encountered,
 /// then freeing \p [vec]

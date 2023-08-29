@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	**ft_vecdup(const char **vec)
+char	**ft_vecdup(char **vec)
 {
 	char	**ret_vec;
 	int		i;
