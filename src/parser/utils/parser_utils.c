@@ -12,16 +12,17 @@
 
 #include "minishell.h"
 
-void	free_unused_tokens(t_Token *tokens)
+void	free_command(t_Command cmd)
 {
-	int	i;
-
-	i = 0;
-	while (tokens[i].type != TOKEN_END)
+	if (cmd.type.lexeme != NULL)
+		free(cmd.type.lexeme);
+	while (--cmd.arg_i >= 0)
+		if (cmd.arguments[cmd.arg_i].lexeme != NULL)
+			free(cmd.arguments[cmd.arg_i].lexeme);
+	if (cmd.next != NULL)
 	{
-		if (!is_allowed_token(tokens[i]) && tokens[i].lexeme)
-			free(tokens[i].lexeme);
-		i++;
+		free_command(*(t_Command *)cmd.next);
+		free(cmd.next);
 	}
 }
 
@@ -68,11 +69,15 @@ t_Command	std_command(t_Command command, t_Token *tokens)
 	command.arg_count = cmd_arg_count(tokens);
 	command.arguments = ft_calloc((command.arg_count + 1), sizeof(t_Token));
 	while (i <= command.arg_count)
+	{
+		command.arguments[i].lexeme = NULL;
 		command.arguments[i++].type = ERR;
+	}
 	command.arg_i = 0;
-	command.in_file = NULL;
-	command.out_file = NULL;
+	command.in_fd = STDIN;
+	command.out_fd = STDOUT;
 	command.err = 0;
+	command.next = NULL;
 	return (command);
 }
 

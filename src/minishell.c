@@ -35,5 +35,4 @@ int	main(int argc, char **argv, char **envp)
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 			executer(cmd, env);
 	}
-
 }

@@ -15,11 +15,13 @@
 t_Command	in_out(t_Token type, t_Token where, t_Command cmd)
 {
 	if (type.type == TOKEN_GREAT)
-		cmd.out_file = ft_strdup(where.lexeme);
+		cmd.out_fd = open(where.lexeme, O_WRONLY, O_CREAT, 0644);
+	else if (type.type == TOKEN_GREAT_GREAT)
+		cmd.out_fd = open(where.lexeme, O_WRONLY, O_APPEND, O_CREAT, 0644);
 	else if (type.type == TOKEN_LESS)
-		cmd.in_file = ft_strdup(where.lexeme);
+		cmd.in_fd = open(where.lexeme, O_RDONLY);
 	else if (type.type == TOKEN_LESS_LESS)
-		cmd = make_heredoc(cmd, ft_strdup(where.lexeme));
+		cmd.in_fd = make_heredoc(ft_strdup(where.lexeme));
 	free(where.lexeme);
 	free(type.lexeme);
 	return (cmd);
@@ -56,7 +58,7 @@ t_Command	*parser_next(t_Token *tokens)
 		if (tokens[i].type == TOKEN_PIPE)
 			return (cmd->next = parser_next(&tokens[++i]), cmd);
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
-			in_out(tokens[i], tokens[i + 1], *cmd);
+			*cmd = in_out(tokens[i], tokens[i + 1], *cmd);
 		else if (!is_allowed_token(tokens[i]))
 			return (*cmd = unexpected_token(tokens[i + 1]), cmd);
 		if (is_allowed_token(tokens[i]) && cmd->type.lexeme == NULL)
@@ -76,7 +78,7 @@ t_Command	parser(t_Token *tokens)
 
 	i = 0;
 	n = cmd_count(tokens);
-	cmds = (t_Command){{ERR, NULL}, 0, 0, NULL, 0, 0, NULL, NULL, 0, NULL};
+	cmds = (t_Command){{ERR, NULL}, 0, 0, NULL, 0, 0, 0, NULL};
 	cmds = std_command(cmds, tokens);
 	while (tokens[i].type != TOKEN_END && cmds.err == 0)
 	{

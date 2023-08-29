@@ -47,23 +47,22 @@ void	handle_heredoc(char *delimiter_full, int *fd)
 	end_heredoc(delimiter_full, fd);
 }
 
-t_Command	end_heredoc_parent(int status, int *fd, t_Command Command)
+int	end_heredoc_parent(int status, int *fd)
 {
 	if (WIFSIGNALED(status))
 	{
 		write(STDOUT, "\n", 1);
-		Command.err = 1;
+		return (-1);
 	}
 	else
 	{
 		signal(SIGINT, sig_decide);
 		close(fd[1]);
-		Command.in_fd = fd[0];
+		return (fd[0]);
 	}
-	return (Command);
 }
 
-t_Command	make_heredoc(t_Command Command, char *delimiter)
+int	make_heredoc(char *delimiter)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -75,5 +74,5 @@ t_Command	make_heredoc(t_Command Command, char *delimiter)
 	if (pid == 0)
 		handle_heredoc(delimiter, fd);
 	waitpid(pid, &status, 0);
-	return (end_heredoc_parent(status, fd, Command));
+	return (end_heredoc_parent(status, fd));
 }

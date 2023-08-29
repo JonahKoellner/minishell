@@ -50,8 +50,6 @@ typedef struct Command
 	t_Token		*arguments;
 	int			in_fd;
 	int			out_fd;
-	char		*in_file;
-	char		*out_file;
 	int			err;
 	void		*next;
 }	t_Command;
@@ -127,7 +125,7 @@ int			cmd_count(t_Token *tokens);
 /// @return Returns number of arguments. Return -1 if Error.
 int			cmd_arg_count(t_Token *tokens);
 
-void		free_unused_tokens(t_Token *tokens);
+void		free_command(t_Command cmd);
 
 t_Command	std_command(t_Command command, t_Token *tokens);
 
@@ -165,8 +163,8 @@ void		end_heredoc(char *delimiter_full, int *fd);
 
 void		handle_heredoc(char *delimiter_full, int *fd);
 
-t_Command	end_heredoc_parent(int status, int *fd, t_Command Command);
+int			end_heredoc_parent(int status, int *fd);
 
-t_Command	make_heredoc(t_Command Command, char *delimiter);
+int			make_heredoc(char *delimiter);
 
 #endif

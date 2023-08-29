@@ -57,7 +57,7 @@ all: libft $(NAME)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER_DIR) $(LIBFT_INCLUDE)
 
-$(NAME):$(ALL_OBJ_DIR) $(ALL_OBJ)
+$(NAME):$(ALL_OBJ_DIR)$(ALL_OBJ)
 	$(CC) $(ALL_OBJ) -o $(NAME) $(LIBFT) -lreadline
 
 clean:
@@ -84,7 +84,7 @@ $(LIBFT): $(LIBFT_C)
 	@git submodule init $(REDIRECT)
 	@git submodule update $(REDIRECT)
 	@make allclean -C lib/42-libft
-
+	@make re
 
 .PHONY:	all clean fclean re prinf
 
