@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+         #
+#    By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 08:11:09 by mreidenb          #+#    #+#              #
-#    Updated: 2023/08/29 12:33:41 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/08/29 20:45:11 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ AR		= ar
 ARFLAGS = -rcs
 
 NAME	= libft.a
-MAIN	= isalpha isdigit isalnum isascii isprint strlen memset bzero memcpy memccpy\
-		memmove strlcpy strlcat toupper tolower strchr strrchr strncmp memchr\
-		memcmp strnstr atoi calloc strdup substr strjoin strtrim split itoa\
+MAIN	= isalpha isdigit isalnum isascii isspace isprint strlen memset bzero memcpy\
+		memccpy memmove strlcpy strlcat toupper tolower strchr strrchr strncmp\
+		memchr memcmp strnstr atoi calloc strdup substr strjoin strtrim split itoa\
 		strmapi striteri putchar_fd putstr_fd putendl_fd putnbr_fd strjoin_free\
 		printf/ft_printf atoi_l printf_fd/ft_printf_fd vecdup vecfree veclen\
 		vecadd vecdelete vecreplace vecresize

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 20:49:24 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/28 15:22:23 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/29 23:11:33 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	handle_heredoc(char *delimiter_full, int *fd)
 		free(input);
 	}
 	free(input);
-	//free(delimiter_cut);
+	if (ft_strlen(delimiter_full) != ft_strlen(delimiter_cut))
+		free(delimiter_cut);
 	end_heredoc(delimiter_full, fd);
 }
 
@@ -51,6 +52,7 @@ int	end_heredoc_parent(int status, int *fd)
 {
 	if (WIFSIGNALED(status))
 	{
+		signal(SIGINT, sig_decide);
 		write(STDOUT, "\n", 1);
 		return (-1);
 	}
@@ -74,5 +76,6 @@ int	make_heredoc(char *delimiter)
 	if (pid == 0)
 		handle_heredoc(delimiter, fd);
 	waitpid(pid, &status, 0);
+	free(delimiter);
 	return (end_heredoc_parent(status, fd));
 }

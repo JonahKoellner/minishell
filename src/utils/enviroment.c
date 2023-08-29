@@ -19,6 +19,8 @@ char	**enviroment(char	**envp)
 
 	if (envp)
 	{
+		if (env)
+			ft_vecfree(env);
 		env = ft_vecdup(envp);
 		ft_vecfree(envp);
 	}

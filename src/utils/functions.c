@@ -111,7 +111,7 @@ int	unset(t_Token *arguments, int arg_count)
 /// @return (void) No return.
 void	custom_exit(void *to_clean)
 {
-	free(enviroment(NULL));
+	ft_vecfree(enviroment(NULL));
 	if (to_clean)
 		free(to_clean);
 	exit(0);

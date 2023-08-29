@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:57:44 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/29 13:10:26 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:44:09 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,6 +304,11 @@ int		ft_isalnum(int c);
 /// @param c character to be checked.
 /// @return Returns 1 if character is Ascii (true). 0 if not (false).
 int		ft_isascii(int c);
+
+/// @brief Checks if character is Whitespace.
+/// @param c character to be checked.
+/// @return Returns 1 if character is Whitespace (true). 0 if not (false).
+int		ft_isspace(char c);
 
 /*----------------------------------------------------------------------------*/
 /*Strings make strings, strings join strings, strings trim strings. Thats life*/

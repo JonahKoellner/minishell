@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/24 22:07:50 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:25:02 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	free_command(t_Command cmd)
 	while (--cmd.arg_i >= 0)
 		if (cmd.arguments[cmd.arg_i].lexeme != NULL)
 			free(cmd.arguments[cmd.arg_i].lexeme);
+	if (cmd.arguments != NULL)
+		free(cmd.arguments);
 	if (cmd.next != NULL)
 	{
 		free_command(*(t_Command *)cmd.next);
@@ -37,9 +39,11 @@ int	cmd_arg_count(t_Token *tokens)
 	{
 		if (is_allowed_token(tokens[i]))
 			n++;
-		i++;
+		if (!is_allowed_token(tokens[i]))
+			i += 2;
+		else
+			i++;
 	}
-	//ft_printf("arg count %i \n", n);
 	return (n);
 }
 
@@ -59,9 +63,10 @@ int	cmd_count(t_Token *tokens)
 	return (n);
 }
 
-t_Command	std_command(t_Command command, t_Token *tokens)
+t_Command	std_command(t_Token *tokens)
 {
-	int	i;
+	t_Command	command;
+	int			i;
 
 	i = 0;
 	command.type.type = ERR;
@@ -79,75 +84,6 @@ t_Command	std_command(t_Command command, t_Token *tokens)
 	command.err = 0;
 	command.next = NULL;
 	return (command);
-}
-
-int	is_unquotable(char c)
-{
-	if (c == '|' || c == '&' || c == ';' || c == '<' || c == '>'
-		|| c == '(' || c == ')' || c == '$' || c == '`' || c == '\\'
-		|| c == '"' || c == '\'')
-		return (2);
-	else if (c == ' ' || c == '\n' || c == '\t' || c == '\n' || c == '\0')
-		return (1);
-	else
-		return (0);
-}
-
-int	tokencount(const char *s)
-{
-	int		i;
-	int		wrd;
-	char	qte;
-
-	qte = 0;
-	wrd = 0;
-	i = 0;
-	while (*s)
-	{
-		if ((*s == '\'' || *s == '\"') && qte == 0)
-		{
-			qte = *s++;
-			i++;
-		}
-		if (!(*s == ' ' || *s == '\n' || *s == '\t') && wrd == 0 && qte == 0)
-			wrd = ++i;
-		if (*s == ' ' || *s == '\n' || *s == '\t')
-			wrd = 0;
-		if (*s == qte)
-			qte = 0;
-		s++;
-	}
-	//ft_printf("%i\n", i);
-	return (i * ((qte - 1) * -1));
-}
-
-t_Token	lex_dollar(char *input, int *i)
-{
-	int		j;
-	t_Token	token;
-
-	j = 0;
-	token.type = TOKEN_WORD;
-	if (is_unquotable(input[*i + 1]) == 1)
-		token.lexeme = ft_strdup("$");
-	else
-	{
-		j = *i;
-		*i += 1;
-		token.type = TOKEN_VARIABLE;
-		while (is_unquotable(input[*i]) == 0 || is_unquotable(input[*i]) == 2)
-		{
-			if (is_unquotable(input[*i]) == 2)
-			{
-				unexpected_token((t_Token){ERR, ft_substr(input, *i, 1)});
-				token.type = ERR;
-				break ;
-			}
-			*i += 1;
-		}
-		token.lexeme = fillstr(input, j, *i);
-	}
-	return (token);
 }
 
 int	is_allowed_token(t_Token token)

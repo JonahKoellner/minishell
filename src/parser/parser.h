@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/28 15:14:29 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:15:29 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,9 @@ int			cmd_arg_count(t_Token *tokens);
 
 void		free_command(t_Command cmd);
 
-t_Command	std_command(t_Command command, t_Token *tokens);
+t_Command	std_command(t_Token *tokens);
 
-t_Command	in_out(t_Token type, t_Token where, t_Command cmd);
+t_Command	in_out(t_Token type, t_Token where, t_Command cmd, int *i);
 
 //Error
 
@@ -150,6 +150,8 @@ t_Command	bad_quote(char *input);
 t_Command	unexpected_token(t_Token err_token);
 
 t_Command	unclosed_pipe(void);
+
+t_Command	open_error(int in_f, int out_f);
 
 //expander
 

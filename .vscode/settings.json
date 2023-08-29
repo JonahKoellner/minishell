@@ -12,7 +12,8 @@
 		"utils.h": "c",
 		"list_utils.h": "c",
 		"minishell.h": "c",
-		"parser.h": "c"
+		"parser.h": "c",
+		"__locale": "c"
 	},
 	"workbench.settings.openDefaultKeybindings": true
 }

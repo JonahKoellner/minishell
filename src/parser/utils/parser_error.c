@@ -29,3 +29,12 @@ t_Command	unclosed_pipe(void)
 	ft_printf_fd(STDERR, "minishell: Parser Error, unclosed Pipe");
 	return ((t_Command){.err = -4});
 }
+
+t_Command	open_error(int in_f, int out_f)
+{
+	if (in_f < 0)
+		ft_printf_fd(STDERR, "minishell: Error Opening Input File");
+	if (out_f < 0)
+		ft_printf_fd(STDERR, "minishell: Error Opening Output File");
+	return ((t_Command){.err = -8});
+}

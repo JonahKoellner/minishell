@@ -46,6 +46,7 @@ int	execute_path(t_Command cmd, char *args[])
 						cmd.type.lexeme), 1);
 		}
 	}
+	free_command(cmd);
 	return (0);
 }
 
@@ -120,5 +121,6 @@ int	executer(t_Command command)
 			signal(SIGINT, sig_decide);
 		}
 	}
+	free_command(command);
 	return (0);
 }

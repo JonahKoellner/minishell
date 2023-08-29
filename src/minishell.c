@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/29 18:15:39 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:27:07 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	main2(int argc, char **argv, char **envp)
 {
 	char				*inp;
 	t_Command			cmd;
@@ -33,5 +33,20 @@ int	main(int argc, char **argv, char **envp)
 		// 	printf("\n");
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 			executer(cmd);
+		else
+			write(1, "\n", 1);
 	}
+}
+
+void cleanup() {
+	char command[100];
+	pid_t pid = getpid();
+	sprintf(command, "leaks %d", pid);
+	system(command);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	atexit(cleanup);
+	main2(argc, argv, envp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/24 21:55:04 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:03:43 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ t_Token	redirect_decide(t_Token token, int *i)
 		token.type = TOKEN_LESS;
 	else if (token.lexeme[0] == '<' && token.lexeme[1] == '<')
 		token.type = TOKEN_LESS_LESS;
-	else if (token.lexeme[0] == '|' && token.lexeme[1] == ' ')
+	else if (token.lexeme[0] == '|' && token.lexeme[1] != '|')
 		token.type = TOKEN_PIPE;
 	if (token.type == TOKEN_GREAT_GREAT || token.type == TOKEN_LESS_LESS)
 		*i += 1;
-	else
-		token.lexeme[1] = 0;
+	free(token.lexeme);
 	return (token);
 }
 
