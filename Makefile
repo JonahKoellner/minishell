@@ -25,7 +25,7 @@ SRC_FILES		= minishell
 
 UTILS			= $(addprefix $(UTILS_DIR),$(addsuffix .c, $(UTILS_FILES)))
 UTILS_DIR		= $(addprefix $(SRC_DIR), utils/)
-UTILS_FILES		= visual_prompt signal_handler directory_handler executer functions vectors
+UTILS_FILES		= visual_prompt signal_handler directory_handler executer functions
 
 PARSER			= $(addprefix $(PARSER_DIR),$(addsuffix .c, $(PARSER_FILES)))
 PARSER_DIR		= $(addprefix $(SRC_DIR), parser/)
@@ -74,15 +74,18 @@ $(ALL_OBJ_DIR):
 
 LIBFT			=	$(LIBFT_DIR)$(LIBFT_LIB)
 LIBFT_LIB		=	libft.a
+LIBFT_C			=	$(LIBFT_DIR)*.c
 LIBFT_DIR		=	lib/42-libft/
 LIBFT_INCLUDE	=	-I ./lib/42-libft
 
-$(LIBFT):
+libft: $(LIBFT)
+
+# libft:
+$(LIBFT): $(LIBFT_C)
 	@git submodule init $(REDIRECT)
 	@git submodule update $(REDIRECT)
 	@make allclean -C lib/42-libft
 
-libft: $(LIBFT)
 
 .PHONY:	all clean fclean re prinf
 
