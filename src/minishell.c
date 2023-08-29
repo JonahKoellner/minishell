@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/28 15:25:52 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:04:09 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	main(int argc, char **argv, char **envp)
 	// signal(EOF, sig_decide);
 	(void)argc;
 	(void)argv;
-	env = ft_vecdup((const char **)envp);
+	//env = ft_vecdup((const char **)envp);
+	env = enviroment(ft_vecdup(envp));
 	while (1)
 	{
 		inp = input();

@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 11:51:01 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:09:04 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,20 @@ int	env(void)
 /// @param envp (char **) enviorment of the system;
 /// given by the main function.
 /// @return Returns 0 on success, no failure catched for now.
-int	export(t_Token *input, int c_arg, char **envp)
+int	export(t_Token *input, int c_arg)
 {
 	int	index;
+	char	**envp;
 
 	if (c_arg)
 	{
 		index = -1;
 		while (input[++index].lexeme)
-			printf("%s\n", var_expander(input[index].lexeme, envp));
+			add_environ(input[index].lexeme);
 	}
 	else
 	{
+		envp = enviroment(NULL);
 		index = 0;
 		while (envp[index])
 		{
