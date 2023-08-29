@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:57:44 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/24 19:25:56 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/29 13:10:26 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -563,11 +563,23 @@ int		ft_printf(const char *format, ...);
 /// @return Returns the total number of chars printed.
 int		ft_printf_fd(int fd, const char *format, ...);
 
+/* ---------------------------------------------------------------------------*/
+/*                    Strings? Nah to Boring make, it 2D!                     */
+/* ---------------------------------------------------------------------------*/
+
 /// @brief Computes number of Strings in null-terminated vector \p [vec].
 /// @param vec Null-terminated string vector.
 /// @return Returns the number of Strings in \p [vec]. Returns 0 if Null-
 /// pointer is passed.
-size_t	ft_veclen(const char **vec);
+size_t	ft_veclen(char **vec);
+
+/// @brief Adds a value to the vector. Works by checking first if there is an
+/// empty spot, so only reallocation if neccessary, and inserts it or resizes
+/// and appends the value
+///f @param vec
+/// @param var
+/// @return
+char	**ft_vectoradd(char	**vec, char *var);
 
 /// @brief Duplicates null-terminated string vector \p [vec].
 /// @param vec Null-terminated string vector.
@@ -579,5 +591,25 @@ char	**ft_vecdup(const char **vec);
 /// then freeing \p [vec]
 /// @param vec String vector to be freed.
 void	ft_vecfree(char **vec);
+
+/// @brief Duplicates the old vector into a new one with a new size
+/// It can cut or extend the vector.
+/// @param old_vec
+/// @param size
+/// @return
+char	**ft_vecresize(char **old_vec, size_t size);
+
+/// @brief Finds and deletes a given value.
+/// @param var
+/// @param vector
+/// @return Returns 1 on succes. Returns 0 if not found.
+int		ft_vecreplace(char *var, char	**vector);
+
+/// @brief Searches var in vector deletes it.
+/// @param var Value to be deleted.
+/// @param vector Vector to delete in.
+/// @return Returns allocated vector without var. New Vector
+/// has (old)vector size -1. Returns (old)vector if var not found.
+char	**ft_vecdelete(char *var, char **vector);
 
 #endif
