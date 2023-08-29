@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:09:08 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 17:57:26 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:13:36 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		pwd(void);
 
 //#--------- Execution ----------#//
 
-int		executer(t_Command command, char **envp);
-int		execute_path(t_Command cmd, char **env_var, char *args[]);
+int		executer(t_Command command);
+int		execute_path(t_Command cmd, char *args[]);
 
 //#--------- Enviroment ----------#//
 
