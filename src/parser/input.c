@@ -27,7 +27,7 @@ void	free_tokens(t_Token *tokens)
 	free(tokens);
 }
 
-t_Command	input_to_lex(char *input, char **env)
+t_Command	input_to_lex(char *input)
 {
 	int		i;
 	int		j;
@@ -54,7 +54,7 @@ t_Command	input_to_lex(char *input, char **env)
 	free(input);
 	if (tokens[j - 1].type == ERR)
 		return (free_tokens(tokens), (t_Command){.err = -3});
-	return (parser(tokens, env));
+	return (parser(tokens));
 }
 
 char	*input(void)

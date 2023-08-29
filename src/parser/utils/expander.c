@@ -12,15 +12,17 @@
 
 #include "minishell.h"
 
-char	*var_search(char *var, char **env)
+char	*var_search(char *var)
 {
-	int	i;
-	int	env_len;
-	int	var_len;
+	int		i;
+	int		env_len;
+	int		var_len;
+	char	**env;
 
 	i = 0;
+	env = enviroment(NULL);
 	var_len = ft_strlen(var);
-	env_len = ft_veclen((const char **)env);
+	env_len = ft_veclen(env);
 	while (i < env_len)
 	{
 		if (ft_memcmp(env[i], var, var_len + 1) == '=')
@@ -33,7 +35,7 @@ char	*var_search(char *var, char **env)
 	return (ft_strdup(""));
 }
 
-char	*var_expander(char *input, char **env)
+char	*var_expander(char *input)
 {
 	char	*result;
 	char	*tmp;
@@ -51,7 +53,7 @@ char	*var_expander(char *input, char **env)
 			e = i;
 			while (!is_unquotable(input[i]))
 				i++;
-			tmp = var_search(ft_substr(input, e, i - e), env);
+			tmp = var_search(ft_substr(input, e, i - e));
 			result = ft_strjoin(result, tmp);
 			free(tmp);
 		}

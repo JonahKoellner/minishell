@@ -12,14 +12,14 @@
 
 #include "minishell.h"
 
-t_Command	in_out(t_Token type, t_Token where, t_Command cmd, char **env)
+t_Command	in_out(t_Token type, t_Token where, t_Command cmd)
 {
 	if (type.type == TOKEN_GREAT)
 		cmd.out_file = ft_strdup(where.lexeme);
 	else if (type.type == TOKEN_LESS)
 		cmd.in_file = ft_strdup(where.lexeme);
 	else if (type.type == TOKEN_LESS_LESS)
-		cmd = make_heredoc(cmd, env, ft_strdup(where.lexeme));
+		cmd = make_heredoc(cmd, ft_strdup(where.lexeme));
 	free(where.lexeme);
 	free(type.lexeme);
 	return (cmd);
@@ -41,7 +41,7 @@ t_Command	check_parsed(t_Command cmds, int n)
 	return (cmds);
 }
 
-t_Command	*parser_next(t_Token *tokens, char **env)
+t_Command	*parser_next(t_Token *tokens)
 {
 	int			i;
 	//int			n;
@@ -54,9 +54,9 @@ t_Command	*parser_next(t_Token *tokens, char **env)
 	while (tokens[i].type != TOKEN_END)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
-			return (cmd->next = parser_next(&tokens[++i], env), cmd);
+			return (cmd->next = parser_next(&tokens[++i]), cmd);
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
-			in_out(tokens[i], tokens[i + 1], *cmd, env);
+			in_out(tokens[i], tokens[i + 1], *cmd);
 		else if (!is_allowed_token(tokens[i]))
 			return (*cmd = unexpected_token(tokens[i + 1]), cmd);
 		if (is_allowed_token(tokens[i]) && cmd->type.lexeme == NULL)
@@ -68,7 +68,7 @@ t_Command	*parser_next(t_Token *tokens, char **env)
 	return (cmd);
 }
 
-t_Command	parser(t_Token *tokens, char **env)
+t_Command	parser(t_Token *tokens)
 {
 	int			i;
 	int			n;
@@ -81,11 +81,11 @@ t_Command	parser(t_Token *tokens, char **env)
 	while (tokens[i].type != TOKEN_END && cmds.err == 0)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
-			return (cmds.next = parser_next(&tokens[++i], env), cmds);
+			return (cmds.next = parser_next(&tokens[++i]), cmds);
 		if (tokens[i].type == TOKEN_STRING || tokens[i].type == TOKEN_VARIABLE)
-			tokens[i].lexeme = var_expander(tokens[i].lexeme, env);
+			tokens[i].lexeme = var_expander(tokens[i].lexeme);
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
-			cmds = in_out(tokens[i], tokens[i + 1], cmds, env);
+			cmds = in_out(tokens[i], tokens[i + 1], cmds);
 		else if (!is_allowed_token(tokens[i]))
 			return (unexpected_token(tokens[i + 1]));
 		else if (is_allowed_token(tokens[i]) && cmds.type.lexeme == NULL)

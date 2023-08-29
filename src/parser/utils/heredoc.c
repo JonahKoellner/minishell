@@ -12,18 +12,17 @@
 
 #include "minishell.h"
 
-void	end_heredoc(char *delimiter_full, int *fd, char **env)
+void	end_heredoc(char *delimiter_full, int *fd)
 {
 	free(delimiter_full);
 	if (fd[0] > 2)
 		close(fd[0]);
 	if (fd[1] > 2)
 		close(fd[1]);
-	ft_vecfree(env);
 	exit(0);
 }
 
-void	handle_heredoc(char *delimiter_full, int *fd, char **env)
+void	handle_heredoc(char *delimiter_full, int *fd)
 {
 	char	*input;
 	char	*delimiter_cut;
@@ -40,12 +39,12 @@ void	handle_heredoc(char *delimiter_full, int *fd, char **env)
 		if (ft_strlen(delimiter_full) != ft_strlen(delimiter_cut))
 			ft_putendl_fd(input, fd[1]);
 		else
-			ft_putendl_fd(var_expander(input, env), fd[1]);
+			ft_putendl_fd(var_expander(input), fd[1]);
 		free(input);
 	}
 	free(input);
 	//free(delimiter_cut);
-	end_heredoc(delimiter_full, fd, env);
+	end_heredoc(delimiter_full, fd);
 }
 
 t_Command	end_heredoc_parent(int status, int *fd, t_Command Command)
@@ -64,7 +63,7 @@ t_Command	end_heredoc_parent(int status, int *fd, t_Command Command)
 	return (Command);
 }
 
-t_Command	make_heredoc(t_Command Command, char **env, char *delimiter)
+t_Command	make_heredoc(t_Command Command, char *delimiter)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -74,7 +73,7 @@ t_Command	make_heredoc(t_Command Command, char **env, char *delimiter)
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
-		handle_heredoc(delimiter, fd, env);
+		handle_heredoc(delimiter, fd);
 	waitpid(pid, &status, 0);
 	return (end_heredoc_parent(status, fd, Command));
 }

@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		inp = input();
-		cmd = input_to_lex(inp, env);
+		cmd = input_to_lex(inp);
 		// if (cmd.type.lexeme == NULL)
 		// 	printf("\n");
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)

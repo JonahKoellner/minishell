@@ -62,7 +62,7 @@ typedef struct Command
 /// @param input
 /// @param env
 /// @return
-t_Command	input_to_lex(char *input, char **env);
+t_Command	input_to_lex(char *input);
 
 /// @brief Checks how many potential tokens there are in a string.
 /// Used to calculate allocation size for token array.
@@ -109,7 +109,7 @@ t_Token		get_next_token_qte(char *input, int *i);
 t_Token		get_next_token_rst(char *input, int *i);
 
 //Parser
-t_Command	parser(t_Token *tokens, char **env);
+t_Command	parser(t_Token *tokens);
 
 /// @brief Checks if the token is valid for redirect meaning
 /// Word, Variable, String, Name of a command
@@ -131,7 +131,7 @@ void		free_unused_tokens(t_Token *tokens);
 
 t_Command	std_command(t_Command command, t_Token *tokens);
 
-t_Command	in_out(t_Token type, t_Token where, t_Command cmd, char **env);
+t_Command	in_out(t_Token type, t_Token where, t_Command cmd);
 
 //Error
 
@@ -155,18 +155,18 @@ t_Command	unclosed_pipe(void);
 
 //expander
 
-char		*var_search(char *var, char **env);
+char		*var_search(char *var);
 
-char		*var_expander(char *input, char **env);
+char		*var_expander(char *input);
 
 //heredoc
 
-void		end_heredoc(char *delimiter_full, int *fd, char **env);
+void		end_heredoc(char *delimiter_full, int *fd);
 
-void		handle_heredoc(char *delimiter_full, int *fd, char **env);
+void		handle_heredoc(char *delimiter_full, int *fd);
 
 t_Command	end_heredoc_parent(int status, int *fd, t_Command Command);
 
-t_Command	make_heredoc(t_Command Command, char **env, char *delimiter);
+t_Command	make_heredoc(t_Command Command, char *delimiter);
 
 #endif
