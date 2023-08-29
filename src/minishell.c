@@ -25,7 +25,6 @@ int	main(int argc, char **argv, char **envp)
 	// signal(EOF, sig_decide);
 	(void)argc;
 	(void)argv;
-	//env = ft_vecdup((const char **)envp);
 	env = enviroment(ft_vecdup(envp));
 	while (1)
 	{
