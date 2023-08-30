@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:20:45 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/29 21:20:58 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:22:52 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,29 @@ int	tokencount(const char *s)
 {
 	int		i;
 	int		wrd;
-	char	qte;
+	char	qt;
 
-	qte = 0;
+	qt = 0;
 	wrd = 0;
 	i = 0;
 	while (*s)
 	{
 		if ((*s == '\'' || *s == '\"' || (*s == '>' || *s == '<' || *s == '|'))
-			&& qte == 0)
+			&& qt == 0)
 		{
-			qte = *s++;
+			qt = *s++;
 			i++;
 		}
-		if (!ft_isspace(*s) && wrd == 0 && (qte == 0 || qte == '>'
-				|| qte == '<' || qte == '|'))
+		if (!ft_isspace(*s) && wrd == 0 && (qt == 0 || qt == '>'
+				|| qt == '<' || qt == '|'))
 			wrd = ++i;
 		if (ft_isspace(*s))
 			wrd = 0;
-		if ((*s == qte || qte == '>' || qte == '<' || qte == '|') && *s != qte)
-			qte = 0;
+		if (*s == qt || ((qt == '>' || qt == '<' || qt == '|') && *s != qt))
+			qt = 0;
 		s++;
 	}
-	return (i * ((qte - 1) * -1));
+	return (i * ((qt - 1) * -1));
 }
 
 t_Token	lex_dollar(char *input, int *i)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/28 15:22:48 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:56:43 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ char	*var_search(char *var)
 	{
 		if (ft_memcmp(env[i], var, var_len + 1) == '=')
 		{
+			free(var);
 			return (ft_substr(env[i], var_len + 1,
 					ft_strlen(env[i]) - (var_len + 1)));
 		}
 		i++;
 	}
+	free(var);
 	return (ft_strdup(""));
 }
 
@@ -54,11 +56,11 @@ char	*var_expander(char *input)
 			while (!is_unquotable(input[i]))
 				i++;
 			tmp = var_search(ft_substr(input, e, i - e));
-			result = ft_strjoin(result, tmp);
-			free(tmp);
+			result = ft_strjoin_free(result, tmp);
 		}
 		else
 			result = ft_strjoin_free(result, ft_substr(input, e, i - e));
 	}
+	free(input);
 	return (result);
 }

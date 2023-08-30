@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 18:08:35 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 14:25:51 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:19:48 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*quote(char *command, int *i)
 	if (command[*i] != '\"' && command[*i] != '\'')
 		return (command);
 	start = *i + 1;
-	c = command[start];
+	c = command[*i];
+	*i += 1;
 	while (command[*i] != c)
 	{
 		if (command[*i] == '\0')
@@ -29,5 +30,6 @@ char	*quote(char *command, int *i)
 		}
 		*i += 1;
 	}
-	return (ft_substr(command, start, *i - start));
+	*i += 1;
+	return (ft_substr(command, start, *i - start - 1));
 }

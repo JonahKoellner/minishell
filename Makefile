@@ -6,7 +6,7 @@
 #    By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 19:53:44 by jonahkollne       #+#    #+#              #
-#    Updated: 2023/08/29 21:22:43 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/08/30 17:28:15 by mreidenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM	= rm -f
 
+#  -fsanitize=address -g
 ################################################################################
 ###########################-Files.c by Folder-##################################
 ################################################################################
@@ -60,6 +61,8 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 $(NAME):$(ALL_OBJ_DIR)$(ALL_OBJ)
 	$(CC) $(ALL_OBJ) -o $(NAME) $(LIBFT) -lreadline
+
+#  -fsanitize=address -g
 
 clean:
 	$(RM) $(OBJ)
