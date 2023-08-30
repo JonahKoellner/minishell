@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 17:59:27 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 10:36:10 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ int	echo(t_Token *arguments, int arg_count)
 /// @return Returns 0 on success, no failure catched for now.
 int	env(void)
 {
-	extern char	**environ;
+	char	**envp;
 	int			index;
 
+	envp = enviroment(NULL);
 	index = 0;
-	while (environ[index])
+	while (envp[index])
 	{
-		printf("%s\n", environ[index]);
+		printf("%s\n", envp[index]);
 		index++;
 	}
 	return (0);

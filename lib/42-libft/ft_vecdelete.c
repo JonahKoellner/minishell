@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 09:55:17 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 16:32:00 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 10:52:41 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ char	**ft_vecdelete(char *var, char **vector)
 	if (new_i == index)
 		return (new_vec[new_i - 1] = NULL, ft_vecfree(new_vec), vector);
 	new_vec[new_i] = NULL;
-	return (new_vec);
+	return (ft_vecfree(vector),new_vec);
 }
