@@ -6,11 +6,31 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 10:33:25 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:50:18 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	search_buildins(t_Command cmd, char *args[])
+{
+	char	*bin_ver;
+	char	*usr_bin_ver;
+
+	bin_ver = ft_strjoin("/bin/", cmd.type.lexeme);
+	usr_bin_ver = ft_strjoin("/usr/bin/", cmd.type.lexeme);
+
+	if (access(bin_ver, X_OK) == 0)
+		execve(bin_ver,
+			args, enviroment(NULL));
+	else if (access(usr_bin_ver, X_OK) == 0)
+		execve(usr_bin_ver,
+			args, enviroment(NULL));
+	free(bin_ver);
+	free(usr_bin_ver);
+
+	return (0);
+}
 
 /// Executes the programm
 /// @param path (char *) Path to the executeable
@@ -23,28 +43,30 @@
 /// 0 == no error;
 int	execute_path(t_Command cmd, char *args[])
 {
-	if (!cmd.type.lexeme)
-		return (1);
+
 	if (access(cmd.type.lexeme, X_OK) == 0)
 		execve(cmd.type.lexeme, args, enviroment(NULL));
 	else
 	{
-		if (errno == EACCES)
-			return (printf("No execution rights\n"), 1);
-		if (access(ft_strjoin("/bin/", cmd.type.lexeme), X_OK) == 0)
-			execve(ft_strjoin("/bin/", cmd.type.lexeme),
-				args, enviroment(NULL));
-		else if (access(ft_strjoin("/usr/bin/", cmd.type.lexeme), X_OK) == 0)
-			execve(ft_strjoin("/usr/bin/", cmd.type.lexeme),
-				args, enviroment(NULL));
-		else
-		{
+		search_buildins(cmd, args);
+//		if (search_buildins(cmd, args) == -1)
+			// perror()
+		//if (errno == EACCES)
+			//return (printf("No execution rights\n"), 1);
+//		if (access(ft_strjoin("/bin/", cmd.type.lexeme), X_OK) == 0)
+//			execve(ft_strjoin("/bin/", cmd.type.lexeme),
+//				args, enviroment(NULL));
+//		else if (access(ft_strjoin("/usr/bin/", cmd.type.lexeme), X_OK) == 0)
+//			execve(ft_strjoin("/usr/bin/", cmd.type.lexeme),
+//				args, enviroment(NULL));
+		//else
+		//{
 			if (errno == EACCES)
 				return (printf("No execution rights\n"), 1);
 			if (errno == ENOENT)
 				return (printf("Command not found: %s\n",
 						cmd.type.lexeme), 1);
-		}
+		//}
 	}
 	free_command(cmd);
 	return (0);

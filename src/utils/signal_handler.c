@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:18:23 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/28 15:24:33 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:56:46 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ void	sig_ctrl_d(void)
 /// @return No return value.
 void	sig_ctrl_quit(void)
 {
-	printf("Quititng with SGIQUIT\n");
-	custom_exit(NULL);
+	//printf("Quititng with SGIQUIT\n");
+	//custom_exit(NULL);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 /// Signal Handler function for ctrl_d.

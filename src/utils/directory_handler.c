@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/29 17:53:13 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:52:30 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	cd(char *path)
 		return (chdir(var_search("HOME")));
 	cd_ret = chdir(path);
 	if (cd_ret == -1)
-		printf("cd: no such file or directory: %s\n", path);
+		perror("chdir");
+		// printf("cd: no such file or directory: %s\n", path);
 	return (0);
 }
 
@@ -34,6 +35,8 @@ int	pwd(void)
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
+		return (perror("getcwd"), 1);
 	ft_printf("%s\n", pwd);
 	free(pwd);
 	return (0);
