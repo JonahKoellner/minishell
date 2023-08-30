@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 12:50:18 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:18:35 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,20 +131,28 @@ int	executer(t_Command command)
 {
 	int		child_pid;
 
-	dup2(command.out_fd, command.in_fd);
 	if (check_customs(command) == 1)
 	{
 		child_pid = fork();
 		signal(SIGINT, SIG_IGN);
 		if (child_pid == 0)
+		{
+			dup2(command.out_fd, STDOUT);
+			dup2(command.in_fd, STDIN);
+			//close(command.in_fd);
+		//	close(command.out_fd);
 			process_executer(command);
+		}
 		else
 		{
 			waitpid(child_pid, NULL, 0);
+			dup2(STDOUT, command.out_fd);
+			dup2(STDIN, command.in_fd);
+			close(command.in_fd);
+			close(command.out_fd);
 			signal(SIGINT, sig_decide);
 		}
 	}
-	dup2(command.in_fd, command.out_fd);
 	free_command(command);
 	return (0);
 }
