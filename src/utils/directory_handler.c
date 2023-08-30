@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/30 12:52:30 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:39:17 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,16 @@
 /// @return Return Value from chdir (lib function).
 int	cd(char *path)
 {
-	int	cd_ret;
+	int		cd_ret;
+	char	*home;
+
 	if (!path)
-		return (chdir(var_search("HOME")));
+	{
+		home = var_search("HOME");
+		chdir(home);
+		free(home);
+		return (0);
+	}
 	cd_ret = chdir(path);
 	if (cd_ret == -1)
 		perror("chdir");
