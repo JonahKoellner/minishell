@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vecreplace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 09:55:17 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 13:22:53 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:12:21 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_vecreplace(char *var, char **vector)
 	vec_len = ft_veclen(vector);
 	equal_pos = 0;
 	index = 0;
-	while (var[equal_pos] != '=')
+	while (var[equal_pos] != '=' && var[equal_pos])
 		equal_pos++;
 	while (index < vec_len)
 	{
