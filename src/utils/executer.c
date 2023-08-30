@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 15:25:45 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:43:39 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int	execute_path(t_Command cmd, char *args[])
 		//else
 		//{
 			if (errno == EACCES)
-				return (printf("No execution rights\n"), 1);
+				printf("No execution rights\n");
 			if (errno == ENOENT)
-				return (printf("Command not found: %s\n",
-						cmd.type.lexeme), 1);
+				printf("Command not found: %s\n",
+						cmd.type.lexeme);
 		//}
 	}
 	free_command(cmd);
