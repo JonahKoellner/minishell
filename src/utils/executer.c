@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 14:18:35 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 14:25:18 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,11 @@ int	process_executer(t_Command command)
 int	executer(t_Command command)
 {
 	int		child_pid;
+	int		og_in;
+	int		og_out;
 
+	og_in = dup(0);
+	og_out = dup(1);
 	if (check_customs(command) == 1)
 	{
 		child_pid = fork();
@@ -139,17 +143,17 @@ int	executer(t_Command command)
 		{
 			dup2(command.out_fd, STDOUT);
 			dup2(command.in_fd, STDIN);
-			//close(command.in_fd);
-		//	close(command.out_fd);
+			close(command.in_fd);
+			close(command.out_fd);
 			process_executer(command);
 		}
 		else
 		{
 			waitpid(child_pid, NULL, 0);
-			dup2(STDOUT, command.out_fd);
-			dup2(STDIN, command.in_fd);
-			close(command.in_fd);
-			close(command.out_fd);
+			dup2(og_out, STDOUT);
+			dup2(og_in, STDIN);
+			close(og_in);
+			close(og_out);
 			signal(SIGINT, sig_decide);
 		}
 	}
