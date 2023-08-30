@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 11:01:04 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 11:19:18 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	env(void)
 	index = 0;
 	while (envp[index])
 	{
-		printf("%s\n", envp[index]);
+		if (ft_strchr(envp[index], '='))
+			printf("%s\n", envp[index]);
 		index++;
 	}
 	return (0);
@@ -74,7 +75,6 @@ int	export(t_Token *input, int c_arg)
 		index = 0;
 		while (input[index].lexeme)
 		{
-			// check if correct form. (string=).append =.
 			add_environ(input[index++].lexeme);
 
 		}
