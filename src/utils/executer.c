@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 15:43:39 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:17:16 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	process_executer(t_Command command)
 	execute_path(command, args);
 	// perror("execve");
 	free(args);
-	exit(1);
+	exit(errno);
 }
 
 /// Executes the custom command (giving it to the respective function)
@@ -132,9 +132,11 @@ int	executer(t_Command command)
 	int		child_pid;
 	int		og_in;
 	int		og_out;
+	int		*child_error;
 
 	og_in = dup(0);
 	og_out = dup(1);
+	child_error = ft_calloc(1, sizeof(int));
 	dup2(command.out_fd, STDOUT);
 	dup2(command.in_fd, STDIN);
 	if (command.in_fd > 2)
@@ -151,10 +153,11 @@ int	executer(t_Command command)
 		}
 		else
 		{
-			waitpid(child_pid, NULL, 0);
+			waitpid(child_pid, child_error, 0);
 			signal(SIGINT, sig_decide);
 		}
 	}
+	add_environ(ft_strjoin_free(ft_strdup("?="), ft_itoa(WEXITSTATUS(*child_error))));
 	dup2(og_out, STDOUT);
 	dup2(og_in, STDIN);
 	close(og_in);

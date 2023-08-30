@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/30 16:34:11 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:07:40 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	cd(char *path)
 	char	*new_pwd;
 
 	old_pwd = ft_strjoin_free(ft_strdup("OLDPWD="), getcwd(NULL, 0));
-	home = var_search("HOME");
+	home = var_search(ft_strdup("HOME"));
 	if (!path)
 		cd_ret = chdir(home);
 	else
