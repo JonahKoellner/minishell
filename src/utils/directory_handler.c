@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/30 15:39:17 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:34:11 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,24 @@ int	cd(char *path)
 {
 	int		cd_ret;
 	char	*home;
+	char	*old_pwd;
+	char	*new_pwd;
 
+	old_pwd = ft_strjoin_free(ft_strdup("OLDPWD="), getcwd(NULL, 0));
+	home = var_search("HOME");
 	if (!path)
-	{
-		home = var_search("HOME");
-		chdir(home);
-		free(home);
-		return (0);
-	}
-	cd_ret = chdir(path);
-	if (cd_ret == -1)
+		cd_ret = chdir(home);
+	else
+		cd_ret = chdir(path);
+	new_pwd = ft_strjoin_free(ft_strdup("PWD="), getcwd(NULL, 0));
+	if (cd_ret)
 		perror("chdir");
-		// printf("cd: no such file or directory: %s\n", path);
-	return (0);
+	else
+	{
+		add_environ(new_pwd);
+		add_environ(old_pwd);
+	}
+	return (free(home), free(old_pwd), free(new_pwd), 0);
 }
 
 /// Print the current working Directory
