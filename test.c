@@ -29,15 +29,9 @@
 // 	main2(argc, argv, envp);
 // }
 
-int main(void)
+char **main(void)
 {
-	char c = 0;
-	while (c < 127)
-	{
-		if (isspace(c))
-			printf("%d \n", c);
-		c++;
-	}
+	printf("Burger");
 }
 
 // t_Command	check_parsed(t_Command cmds, t_Token *tokens)

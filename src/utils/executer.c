@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 14:25:18 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:25:45 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,28 +135,30 @@ int	executer(t_Command command)
 
 	og_in = dup(0);
 	og_out = dup(1);
+	dup2(command.out_fd, STDOUT);
+	dup2(command.in_fd, STDIN);
+	if (command.in_fd > 2)
+		close(command.in_fd);
+	if (command.out_fd > 2)
+		close(command.out_fd);
 	if (check_customs(command) == 1)
 	{
 		child_pid = fork();
 		signal(SIGINT, SIG_IGN);
 		if (child_pid == 0)
 		{
-			dup2(command.out_fd, STDOUT);
-			dup2(command.in_fd, STDIN);
-			close(command.in_fd);
-			close(command.out_fd);
 			process_executer(command);
 		}
 		else
 		{
 			waitpid(child_pid, NULL, 0);
-			dup2(og_out, STDOUT);
-			dup2(og_in, STDIN);
-			close(og_in);
-			close(og_out);
 			signal(SIGINT, sig_decide);
 		}
 	}
+	dup2(og_out, STDOUT);
+	dup2(og_in, STDIN);
+	close(og_in);
+	close(og_out);
 	free_command(command);
 	return (0);
 }

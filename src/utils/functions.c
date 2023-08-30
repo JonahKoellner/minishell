@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 11:19:18 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:29:06 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	echo(t_Token *arguments, int arg_count)
 	index = 0;
 	n_flag = 0;
 	if (!arg_count)
-		return (printf("\n"), 0);
+		return (ft_printf("\n"), 0);
 	if (!ft_strncmp(arguments[0].lexeme, "-n", 3))
 	{
 		index++;
@@ -33,12 +33,12 @@ int	echo(t_Token *arguments, int arg_count)
 	}
 	while (arguments[index].lexeme)
 	{
-		printf("%s", arguments[index++].lexeme);
+		ft_printf("%s", arguments[index++].lexeme);
 		if (index != arg_count)
-			printf(" ");
+			ft_printf(" ");
 	}
 	if (!n_flag)
-		printf("\n");
+		ft_printf("\n");
 	return (0);
 }
 
