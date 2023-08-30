@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:07:37 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 10:51:02 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/30 10:56:48 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,3 @@ int	remove_environ(char	*var)
 	enviroment(ft_vecdelete(var, enviroment(NULL)));
 	return (0);
 }
-
-//
-//char	**env(char	**envp_org)
-//{
-//	static	char	**env;
-//	int				env_len;
-//
-//	if (!env)
-//	{
-//		if (envp_org)
-//		{
-//			// allocate and copy env
-//			env_len = ft_veclen(envp_org);
-//			env = ft_calloc(env_len, sizeof(char *));
-//			while (env_len)
-//			{
-//				env[env_len] = envp_org[env_len];
-//				env_len--;
-//			}
-//
-//		}
-//	}
-//	return (env);
-//}
-//
