@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/31 13:36:36 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:41:45 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,14 +134,6 @@ int	executer(t_Command command)
 	int		*child_error;
 	char	*error_env;
 
-//	og_in = dup(0);
-//	og_out = dup(1);
-//	dup2(command.out_fd, STDOUT);
-//	dup2(command.in_fd, STDIN);
-//	if (command.in_fd > 2)
-//		close(command.in_fd);
-//	if (command.out_fd > 2)
-//		close(command.out_fd);
 	ogs = open_redirect(command.in_fd, command.out_fd);
 	child_error = ft_calloc(1, sizeof(int));
 	if (check_customs(command) == 1)
@@ -156,17 +148,10 @@ int	executer(t_Command command)
 			signal(SIGINT, sig_decide);
 		}
 	}
-	error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(WEXITSTATUS(*child_error)));
+	error_env = ft_strjoin_free(ft_strdup("?="),
+			ft_itoa(WEXITSTATUS(*child_error)));
 	add_environ(error_env);
-	free(error_env);
 	free(child_error);
 	close_redirect(ogs[0], ogs[1]);
-	free(ogs);
-//	dup2(og_out, STDOUT);
-//	dup2(og_in, STDIN);
-//	close(og_in);
-//	close(og_out);
-//
-	free_command(command);
-	return (0);
+	return (free(ogs), free_command(command), free(error_env), 0);
 }
