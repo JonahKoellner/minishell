@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/31 13:10:51 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:20:30 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ int	executer(t_Command command)
 	error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(WEXITSTATUS(*child_error)));
 	add_environ(error_env);
 	free(error_env);
+	free(child_error);
 	dup2(og_out, STDOUT);
 	dup2(og_in, STDIN);
 	close(og_in);
