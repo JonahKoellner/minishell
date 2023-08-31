@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:23:21 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/31 13:36:22 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:48:03 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	*open_redirect(int in_fd, int out_fd)
 	return (ogs[0] = og_in, ogs[1] = og_out, ogs);
 }
 
-int	close_redirect(int	og_in, int og_out)
+int	close_redirect(int og_in, int og_out)
 {
 	dup2(og_out, STDOUT);
 	dup2(og_in, STDIN);

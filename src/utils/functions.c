@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 15:29:06 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:47:35 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	echo(t_Token *arguments, int arg_count)
 int	env(void)
 {
 	char	**envp;
-	int			index;
+	int		index;
 
 	envp = enviroment(NULL);
 	index = 0;
@@ -67,17 +67,14 @@ int	env(void)
 /// @return Returns 0 on success, no failure catched for now.
 int	export(t_Token *input, int c_arg)
 {
-	int	index;
+	int		index;
 	char	**envp;
 
 	if (c_arg)
 	{
 		index = 0;
 		while (input[index].lexeme)
-		{
 			add_environ(input[index++].lexeme);
-
-		}
 	}
 	else
 	{

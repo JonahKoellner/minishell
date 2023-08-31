@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:07:37 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 10:56:48 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:46:53 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	**enviroment(char	**envp)
 	{
 		if (env != NULL)
 			env = NULL;
-			//ft_vecfree(env);
 		env = ft_vecdup(envp);
 		ft_vecfree(envp);
 	}
