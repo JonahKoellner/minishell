@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/31 13:41:45 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:44:50 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	search_buildins(t_Command cmd, char *args[])
 
 	bin_ver = ft_strjoin("/bin/", cmd.type.lexeme);
 	usr_bin_ver = ft_strjoin("/usr/bin/", cmd.type.lexeme);
-
 	if (access(bin_ver, X_OK) == 0)
 		execve(bin_ver,
 			args, enviroment(NULL));
@@ -28,7 +27,6 @@ int	search_buildins(t_Command cmd, char *args[])
 			args, enviroment(NULL));
 	free(bin_ver);
 	free(usr_bin_ver);
-
 	return (0);
 }
 
@@ -43,30 +41,15 @@ int	search_buildins(t_Command cmd, char *args[])
 /// 0 == no error;
 int	execute_path(t_Command cmd, char *args[])
 {
-
 	if (access(cmd.type.lexeme, X_OK) == 0)
 		execve(cmd.type.lexeme, args, enviroment(NULL));
 	else
 	{
 		search_buildins(cmd, args);
-//		if (search_buildins(cmd, args) == -1)
-			// perror()
-		//if (errno == EACCES)
-			//return (printf("No execution rights\n"), 1);
-//		if (access(ft_strjoin("/bin/", cmd.type.lexeme), X_OK) == 0)
-//			execve(ft_strjoin("/bin/", cmd.type.lexeme),
-//				args, enviroment(NULL));
-//		else if (access(ft_strjoin("/usr/bin/", cmd.type.lexeme), X_OK) == 0)
-//			execve(ft_strjoin("/usr/bin/", cmd.type.lexeme),
-//				args, enviroment(NULL));
-		//else
-		//{
-			if (errno == EACCES)
-				printf("No execution rights\n");
-			if (errno == ENOENT)
-				printf("Command not found: %s\n",
-						cmd.type.lexeme);
-		//}
+		if (errno == EACCES)
+			printf("No execution rights\n");
+		if (errno == ENOENT)
+			printf("Command not found: %s\n", cmd.type.lexeme);
 	}
 	free_command(cmd);
 	return (0);
@@ -116,7 +99,6 @@ int	process_executer(t_Command command)
 	}
 	args[index] = NULL;
 	execute_path(command, args);
-	// perror("execve");
 	free(args);
 	exit(errno);
 }
