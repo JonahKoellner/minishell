@@ -6,11 +6,10 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/31 13:17:51 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:05:35 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../lib/42-libft/libft.h"
 
 #include "minishell.h"
 
@@ -21,7 +20,6 @@ int	main2(int argc, char **argv, char **envp)
 
 	signal(SIGINT, sig_decide);
 	signal(SIGQUIT, sig_decide);
-	// signal(EOF, sig_decide);
 	(void)argc;
 	(void)argv;
 	enviroment(ft_vecdup(envp));
@@ -30,12 +28,16 @@ int	main2(int argc, char **argv, char **envp)
 	{
 		inp = input();
 		cmd = input_to_lex(inp);
-		// if (cmd.type.lexeme == NULL)
-		// 	printf("\n");
-		///if (cmd.type.lexeme != NULL)
-			//add_environ(ft_strjoin_free(ft_strdup("?="), ft_itoa(cmd.err)));
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
+		{
+			while (cmd.next)
+			{
+				printf("\n");
+				executer(cmd);
+				cmd = *(t_Command *)cmd.next;
+			}
 			executer(cmd);
+		}
 		else
 			write(1, "\n", 1);
 	}
