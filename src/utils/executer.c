@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/31 13:20:30 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:36:36 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,28 +130,26 @@ int	process_executer(t_Command command)
 int	executer(t_Command command)
 {
 	int		child_pid;
-	int		og_in;
-	int		og_out;
+	int		*ogs;
 	int		*child_error;
 	char	*error_env;
 
-	og_in = dup(0);
-	og_out = dup(1);
+//	og_in = dup(0);
+//	og_out = dup(1);
+//	dup2(command.out_fd, STDOUT);
+//	dup2(command.in_fd, STDIN);
+//	if (command.in_fd > 2)
+//		close(command.in_fd);
+//	if (command.out_fd > 2)
+//		close(command.out_fd);
+	ogs = open_redirect(command.in_fd, command.out_fd);
 	child_error = ft_calloc(1, sizeof(int));
-	dup2(command.out_fd, STDOUT);
-	dup2(command.in_fd, STDIN);
-	if (command.in_fd > 2)
-		close(command.in_fd);
-	if (command.out_fd > 2)
-		close(command.out_fd);
 	if (check_customs(command) == 1)
 	{
 		child_pid = fork();
 		signal(SIGINT, SIG_IGN);
 		if (child_pid == 0)
-		{
 			process_executer(command);
-		}
 		else
 		{
 			waitpid(child_pid, child_error, 0);
@@ -162,10 +160,13 @@ int	executer(t_Command command)
 	add_environ(error_env);
 	free(error_env);
 	free(child_error);
-	dup2(og_out, STDOUT);
-	dup2(og_in, STDIN);
-	close(og_in);
-	close(og_out);
+	close_redirect(ogs[0], ogs[1]);
+	free(ogs);
+//	dup2(og_out, STDOUT);
+//	dup2(og_in, STDIN);
+//	close(og_in);
+//	close(og_out);
+//
 	free_command(command);
 	return (0);
 }

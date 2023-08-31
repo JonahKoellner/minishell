@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:09:08 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/29 18:13:36 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:35:20 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,10 @@ int		execute_path(t_Command cmd, char *args[]);
 char	**enviroment(char	**envp);
 int	add_environ(char	*var);
 int	remove_environ(char	*var);
+
+//#--------- Redirect ------------#//
+int	close_redirect(int	og_in, int og_out);
+int	*open_redirect(int in_fd, int out_fd);
+
 
 #endif
