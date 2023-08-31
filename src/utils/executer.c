@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/30 19:17:16 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:10:51 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int	executer(t_Command command)
 	int		og_in;
 	int		og_out;
 	int		*child_error;
+	char	*error_env;
 
 	og_in = dup(0);
 	og_out = dup(1);
@@ -157,7 +158,9 @@ int	executer(t_Command command)
 			signal(SIGINT, sig_decide);
 		}
 	}
-	add_environ(ft_strjoin_free(ft_strdup("?="), ft_itoa(WEXITSTATUS(*child_error))));
+	error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(WEXITSTATUS(*child_error)));
+	add_environ(error_env);
+	free(error_env);
 	dup2(og_out, STDOUT);
 	dup2(og_in, STDIN);
 	close(og_in);

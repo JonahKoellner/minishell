@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/30 18:58:54 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:13:07 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	main2(int argc, char **argv, char **envp)
 		cmd = input_to_lex(inp);
 		// if (cmd.type.lexeme == NULL)
 		// 	printf("\n");
-		if (cmd.type.lexeme != NULL)
-			add_environ(ft_strjoin_free(ft_strdup("?="), ft_itoa(cmd.err)));
+		///if (cmd.type.lexeme != NULL)
+			//add_environ(ft_strjoin_free(ft_strdup("?="), ft_itoa(cmd.err)));
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 			executer(cmd);
 		else
