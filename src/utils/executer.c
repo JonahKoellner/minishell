@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/31 19:10:37 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:30:50 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	execute_path(t_Command cmd, char *args[])
 int	check_customs(t_Command command)
 {
 	if (!ft_strncmp(command.type.lexeme, "cd", 3))
-		return (cd(command.arguments->lexeme), 0);
+		return (cd(command.arguments->lexeme));
 	if (!ft_strncmp(command.type.lexeme, "pwd", 4))
 		return (pwd(), 0);
 	if (!ft_strncmp(command.type.lexeme, "echo", 5))

@@ -6,18 +6,38 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/01 14:16:32 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:29:21 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
 
+int	*ft_realloc(int *old, int size)
+{
+	int	*arr;
+	int	index;
+
+	if (!old)
+		return (NULL);
+	arr = ft_calloc(size, sizeof(int));
+	index = 0;
+	while (old[index] && index < size)
+	{
+		arr[index] = old[index];
+		index++;
+	}
+	free(old);
+	return (arr);
+}
+
 int	main2(int argc, char **argv, char **envp)
 {
 	char				*inp;
 	t_Command			cmd;
-	int					child_pid;
+	int					*child_pid;
+	int					num_child;
+	int					index;
 	t_Command			head_cmd;
 
 	signal(SIGINT, sig_decide);
@@ -36,11 +56,15 @@ int	main2(int argc, char **argv, char **envp)
 				executer(cmd);
 			else
 			{
+				num_child = 0;
+				child_pid = ft_calloc(1, sizeof(int));
 				head_cmd = cmd;
 				while (cmd.next)
 				{
-					child_pid = fork();
-					if (child_pid == 0)
+				//	num_child++;
+					child_pid = ft_realloc(child_pid, ++num_child);
+					child_pid[num_child - 1] = fork();
+					if (child_pid[num_child - 1] == 0)
 					{
 						executer(cmd);
 						close(((t_Command *)cmd.next)->in_fd);
@@ -48,20 +72,22 @@ int	main2(int argc, char **argv, char **envp)
 					}
 					close(cmd.out_fd);
 					cmd = *(t_Command *)cmd.next;
-					waitpid(child_pid, NULL, 0);
 				}
-				child_pid = fork();
-				if (child_pid == 0)
+				//num_child++;
+				child_pid = ft_realloc(child_pid, ++num_child);
+				child_pid[num_child - 1] = fork();
+				if (child_pid[num_child - 1] == 0)
 				{
 					executer(cmd);
 					exit(0);
 				}
-				waitpid(child_pid, NULL, 0);
+				index = 0;
+				while (index < num_child)
+					waitpid(child_pid[index++], NULL, 0);
+				free(child_pid);
 				free_command(head_cmd);
 			}
 		}
-		// else
-			// write(1, "\n", 1);
 	}
 }
 
