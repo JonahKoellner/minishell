@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/30 16:34:17 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/31 17:24:06 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,10 @@ t_Token		get_next_token_rst(char *input, int *i);
 
 //Parser
 t_Command	parser(t_Token *tokens);
+
+t_Command	*parser_next(t_Token *tokens);
+
+t_Command	parse_pipe(t_Command cmd, t_Token *tokens);
 
 /// @brief Checks if the token is valid for redirect meaning
 /// Word, Variable, String, Name of a command

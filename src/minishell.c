@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/31 14:05:35 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:14:17 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main2(int argc, char **argv, char **envp)
 {
 	char				*inp;
 	t_Command			cmd;
+	//t_Command			og;
 
 	signal(SIGINT, sig_decide);
 	signal(SIGQUIT, sig_decide);
@@ -30,6 +31,7 @@ int	main2(int argc, char **argv, char **envp)
 		cmd = input_to_lex(inp);
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 		{
+			//og = cmd;
 			while (cmd.next)
 			{
 				printf("\n");
@@ -37,6 +39,7 @@ int	main2(int argc, char **argv, char **envp)
 				cmd = *(t_Command *)cmd.next;
 			}
 			executer(cmd);
+			free(&cmd);
 		}
 		else
 			write(1, "\n", 1);

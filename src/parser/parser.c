@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/30 15:30:29 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:02:01 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_Command	check_parsed(t_Command cmds, t_Token *tokens)
 			return ((t_Command){.err = -7});
 		if (cmds.in_fd < 0 || cmds.out_fd < 0)
 			return (free_command(cmds), open_error(cmds.in_fd, cmds.out_fd));
+		if (cmds.next)
+			cmds = *(t_Command *)cmds.next;
 		i++;
 	}
 	return (cmds);
@@ -75,6 +77,26 @@ t_Command	check_parsed(t_Command cmds, t_Token *tokens)
 // 	return (cmds);
 // }
 
+t_Command	parse_pipe(t_Command cmd, t_Token *tokens)
+{
+	int			fd[2];
+	t_Command	*next;
+
+	pipe(fd);
+	if (cmd.out_fd == STDOUT)
+		cmd.out_fd = fd[1];
+	else
+		close(fd[1]);
+	next = parser_next(tokens);
+	printf("%i \n", cmd.arg_i);
+	if (next->in_fd == STDIN)
+		next->in_fd = fd[0];
+	else
+		close(fd[0]);
+	cmd.next = next;
+	return (cmd);
+}
+
 t_Command	*parser_next(t_Token *tokens)
 {
 	int			i;
@@ -86,7 +108,7 @@ t_Command	*parser_next(t_Token *tokens)
 	while (tokens[i].type != TOKEN_END)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
-			return (cmd->next = parser_next(&tokens[++i]), cmd);
+			return (*cmd = parse_pipe(*cmd, &tokens[++i]), cmd);
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
 			*cmd = in_out(tokens[i], tokens[i + 1], *cmd, &i);
 		else if (!is_allowed_token(tokens[i]))
@@ -111,7 +133,7 @@ t_Command	parser(t_Token *tokens)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
 		{
-			cmds.next = parser_next(&tokens[++i]);
+			cmds = parse_pipe(cmds, &tokens[++i]);
 			return (check_parsed(cmds, tokens));
 		}
 		if (tokens[i].type == TOKEN_STRING || tokens[i].type == TOKEN_VARIABLE)

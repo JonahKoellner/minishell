@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/31 14:07:32 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:03:59 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	free_command(t_Command cmd)
 		free(cmd.arguments);
 	//if (cmd.next != NULL)
 	//{
-		///free_command(*(t_Command *)cmd.next);
-		///free(cmd.next);
-//	}
+	//	free_command(*(t_Command *)cmd.next);
+	//	free(cmd.next);
+	//}
+	printf("free \n");
 }
 
 int	cmd_arg_count(t_Token *tokens)
