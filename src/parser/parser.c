@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/31 19:02:01 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:00:02 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ t_Command	in_out(t_Token type, t_Token where, t_Command cmd, int *i)
 
 t_Command	check_parsed(t_Command cmds, t_Token *tokens)
 {
-	// t_Command	cmd;
+	t_Command	cmd;
 	int			i;
 	int			n;
 
 	i = 0;
 	n = cmd_count(tokens);
 	free(tokens);
-	// cmd = cmds;
+	cmd = cmds;
 	while (i < n)
 	{
 		if (cmds.type.type == ERR)
@@ -49,7 +49,7 @@ t_Command	check_parsed(t_Command cmds, t_Token *tokens)
 			cmds = *(t_Command *)cmds.next;
 		i++;
 	}
-	return (cmds);
+	return (cmd);
 }
 
 // t_Command	check_parsed(t_Command cmds, t_Token *tokens)

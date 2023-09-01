@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/01 12:40:19 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:05:34 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main2(int argc, char **argv, char **envp)
 	char				*inp;
 	t_Command			cmd;
 	int					child_pid;
+	t_Command			head_cmd;
 
 	signal(SIGINT, sig_decide);
 	signal(SIGQUIT, sig_decide);
@@ -29,10 +30,17 @@ int	main2(int argc, char **argv, char **envp)
 	{
 		inp = input();
 		cmd = input_to_lex(inp);
+		printf("%s\n", cmd.type.lexeme);
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 		{
-			if (cmd.next)
+			if (!cmd.next)
 			{
+				printf("asdfkj\n");
+				executer(cmd);
+			}
+			else
+			{
+				head_cmd = cmd;
 				while (cmd.next)
 				{
 					child_pid = fork();
@@ -51,9 +59,10 @@ int	main2(int argc, char **argv, char **envp)
 					exit(0);
 				}
 				waitpid(child_pid, NULL, 0);
+				free_command(head_cmd);
 			}
-			else
-				executer(cmd);
+			// else
+				// executer(cmd);
 		}
 		else
 			write(1, "\n", 1);
