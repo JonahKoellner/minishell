@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/31 14:05:35 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/01 10:35:13 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main2(int argc, char **argv, char **envp)
 {
 	char				*inp;
 	t_Command			cmd;
+	int					child_pid;
 
 	signal(SIGINT, sig_decide);
 	signal(SIGQUIT, sig_decide);
@@ -30,13 +31,30 @@ int	main2(int argc, char **argv, char **envp)
 		cmd = input_to_lex(inp);
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 		{
-			while (cmd.next)
+			if (cmd.next)
 			{
-				printf("\n");
-				executer(cmd);
-				cmd = *(t_Command *)cmd.next;
+				while (cmd.next)
+				{
+					child_pid = fork();
+					if (child_pid == 0)
+					{
+		//				printf("\n");
+						executer(cmd);
+						exit(0);
+					}
+					cmd = *(t_Command *)cmd.next;
+					waitpid(child_pid, NULL, 0);
+				}
+				child_pid = fork();
+				if (child_pid == 0)
+				{
+					executer(cmd);
+					exit(0);
+				}
+				waitpid(child_pid, NULL, 0);
 			}
-			executer(cmd);
+			else
+				executer(cmd);
 		}
 		else
 			write(1, "\n", 1);
@@ -44,10 +62,10 @@ int	main2(int argc, char **argv, char **envp)
 }
 
 void cleanup() {
-	char command[100];
-	pid_t pid = getpid();
-	sprintf(command, "leaks %d", pid);
-	system(command);
+	//char command[100];
+//	pid_t pid = getpid();
+	//sprintf(command, "leaks %d", pid);
+	//system(command);
 }
 
 int	main(int argc, char **argv, char **envp)
