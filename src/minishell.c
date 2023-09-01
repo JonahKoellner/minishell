@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/31 19:14:17 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/01 12:40:19 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main2(int argc, char **argv, char **envp)
 {
 	char				*inp;
 	t_Command			cmd;
-	//t_Command			og;
+	int					child_pid;
 
 	signal(SIGINT, sig_decide);
 	signal(SIGQUIT, sig_decide);
@@ -31,15 +31,29 @@ int	main2(int argc, char **argv, char **envp)
 		cmd = input_to_lex(inp);
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 		{
-			//og = cmd;
-			while (cmd.next)
+			if (cmd.next)
 			{
-				printf("\n");
-				executer(cmd);
-				cmd = *(t_Command *)cmd.next;
+				while (cmd.next)
+				{
+					child_pid = fork();
+					if (child_pid == 0)
+					{
+						executer(cmd);
+						exit(0);
+					}
+					cmd = *(t_Command *)cmd.next;
+					waitpid(child_pid, NULL, 0);
+				}
+				child_pid = fork();
+				if (child_pid == 0)
+				{
+					executer(cmd);
+					exit(0);
+				}
+				waitpid(child_pid, NULL, 0);
 			}
-			executer(cmd);
-			free(&cmd);
+			else
+				executer(cmd);
 		}
 		else
 			write(1, "\n", 1);
