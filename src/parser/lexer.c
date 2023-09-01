@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/30 17:22:47 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:32:46 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,21 @@ t_Token	get_next_token(char *input)
 
 	if (!input || input[i] == '\0')
 		return (i = 0, (t_Token){TOKEN_END, NULL});
-	while (input[i] == ' ' || input[i] == '\t')
+	while (input[i] == ' ' || input[i] == '\t' || input[i] == '\\')
 		i++;
-	if (!strncmp(&input[i], "echo", 4))
+	if (!strncmp(&input[i], "echo ", 5))
 		return (command_decide('e', &i, 4));
-	else if (!strncmp(&input[i], "cd", 2))
+	else if (!strncmp(&input[i], "cd ", 3))
 		return (command_decide('c', &i, 2));
-	else if (!strncmp(&input[i], "pwd", 3))
+	else if (!strncmp(&input[i], "pwd ", 4))
 		return (command_decide('p', &i, 3));
-	else if (!strncmp(&input[i], "export", 6))
+	else if (!strncmp(&input[i], "export ", 7))
 		return (command_decide('x', &i, 6));
-	else if (!strncmp(&input[i], "unset", 5))
+	else if (!strncmp(&input[i], "unset ", 6))
 		return (command_decide('u', &i, 5));
-	else if (!strncmp(&input[i], "env", 3))
+	else if (!strncmp(&input[i], "env ", 4))
 		return (command_decide('v', &i, 3));
-	else if (!strncmp(&input[i], "exit", 4))
+	else if (!strncmp(&input[i], "exit ", 5))
 		return (command_decide('q', &i, 4));
 	return (get_next_token_qte(input, &i));
 }
