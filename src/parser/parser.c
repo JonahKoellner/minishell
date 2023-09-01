@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/01 13:00:02 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:44:11 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ t_Command	parse_pipe(t_Command cmd, t_Token *tokens)
 	else
 		close(fd[1]);
 	next = parser_next(tokens);
-	printf("%i \n", cmd.arg_i);
 	if (next->in_fd == STDIN)
 		next->in_fd = fd[0];
 	else

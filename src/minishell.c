@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/01 13:05:34 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:43:51 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,10 @@ int	main2(int argc, char **argv, char **envp)
 	{
 		inp = input();
 		cmd = input_to_lex(inp);
-		printf("%s\n", cmd.type.lexeme);
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 		{
 			if (!cmd.next)
-			{
-				printf("asdfkj\n");
 				executer(cmd);
-			}
 			else
 			{
 				head_cmd = cmd;
@@ -47,8 +43,10 @@ int	main2(int argc, char **argv, char **envp)
 					if (child_pid == 0)
 					{
 						executer(cmd);
+						close(((t_Command *)cmd.next)->in_fd);
 						exit(0);
 					}
+					close(cmd.out_fd);
 					cmd = *(t_Command *)cmd.next;
 					waitpid(child_pid, NULL, 0);
 				}
@@ -61,8 +59,6 @@ int	main2(int argc, char **argv, char **envp)
 				waitpid(child_pid, NULL, 0);
 				free_command(head_cmd);
 			}
-			// else
-				// executer(cmd);
 		}
 		else
 			write(1, "\n", 1);
@@ -78,6 +74,6 @@ void cleanup() {
 
 int	main(int argc, char **argv, char **envp)
 {
-	atexit(cleanup);
+	// atexit(cleanup);
 	main2(argc, argv, envp);
 }

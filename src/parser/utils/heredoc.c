@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 20:49:24 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/29 23:11:33 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:51:38 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void	handle_heredoc(char *delimiter_full, int *fd)
 		if (!ft_strncmp(input, delimiter_cut, ft_strlen(delimiter_cut) + 1))
 			break ;
 		if (ft_strlen(delimiter_full) != ft_strlen(delimiter_cut))
+		{
 			ft_putendl_fd(input, fd[1]);
+			free(input);
+		}
 		else
 			ft_putendl_fd(var_expander(input), fd[1]);
-		free(input);
 	}
 	free(input);
 	if (ft_strlen(delimiter_full) != ft_strlen(delimiter_cut))
