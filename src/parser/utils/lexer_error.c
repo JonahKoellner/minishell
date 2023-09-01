@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:14:23 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/18 18:04:45 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:18:22 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_Command	bad_quote(char *input)
 {
-	ft_printf_fd(STDERR, "minishell: Quote Error (try closing them ;-) )");
+	ft_printf_fd(STDERR, "minishell: Quote Error (try closing them ;-) )\n");
 	add_history(input);
 	free(input);
 	return ((t_Command){.err = -1});
