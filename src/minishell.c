@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/01 10:35:13 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/01 10:46:06 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	main2(int argc, char **argv, char **envp)
 					child_pid = fork();
 					if (child_pid == 0)
 					{
-		//				printf("\n");
 						executer(cmd);
 						exit(0);
 					}
@@ -62,10 +61,10 @@ int	main2(int argc, char **argv, char **envp)
 }
 
 void cleanup() {
-	//char command[100];
-//	pid_t pid = getpid();
-	//sprintf(command, "leaks %d", pid);
-	//system(command);
+	char command[100];
+	pid_t pid = getpid();
+	sprintf(command, "leaks %d", pid);
+	system(command);
 }
 
 int	main(int argc, char **argv, char **envp)
