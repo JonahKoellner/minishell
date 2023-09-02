@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/30 16:56:43 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/02 16:08:51 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*var_expander(char *input)
 	while (i < ft_strlen(input))
 	{
 		e = i;
-		if (input[i++] == '$')
+		if (input[i++] == '$' && is_unquotable(input[i]) != 1)
 		{
 			e = i;
 			while (!is_unquotable(input[i]))
@@ -63,4 +63,61 @@ char	*var_expander(char *input)
 	}
 	free(input);
 	return (result);
+}
+
+char	*replace_dollar(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '$')
+			input[i] = 6;
+		i++;
+	}
+	return (input);
+}
+
+char	*finish_expand(char *res)
+{
+	int		i;
+
+	i = 0;
+	res = var_expander(res);
+	while (res[i])
+	{
+		if (res[i] == 6)
+			res[i] = '$';
+		i++;
+	}
+	return (res);
+}
+
+char	*expand_word(char *input)
+{
+	int		i;
+	char	*tmp;
+	char	*res;
+
+	i = 0;
+	res = ft_strdup("");
+	while (input[i])
+	{
+		if (input[i] == '\"' || input[i] == '\'')
+		{
+			if (input[i] == '\"')
+				tmp = var_expander(quote(input, &i));
+			else if (input[i] == '\'')
+				tmp = replace_dollar(quote(input, &i));
+			res = ft_strjoin_free(res, tmp);
+		}
+		else
+		{
+		tmp = ft_substr(input, i, 1);
+		res = ft_strjoin_free(res, tmp);
+		i++;
+		}
+	}
+	return (finish_expand(res));
 }

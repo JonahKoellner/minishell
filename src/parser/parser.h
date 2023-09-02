@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/31 17:24:06 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:26:31 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char		*input(void);
 /// @param command Input String.
 /// @return Returns the next available token of the input.
 t_Token		get_next_token(char *input);
+t_Token		get_next_token_qte(char *input, int *i);
+t_Token		get_next_token_rst(char *input, int *i);
 
 /// @brief Gets the String inside the quotes, returns it and moves the index.
 /// @param command Command with quotes.
@@ -102,9 +104,8 @@ int			is_unquotable(char c);
 /// Returns Err token and prints error msg if unexpected token is encountered.
 t_Token		lex_dollar(char *input, int *i);
 
-t_Token		get_next_token_qte(char *input, int *i);
 
-t_Token		get_next_token_rst(char *input, int *i);
+char		*expand_word(char *input);
 
 //Parser
 t_Command	parser(t_Token *tokens);

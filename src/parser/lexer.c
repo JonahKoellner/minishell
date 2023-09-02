@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/01 14:32:46 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:55:38 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_Token	redirect_decide(t_Token token, int *i)
 	if (token.type == TOKEN_GREAT_GREAT || token.type == TOKEN_LESS_LESS)
 		*i += 1;
 	free(token.lexeme);
+	token.lexeme = NULL;
 	return (token);
 }
 
@@ -81,17 +82,25 @@ t_Token	get_next_token(char *input)
 t_Token	get_next_token_qte(char *input, int *i)
 {
 	t_Token	token;
+	int		j;
 
-	if (input[*i] == '\'')
+	if (input[*i] == '$')
+		return (lex_dollar(input, i));
+	else if (!is_unquotable(input[*i]) || input[*i] == '\''
+		|| input[*i] == '\"')
 	{
-		token.type = TOKEN_CHARS;
-		token.lexeme = quote(input, i);
-		return (token);
-	}
-	else if (input[*i] == '\"')
-	{
-		token.type = TOKEN_STRING;
-		token.lexeme = quote(input, i);
+		j = *i;
+		while (!is_unquotable(input[*i]) || input[*i] == '\''
+			|| input[*i] == '\"' || input[*i] == '$')
+		{
+			if (input[*i] == '\'' || input[*i] == '\"')
+				free(quote(input, i));
+			else
+				*i += 1;
+		}
+		printf("%i %c \n", *i, input[*i]);
+		token.lexeme = fillstr(input, j, *i);
+		token.type = TOKEN_WORD;
 		return (token);
 	}
 	return (get_next_token_rst(input, i));
@@ -100,20 +109,8 @@ t_Token	get_next_token_qte(char *input, int *i)
 t_Token	get_next_token_rst(char *input, int *i)
 {
 	t_Token	token;
-	int		j;
 
-	if (input[*i] == '$')
-		return (lex_dollar(input, i));
-	else if (!is_unquotable(input[*i]))
-	{
-		j = *i;
-		while (!is_unquotable(input[*i]))
-			*i += 1;
-		token.lexeme = fillstr(input, j, *i);
-		token.type = TOKEN_WORD;
-		return (token);
-	}
-	else if (input[*i] == '>' || input[*i] != '<' || input[*i] != '|')
+	if (input[*i] == '>' || input[*i] != '<' || input[*i] != '|')
 	{
 		token.type = TOKEN_REDIRECT;
 		token.lexeme = ft_substr(input, *i, 2);

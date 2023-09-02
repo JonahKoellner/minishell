@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/01 15:29:21 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:50:57 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ int	main2(int argc, char **argv, char **envp)
 	}
 }
 
-void cleanup() {
-	char command[100];
-	pid_t pid = getpid();
-	sprintf(command, "leaks %d", pid);
-	system(command);
-}
+//void cleanup() {
+//	char command[100];
+//	pid_t pid = getpid();
+//	sprintf(command, "leaks %d", pid);
+//	system(command);
+//}
 
 int	main(int argc, char **argv, char **envp)
 {
