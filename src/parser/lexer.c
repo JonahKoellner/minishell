@@ -98,7 +98,6 @@ t_Token	get_next_token_qte(char *input, int *i)
 			else
 				*i += 1;
 		}
-		printf("%i %c \n", *i, input[*i]);
 		token.lexeme = fillstr(input, j, *i);
 		token.type = TOKEN_WORD;
 		return (token);

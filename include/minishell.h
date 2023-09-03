@@ -22,6 +22,7 @@
 # include <string.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include <stddef.h>
 # include "../src/parser/parser.h"
 # include "../src/utils/utils.h"

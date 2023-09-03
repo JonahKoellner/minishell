@@ -42,6 +42,7 @@ typedef struct Token
 	char		*lexeme;
 }	t_Token;
 
+
 typedef struct Command
 {
 	t_Token		type;
@@ -152,11 +153,11 @@ t_Command	bad_quote(char *input);
 /// @brief Prints parser error message and the token wich caused it
 /// @param err_token The unexpected token
 /// @return Returns -3
-t_Command	unexpected_token(t_Token err_token);
+t_Command	unexpected_token(t_Token err_token, t_Command cmd);
 
-t_Command	unclosed_pipe(void);
+t_Command	unclosed_pipe(t_Command cmd);
 
-t_Command	open_error(int in_f, int out_f);
+t_Command	open_error(int in_f, int out_f, t_Command cmd);
 
 //expander
 

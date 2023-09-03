@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/02 15:56:20 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:09:11 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,59 +28,57 @@ t_Command	in_out(t_Token type, t_Token where, t_Command cmd, int *i)
 	return (cmd);
 }
 
+//t_Command	check_parsed(t_Command cmds, t_Token *tokens)
+//{
+//	t_Command	*cmd;
+//	int			i;
+//	int			n;
+//	int			j;
+
+//	i = 0;
+//	n = cmd_count(tokens);
+//	cmd = &cmds;
+//	while (i++ < n)
+//	{
+//		if (cmds.type.type == ERR)
+//			return (unclosed_pipe());
+//		cmds.type.lexeme = expand_word(cmds.type.lexeme);
+//		if (cmds.arg_i != cmds.arg_count)
+//			return ((t_Command){.err = -7});
+//		j = -1;
+//		while (++j < cmds.arg_count)
+//			cmds.arguments[j].lexeme = expand_word(cmds.arguments[j].lexeme);
+//		if (cmds.in_fd < 0 || cmds.out_fd < 0)
+//			return (free_command(cmds), open_error(cmds.in_fd, cmds.out_fd));
+//		if (cmds.next)
+//			cmds = *(t_Command *)cmds.next;
+//	}
+//	free(tokens);
+//	return (*cmd);
+//}
+
 t_Command	check_parsed(t_Command cmds, t_Token *tokens)
 {
-	t_Command	cmd;
-	int			i;
-	int			n;
 	int			j;
 
-	i = 0;
-	n = cmd_count(tokens);
-	free(tokens);
-	cmd = cmds;
-	while (i++ < n)
-	{
-		if (cmds.type.type == ERR)
-			return (unclosed_pipe());
+	if (cmds.type.type == ERR)
+		return (unclosed_pipe(cmds));
+	if (cmds.type.lexeme)
 		cmds.type.lexeme = expand_word(cmds.type.lexeme);
-		if (cmds.arg_i != cmds.arg_count)
-			return ((t_Command){.err = -7});
-		j = -1;
-		while (++j < cmds.arg_count)
+	if (cmds.arg_i != cmds.arg_count)
+		return ((t_Command){.err = -7});
+	j = -1;
+	while (++j < cmds.arg_count)
+	{
+		if (cmds.arguments[j].lexeme)
 			cmds.arguments[j].lexeme = expand_word(cmds.arguments[j].lexeme);
-		if (cmds.in_fd < 0 || cmds.out_fd < 0)
-			return (free_command(cmds), open_error(cmds.in_fd, cmds.out_fd));
-		if (cmds.next)
-			cmds = *(t_Command *)cmds.next;
 	}
-	return (cmd);
+	if (cmds.in_fd < 0 || cmds.out_fd < 0)
+		return (free_command(cmds), open_error(cmds.in_fd, cmds.out_fd, cmds));
+	if (tokens)
+		free(tokens);
+	return (cmds);
 }
-
-// t_Command	check_parsed(t_Command cmds, t_Token *tokens)
-// {
-// 	t_Command	cmd;
-// 	int			i;
-// 	int			n;
-
-// 	i = 0;
-// 	n = cmd_count(tokens);
-// 	free(tokens);
-// 	cmd = cmds;
-// 	while (i < n)
-// 	{
-// 		if (cmd.type.type == ERR)
-// 			return (free_command(cmds), unclosed_pipe());
-// 		if (cmd.arg_i != cmd.arg_count)
-// 			return (free_command(cmds), (t_Command){.err = -7});
-// 		if (cmd.in_fd < 0 || cmd.out_fd < 0)
-// 			return (free_command(cmds), open_error(cmd.in_fd, cmd.out_fd));
-// 		i++;
-// 		if (cmds.next)
-// 			cmd = *(t_Command *)cmds.next;
-// 	}
-// 	return (cmds);
-// }
 
 t_Command	parse_pipe(t_Command cmd, t_Token *tokens)
 {
@@ -112,18 +110,21 @@ t_Command	*parser_next(t_Token *tokens)
 	while (tokens[i].type != TOKEN_END)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
-			return (*cmd = parse_pipe(*cmd, &tokens[++i]), cmd);
+		{
+			*cmd = parse_pipe(*cmd, &tokens[++i]);
+			return (*cmd = check_parsed(*cmd, NULL), cmd);
+		}
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
 			*cmd = in_out(tokens[i], tokens[i + 1], *cmd, &i);
 		else if (!is_allowed_token(tokens[i]))
-			return (*cmd = unexpected_token(tokens[i + 1]), cmd);
-		if (is_allowed_token(tokens[i]) && cmd->type.lexeme == NULL)
+			return (*cmd = unexpected_token(tokens[i + 1], *cmd), cmd);
+		else if (is_allowed_token(tokens[i]) && cmd->type.lexeme == NULL)
 			cmd->type = tokens[i];
 		else if (is_allowed_token(tokens[i]))
 			cmd->arguments[cmd->arg_i++] = tokens[i];
 		i++;
 	}
-	return (cmd);
+	return (*cmd = check_parsed(*cmd, NULL), cmd);
 }
 
 //t_Command	parser(t_Token *tokens)
@@ -172,7 +173,7 @@ t_Command	parser(t_Token *tokens)
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
 			cmds = in_out(tokens[i], tokens[i + 1], cmds, &i);
 		else if (!is_allowed_token(tokens[i]))
-			return (unexpected_token(tokens[i + 1]));
+			return (unexpected_token(tokens[i + 1], cmds));
 		else if (is_allowed_token(tokens[i]) && cmds.type.lexeme == NULL)
 			cmds.type = tokens[i];
 		else if (is_allowed_token(tokens[i]))

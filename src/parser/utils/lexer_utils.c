@@ -71,7 +71,7 @@ t_Token	lex_dollar(char *input, int *i)
 		{
 			if (is_unquotable(input[*i]) == 2)
 			{
-				unexpected_token((t_Token){ERR, ft_substr(input, *i, 1)});
+				//unexpected_token((t_Token){ERR, ft_substr(input, *i, 1)});
 				token.type = ERR;
 				break ;
 			}

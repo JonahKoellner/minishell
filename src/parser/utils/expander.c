@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/02 16:08:51 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:09:56 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,7 @@ char	*expand_word(char *input)
 		i++;
 		}
 	}
+	free(input);
+	//system("leaks minishell");
 	return (finish_expand(res));
 }

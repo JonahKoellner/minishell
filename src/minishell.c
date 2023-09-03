@@ -21,10 +21,13 @@ int	*ft_realloc(int *old, int size)
 	if (!old)
 		return (NULL);
 	arr = ft_calloc(size, sizeof(int));
+	if (!arr)
+		return (NULL);
 	index = 0;
-	while (old[index] && index < size)
+	while (index < size - 1)
 	{
 		arr[index] = old[index];
+		printf("%i \n", old[index]);
 		index++;
 	}
 	free(old);
@@ -53,7 +56,10 @@ int	main2(int argc, char **argv, char **envp)
 		if (cmd.err == 0 && cmd.type.lexeme != NULL)
 		{
 			if (!cmd.next)
+			{
 				executer(cmd);
+				free_command(cmd);
+			}
 			else
 			{
 				num_child = 0;
@@ -68,6 +74,7 @@ int	main2(int argc, char **argv, char **envp)
 					{
 						executer(cmd);
 						close(((t_Command *)cmd.next)->in_fd);
+						free_command(cmd);
 						exit(0);
 					}
 					close(cmd.out_fd);
@@ -79,6 +86,7 @@ int	main2(int argc, char **argv, char **envp)
 				if (child_pid[num_child - 1] == 0)
 				{
 					executer(cmd);
+					free_command(cmd);
 					exit(0);
 				}
 				index = 0;

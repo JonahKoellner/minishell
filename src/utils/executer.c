@@ -70,7 +70,10 @@ int	check_customs(t_Command command)
 	if (!ft_strncmp(command.type.lexeme, "env", 4))
 		return (env(), 0);
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))
+	{
+		free_command(command);
 		return (custom_exit(NULL), 0);
+	}
 	if (!ft_strncmp(command.type.lexeme, "export", 7))
 		return (export(command.arguments, command.arg_count), 0);
 	if (!ft_strncmp(command.type.lexeme, "unset", 6))
@@ -135,5 +138,6 @@ int	executer(t_Command command)
 	add_environ(error_env);
 	free(child_error);
 	close_redirect(ogs[0], ogs[1]);
-	return (free(ogs), free_command(command), free(error_env), 0);
+	//free_command(command);
+	return (free(ogs), free(error_env), 0);
 }
