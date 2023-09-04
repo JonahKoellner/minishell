@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/04 00:10:27 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/04 08:58:29 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
 
-int	*ft_realloc(int *old, int size)
-{
-	int	*arr;
-	int	index;
+//// int	*ft_realloc(int *old, int size)
+//// {
+//	// int	*arr;
+//	// int	index;
 
-	if (!old)
-		return (NULL);
-	arr = ft_calloc(size, sizeof(int));
-	if (!arr)
-		return (NULL);
-	index = 0;
-	while (index < size - 1)
-	{
-		arr[index] = old[index];
-		//printf("%i \n", old[index]);
-		index++;
-	}
-	free(old);
-	return (arr);
-}
+//	// if (!old)
+//		// return (NULL);
+//	// arr = ft_calloc(size, sizeof(int));
+//	// if (!arr)
+//		// return (NULL);
+//	// index = 0;
+//	// while (index < size - 1)
+//	// {
+//		// arr[index] = old[index];
+//		printf("%i \n", old[index]);
+//		// index++;
+//	// }
+//	// free(old);
+//	// return (arr);
+//// }
 
 int	child_pipe(t_Command cmd, int pip_in, int *pid)
 {

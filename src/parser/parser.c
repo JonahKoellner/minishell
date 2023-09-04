@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/03 20:10:30 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/04 09:01:47 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_Command	in_out(t_Token type, t_Token where, t_Command cmd, int *i)
 {
 	if (type.type == TOKEN_GREAT)
-		cmd.out_fd = open(where.lexeme, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		cmd.out_fd = open(where.lexeme, O_WRONLY | O_CREAT | O_TRUNC | O_NONBLOCK, 0644);
 	else if (type.type == TOKEN_GREAT_GREAT)
 		cmd.out_fd = open(where.lexeme, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	else if (type.type == TOKEN_LESS)
