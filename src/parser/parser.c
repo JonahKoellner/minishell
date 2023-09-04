@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/04 09:10:24 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/04 09:15:27 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,12 @@ t_Command	*parser_next(t_Token *tokens)
 	int			i;
 	t_Command	*cmd;
 
-	i = 0;
+	i = -1;
 	cmd = ft_calloc(1, sizeof(t_Command));
+	if (cmd == NULL)
+		return (NULL);
 	*cmd = std_command(tokens);
-	while (tokens[i].type != TOKEN_END)
+	while (tokens[++i].type != TOKEN_END)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
 		{
@@ -125,7 +127,6 @@ t_Command	*parser_next(t_Token *tokens)
 			cmd->type = tokens[i];
 		else if (is_allowed_token(tokens[i]))
 			cmd->arguments[cmd->arg_i++] = tokens[i];
-		i++;
 	}
 	return (*cmd = check_parsed(*cmd, NULL), cmd);
 }
