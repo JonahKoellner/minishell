@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:23:21 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/04 09:11:04 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/04 09:19:56 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	*open_redirect(int in_fd, int out_fd, void *pip)
 	if (!pip)
 	{
 		og = ft_calloc(2, sizeof(int));
+		// if (og == NULL)
+			// return (NULL);
 		og[0] = dup(STDIN);
 		og[1] = dup(STDOUT);
 	}

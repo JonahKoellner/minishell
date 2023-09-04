@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/04 09:05:31 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/04 09:13:52 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	multi_executor(t_Command cmd)
 	pip_in = cmd.in_fd;
 	num_child = 0;
 	child_pid = ft_calloc(cmd.count, sizeof(int));
+	if (child_pid == NULL)
+		return ;
 	head_cmd = cmd;
 	while (num_child < head_cmd.count)
 	{
