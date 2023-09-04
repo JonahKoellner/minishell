@@ -37,12 +37,11 @@ void	handle_heredoc(char *delimiter_full, int *fd)
 		if (!ft_strncmp(input, delimiter_cut, ft_strlen(delimiter_cut) + 1))
 			break ;
 		if (ft_strlen(delimiter_full) != ft_strlen(delimiter_cut))
-		{
-			ft_putendl_fd(input, fd[1]);
-			free(input);
-		}
+			;
 		else
-			ft_putendl_fd(var_expander(input), fd[1]);
+			input = var_expander(input);
+		ft_putendl_fd(input, fd[1]);
+		free(input);
 	}
 	free(input);
 	if (ft_strlen(delimiter_full) != ft_strlen(delimiter_cut))
