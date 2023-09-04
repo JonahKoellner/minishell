@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/02 23:09:56 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/04 09:10:45 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,5 @@ char	*expand_word(char *input)
 		}
 	}
 	free(input);
-	//system("leaks minishell");
 	return (finish_expand(res));
 }

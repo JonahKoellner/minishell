@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/03 18:23:46 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/04 09:07:45 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct Token
 	t_TokenType	type;
 	char		*lexeme;
 }	t_Token;
-
 
 typedef struct Command
 {
@@ -105,7 +104,6 @@ int			is_unquotable(char c);
 /// Returns the word after the '$' in \a token.lexme  as a variable token.
 /// Returns Err token and prints error msg if unexpected token is encountered.
 t_Token		lex_dollar(char *input, int *i);
-
 
 char		*expand_word(char *input);
 

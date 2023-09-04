@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:23:21 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/03 23:34:09 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/04 09:11:04 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	*open_redirect(int in_fd, int out_fd, void *pip)
 	if (out_fd > 2)
 		close(out_fd);
 	return (og);
-
 }
 
 //int	close_redirect(int og_in, int og_out)
