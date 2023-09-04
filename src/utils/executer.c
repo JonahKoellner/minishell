@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/04 00:13:34 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/04 10:29:05 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,11 @@ int	executer(t_Command command, int *pip)
 			process_executer(command, pip_og);
 		waitpid(child_pid, &child_error, 0);
 		signal(SIGINT, sig_decide);
-	}
-	error_env = ft_strjoin_free(ft_strdup("?="),
+		error_env = ft_strjoin_free(ft_strdup("?="),
 			ft_itoa(WEXITSTATUS(child_error)));
+	}
+	else
+		error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(errno));
 	if (!pip)
 		close_redirect(pip_og, command, -1);
 	else
