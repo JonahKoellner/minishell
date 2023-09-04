@@ -35,6 +35,8 @@ int	cmd_arg_count(t_Token *tokens)
 
 	i = 0;
 	n = -1;
+	if (tokens == NULL)
+		return (0);
 	while (tokens[i].type != TOKEN_PIPE && tokens[i].type != TOKEN_END)
 	{
 		if (is_allowed_token(tokens[i]))
