@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/01 13:43:42 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/03 22:43:29 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	cmd_count(t_Token *tokens)
 	n = 1;
 	while (tokens[i].type != TOKEN_END)
 	{
-		if (tokens[i].type != TOKEN_PIPE)
+		if (tokens[i].type == TOKEN_PIPE)
 			n++;
 		i++;
 	}
@@ -83,6 +83,7 @@ t_Command	std_command(t_Token *tokens)
 	command.out_fd = STDOUT;
 	command.err = 0;
 	command.next = NULL;
+	command.count = cmd_count(tokens);
 	return (command);
 }
 

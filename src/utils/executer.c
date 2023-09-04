@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/01 15:39:48 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/04 00:13:34 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ int	search_buildins(t_Command cmd, char *args[])
 	bin_ver = ft_strjoin("/bin/", cmd.type.lexeme);
 	usr_bin_ver = ft_strjoin("/usr/bin/", cmd.type.lexeme);
 	if (access(bin_ver, X_OK) == 0)
-		execve(bin_ver,
-			args, enviroment(NULL));
+		execve(bin_ver, args, enviroment(NULL));
 	else if (access(usr_bin_ver, X_OK) == 0)
-		execve(usr_bin_ver,
-			args, enviroment(NULL));
+		execve(usr_bin_ver, args, enviroment(NULL));
 	free(bin_ver);
 	free(usr_bin_ver);
 	return (0);
@@ -51,7 +49,7 @@ int	execute_path(t_Command cmd, char *args[])
 		if (errno == ENOENT)
 			printf("Command not found: %s\n", cmd.type.lexeme);
 	}
-	free_command(cmd);
+	//free_command(cmd);
 	return (0);
 }
 
@@ -81,7 +79,7 @@ int	check_customs(t_Command command)
 	return (1);
 }
 
-int	process_executer(t_Command command)
+int	process_executer(t_Command command, int *pip_og)
 {
 	char	**args;
 	int		index;
@@ -94,14 +92,18 @@ int	process_executer(t_Command command)
 	if (args == NULL)
 		return (printf("ft_calloc error !\n"), 1);
 	args[0] = command.type.lexeme;
-	index = 0;
-	while (index <= command.arg_count)
-	{
+	index = -1;
+	while (++index <= command.arg_count)
 		args[index + 1] = command.arguments[index].lexeme;
-		index++;
-	}
 	args[index] = NULL;
 	execute_path(command, args);
+	if (!command.next && command.arg_i == -13)
+		close_redirect(pip_og, command, -1);
+	else
+		close_redirect(pip_og, command, 0);
+	if (!command.next && command.arg_i != -13)
+		free(pip_og);
+	free_command(command);
 	free(args);
 	exit(errno);
 }
@@ -110,34 +112,31 @@ int	process_executer(t_Command command)
 /// or creates child Process and executes the path command in them
 /// (again giving it to the functions)
 /// @param command (t_Command) Command from the parser
-/// @param envp (char **) Enviourment variables given by the main function
 /// @return (int) 0
-int	executer(t_Command command)
+int	executer(t_Command command, int *pip)
 {
 	int		child_pid;
-	int		*ogs;
-	int		*child_error;
+	int		*pip_og;
+	int		child_error;
 	char	*error_env;
 
-	ogs = open_redirect(command.in_fd, command.out_fd);
-	child_error = ft_calloc(1, sizeof(int));
+	pip_og = pip;
+	if (!pip)
+		pip_og = open_redirect(command.in_fd, command.out_fd, pip);
 	if (check_customs(command) == 1)
 	{
 		child_pid = fork();
 		signal(SIGINT, SIG_IGN);
 		if (child_pid == 0)
-			process_executer(command);
-		else
-		{
-			waitpid(child_pid, child_error, 0);
-			signal(SIGINT, sig_decide);
-		}
+			process_executer(command, pip_og);
+		waitpid(child_pid, &child_error, 0);
+		signal(SIGINT, sig_decide);
 	}
 	error_env = ft_strjoin_free(ft_strdup("?="),
-			ft_itoa(WEXITSTATUS(*child_error)));
-	add_environ(error_env);
-	free(child_error);
-	close_redirect(ogs[0], ogs[1]);
-	//free_command(command);
-	return (free(ogs), free(error_env), 0);
+			ft_itoa(WEXITSTATUS(child_error)));
+	if (!pip)
+		close_redirect(pip_og, command, -1);
+	else
+		pip_og = NULL;
+	return (free(pip_og), add_environ(error_env), free(error_env), 0);
 }

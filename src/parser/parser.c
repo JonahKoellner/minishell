@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/02 23:09:11 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/03 20:10:30 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,26 @@ t_Command	check_parsed(t_Command cmds, t_Token *tokens)
 	return (cmds);
 }
 
-t_Command	parse_pipe(t_Command cmd, t_Token *tokens)
-{
-	int			fd[2];
-	t_Command	*next;
+//t_Command	parse_pipe(t_Command cmd, t_Token *tokens)
+//{
+//	int			fd[2];
+//	t_Command	*next;
 
-	pipe(fd);
-	if (cmd.out_fd == STDOUT)
-		cmd.out_fd = fd[1];
-	else
-		close(fd[1]);
-	next = parser_next(tokens);
-	if (next->in_fd == STDIN)
-		next->in_fd = fd[0];
-	else
-		close(fd[0]);
-	cmd.next = next;
-	return (cmd);
-}
+//	pipe(fd);
+//	next = parser_next(tokens);
+//	next->pip = fd;
+//	if (cmd.out_fd == STDOUT)
+//		cmd.out_fd = fd[1];
+//	else
+//		close(fd[1]);
+//	cmd.pip = fd;
+//	if (next->in_fd == STDIN)
+//		next->in_fd = fd[0];
+//	else
+//		close(fd[0]);
+//	cmd.next = next;
+//	return (cmd);
+//}
 
 t_Command	*parser_next(t_Token *tokens)
 {
@@ -111,7 +113,7 @@ t_Command	*parser_next(t_Token *tokens)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
 		{
-			*cmd = parse_pipe(*cmd, &tokens[++i]);
+			cmd->next = parser_next(&tokens[++i]);
 			return (*cmd = check_parsed(*cmd, NULL), cmd);
 		}
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))
@@ -167,7 +169,7 @@ t_Command	parser(t_Token *tokens)
 	{
 		if (tokens[i].type == TOKEN_PIPE)
 		{
-			cmds = parse_pipe(cmds, &tokens[++i]);
+			cmds.next = parser_next(&tokens[++i]);
 			return (check_parsed(cmds, tokens));
 		}
 		if (!is_allowed_token(tokens[i]) && is_allowed_token(tokens[i + 1]))

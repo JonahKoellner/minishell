@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:51:09 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/02 15:26:31 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/03 18:23:46 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct Command
 	int			out_fd;
 	int			err;
 	void		*next;
+	int			count;
 }	t_Command;
 
 //Input

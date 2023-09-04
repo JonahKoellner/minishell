@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:09:08 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/31 13:46:27 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/03 23:33:42 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		pwd(void);
 
 //#--------- Execution ----------#//
 
-int		executer(t_Command command);
+int		executer(t_Command command, int *pip_og);
 int		execute_path(t_Command cmd, char *args[]);
 
 //#--------- Enviroment ----------#//
@@ -49,7 +49,10 @@ int		add_environ(char	*var);
 int		remove_environ(char	*var);
 
 //#--------- Redirect ------------#//
-int		close_redirect(int og_in, int og_out);
-int		*open_redirect(int in_fd, int out_fd);
+//int		close_redirect(int og_in, int og_out);
+void	close_redirect(int *pip, t_Command cmd, int pip_in);
+//int		*open_redirect(int in_fd, int out_fd);
+int		*open_redirect(int in_fd, int out_fd, void *pip);
+int		*close_pipe_rst(int *pip, int in_fd, int out_fd);
 
 #endif
