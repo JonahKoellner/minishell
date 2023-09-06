@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:07:13 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 15:12:20 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:04:46 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*input(void)
 	free(prompt);
 	if (!input)
 	{
-		custom_exit(NULL, 0);
+		custom_exit(NULL);
 	}
 	return (input);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bash_mapper.c                                      :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:38:06 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 14:48:04 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:04:50 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,22 @@ int	etb(int err)
 	return (err);
 }
 
+int	is_number(char *str)
+{
+	int	index;
+
+	index = 0;
+	if (str == NULL)
+		return (1);
+	while (index < (int)ft_strlen(str))
+	{
+		if (str[index] > 57 || str[index] < 48)
+			return (0);
+		index++;
+	}
+	return (1);
+}
+
 /// Checks if the given command is a custom build function
 /// @param command (t_Command) Command from the parser
 /// @param envp (char **) Enviourment variables given by the main function
@@ -50,10 +66,7 @@ int	check_customs(t_Command command)
 		return (env(), 0);
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))
 	{
-		if (command.arg_count)
-			exit_code = ft_atoi(command.arguments[0].lexeme);
-		free_command(command);
-		return (custom_exit(NULL, exit_code), 0);
+		return (custom_exit(&command));
 	}
 	if (!ft_strncmp(command.type.lexeme, "export", 7))
 		return (export(command.arguments, command.arg_count), 0);

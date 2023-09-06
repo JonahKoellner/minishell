@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 15:35:08 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:10:02 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ int	echo(t_Token *arguments, int arg_count)
 	{
 		n_flag = 1;
 		if (++index >= arg_count)
-			break;
+			break ;
 	}
 	if (index < arg_count)
 	{
-	while (arguments[index].lexeme)
-	{
-		ft_printf("%s", arguments[index++].lexeme);
-		if (index != arg_count)
-			ft_printf(" ");
-	}
+		while (arguments[index].lexeme)
+		{
+			ft_printf("%s", arguments[index++].lexeme);
+			if (index != arg_count)
+				ft_printf(" ");
+		}
 	}
 	if (!n_flag)
 		ft_printf("\n");
@@ -114,10 +114,29 @@ int	unset(t_Token *arguments, int arg_count)
 /// @param to_clean (void *) Pointer to anything that needs to be cleaned
 /// when exitin the shell. When nothing to clear pass NULL
 /// @return (void) No return.
-void	custom_exit(void *to_clean, int exit_code)
+int	custom_exit(t_Command *c)
 {
-	ft_vecfree(enviroment(NULL));
-	if (to_clean)
-		free(to_clean);
-	exit(exit_code);
+	int	exit_code;
+
+	if (c != NULL && c->arg_count != 0)
+	{
+		if (c->arg_count >= 2)
+		{
+			if (is_number(c->arguments[0].lexeme))
+				return (printf("exit: too many arguments\n"),
+					add_environ(ft_strjoin_free(ft_strdup("?="),
+							ft_strdup("1"))), 0);
+			else
+				return (printf("exit: %s: numeric argument required\n",
+						c->arguments[0].lexeme), ft_vecfree(enviroment(NULL)),
+					exit(255), 0);
+		}
+		if (c->arg_count == 1 && !is_number(c->arguments[0].lexeme))
+			return (printf("exit: %s: numeric argument required\n",
+					c->arguments[0].lexeme), ft_vecfree(enviroment(NULL)),
+				exit(255), 0);
+			exit_code = ft_atoi(c->arguments[0].lexeme);
+		return (ft_vecfree(enviroment(NULL)), exit(exit_code), 0);
+	}
+	return (ft_vecfree(enviroment(NULL)), exit(0), 0);
 }

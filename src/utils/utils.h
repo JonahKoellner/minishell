@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:09:08 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 15:11:32 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:04:39 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ void	sig_ctrl_d(void);
 
 //#--------- Buildin Functions ----------#//
 
-void	custom_exit(void *to_clean, int exit_code);
+int		custom_exit(t_Command *command);
 int		env(void);
 int		pwd(void);
 int		export(t_Token *input, int c_arg);
 int		echo(t_Token *arguments, int arg_count);
 int		unset(t_Token *arguments, int arg_count);
+int		is_number(char *str);
 
 //#--------- Directory Handling ----------#//
 
