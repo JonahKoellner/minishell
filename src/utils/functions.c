@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 13:15:09 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:30:07 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,22 +112,12 @@ int	unset(t_Token *arguments, int arg_count)
 /// @param to_clean (void *) Pointer to anything that needs to be cleaned
 /// when exitin the shell. When nothing to clear pass NULL
 /// @return (void) No return.
-void	custom_exit(void *to_clean, t_Token *arguments)
+void	custom_exit(void *to_clean, int	exit_code)
 {
 	ft_vecfree(enviroment(NULL));
 	if (to_clean)
 		free(to_clean);
-	printf("before args\n");
-	if (arguments)
-	{
-		printf("in args\n");
-		if (arguments[0].lexeme)
-		{
-			printf("in args[0] %d\n", ft_atoi(arguments[0].lexeme));
-			exit(ft_atoi(arguments[0].lexeme));
-		}
-	}
-	exit(0);
+	exit(exit_code);
 }
 
 ///

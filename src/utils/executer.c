@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 13:20:05 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:31:45 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ int	execute_path(t_Command cmd, char *args[])
 /// @return (int) 0 if it was a custom command, 1 if not.
 int	check_customs(t_Command command)
 {
+	int	exit_code;
+
+	exit_code = 0;
 	if (!ft_strncmp(command.type.lexeme, "cd", 3))
 		return (cd(command.arguments->lexeme));
 	if (!ft_strncmp(command.type.lexeme, "pwd", 4))
@@ -80,8 +83,10 @@ int	check_customs(t_Command command)
 		return (env(), 0);
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))
 	{
+		if (command.arg_count)
+			exit_code = ft_atoi(command.arguments[0].lexeme);
 		free_command(command);
-		return (custom_exit(NULL, command.arguments), 0);
+		return (custom_exit(NULL, exit_code), 0);
 	}
 	if (!ft_strncmp(command.type.lexeme, "export", 7))
 		return (export(command.arguments, command.arg_count), 0);
