@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:09:08 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 13:31:09 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:11:32 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 //#--------- visual_prompt ----------#//
 
 char	*new_line(void);
+int		etb(int err);
+int		check_customs(t_Command command);
 
 //#--------- signal_handler ----------#//
 
@@ -50,9 +52,7 @@ int		remove_environ(char	*var);
 char	*get_environ_item(char *item);
 
 //#--------- Redirect ------------#//
-//int		close_redirect(int og_in, int og_out);
 void	close_redirect(int *pip, t_Command cmd, int pip_in);
-//int		*open_redirect(int in_fd, int out_fd);
 int		*open_redirect(int in_fd, int out_fd, int *pip);
 int		*close_pipe_rst(int *pip, int in_fd, int out_fd, int pip_in);
 void	reset_std(int count);

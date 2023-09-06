@@ -6,29 +6,11 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:23:21 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/04 09:19:56 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:11:20 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//int	*open_redirect(int in_fd, int out_fd)
-//{
-//	int	og_in;
-//	int	og_out;
-//	int	*ogs;
-
-//	og_in = dup(0);
-//	og_out = dup(1);
-//	dup2(out_fd, STDOUT);
-//	dup2(in_fd, STDIN);
-//	if (in_fd > 2)
-//		close(in_fd);
-//	if (out_fd > 2)
-//		close(out_fd);
-//	ogs = ft_calloc(2, sizeof(int));
-//	return (ogs[0] = og_in, ogs[1] = og_out, ogs);
-//}
 
 int	*open_redirect(int in_fd, int out_fd, int *pip)
 {
@@ -38,8 +20,6 @@ int	*open_redirect(int in_fd, int out_fd, int *pip)
 	if (!pip)
 	{
 		og = ft_calloc(2, sizeof(int));
-		// if (og == NULL)
-			// return (NULL);
 		og[0] = dup(STDIN);
 		og[1] = dup(STDOUT);
 	}
@@ -51,17 +31,6 @@ int	*open_redirect(int in_fd, int out_fd, int *pip)
 		close(out_fd);
 	return (og);
 }
-
-//int	close_redirect(int og_in, int og_out)
-//{
-//	close(STDOUT);
-//	close(STDIN);
-//	dup2(og_out, STDOUT);
-//	dup2(og_in, STDIN);
-//	close(og_in);
-//	close(og_out);
-//	return (0);
-//}
 
 void	close_redirect(int *pip_og, t_Command cmd, int pip_in)
 {
@@ -103,7 +72,7 @@ int	*close_pipe_rst(int *pip, int in_fd, int out_fd, int pip_in)
 
 void	reset_std(int count)
 {
-	static int std[2];
+	static int	std[2];
 
 	if (count == 0)
 	{
@@ -117,5 +86,4 @@ void	reset_std(int count)
 		close(std[0]);
 		close(std[1]);
 	}
-
 }

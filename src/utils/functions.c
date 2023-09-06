@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 13:30:07 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:10:43 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	echo(t_Token *arguments, int arg_count)
 	n_flag = 0;
 	if (!arg_count)
 		return (ft_printf("\n"), 0);
-
 	while (!ft_strncmp(arguments[index].lexeme, "-n", 3))
 	{
 		index++;
@@ -75,14 +74,13 @@ int	export(t_Token *input, int c_arg)
 	{
 		index = 0;
 		while (input[index].lexeme)
+		{
 			if (input[index].lexeme[0] != '=')
 				add_environ(ft_strdup(input[index++].lexeme));
 			else
-			{
 				printf("bash: export: `%s': not a valid identifier\n",
-					 input[index].lexeme);
-				index++;
-			}
+					input[index++].lexeme);
+		}
 	}
 	else
 	{
@@ -112,31 +110,10 @@ int	unset(t_Token *arguments, int arg_count)
 /// @param to_clean (void *) Pointer to anything that needs to be cleaned
 /// when exitin the shell. When nothing to clear pass NULL
 /// @return (void) No return.
-void	custom_exit(void *to_clean, int	exit_code)
+void	custom_exit(void *to_clean, int exit_code)
 {
 	ft_vecfree(enviroment(NULL));
 	if (to_clean)
 		free(to_clean);
 	exit(exit_code);
 }
-
-///
-/// Prints the history of commands
-/// @param void (void) No Parameter.
-/// @return Returns 0 on success, no failure catched for now.
-//int	print_history(void)
-//{
-//	HIST_ENTRY		**hist;
-//	HISTORY_STATE	*hist_state;
-//	int				index;
-
-//	hist = history_get(0);
-//	hist_state = history_get_history_state();
-//	index = 0;
-//	while (index < hist_state->length)
-//	{
-//		printf("\t%d\t%s\n", index + 1, hist[index]->line);
-//		index++;
-//	}
-//	return (0);
-//}

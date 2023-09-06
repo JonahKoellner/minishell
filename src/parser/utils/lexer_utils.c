@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:20:45 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/30 17:22:52 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:04:02 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ t_Token	lex_dollar(char *input, int *i)
 		{
 			if (is_unquotable(input[*i]) == 2)
 			{
-				//unexpected_token((t_Token){ERR, ft_substr(input, *i, 1)});
 				token.type = ERR;
 				break ;
 			}

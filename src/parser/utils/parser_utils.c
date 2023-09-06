@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/04 09:19:07 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:04:21 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ t_Command	std_command(t_Token *tokens)
 	command.type.lexeme = NULL;
 	command.arg_count = cmd_arg_count(tokens);
 	command.arguments = ft_calloc((command.arg_count + 1), sizeof(t_Token));
-	// if (command.arguments == NULL)
-		// return (free_command(command), NULL);
 	while (i <= command.arg_count)
 	{
 		command.arguments[i].lexeme = NULL;

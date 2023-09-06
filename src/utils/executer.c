@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 13:31:45 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:06:40 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	search_buildins(t_Command cmd, char *args[])
 		cmd_name = ft_strjoin(split_path[index++], cmd.type.lexeme);
 		if (access(cmd_name, X_OK) == 0)
 			return (execve(cmd_name, args, enviroment(NULL)),
-				free(cmd_name), ft_vecfree(split_path) ,0);
+				free(cmd_name), ft_vecfree(split_path), 0);
 		free(cmd_name);
 	}
 	ft_vecfree(split_path);
@@ -60,39 +60,7 @@ int	execute_path(t_Command cmd, char *args[])
 		if (errno == ENOENT)
 			printf("Command not found: %s\n", cmd.type.lexeme);
 	}
-	//free_command(cmd);
 	return (0);
-}
-
-/// Checks if the given command is a custom build function
-/// @param command (t_Command) Command from the parser
-/// @param envp (char **) Enviourment variables given by the main function
-/// @return (int) 0 if it was a custom command, 1 if not.
-int	check_customs(t_Command command)
-{
-	int	exit_code;
-
-	exit_code = 0;
-	if (!ft_strncmp(command.type.lexeme, "cd", 3))
-		return (cd(command.arguments->lexeme));
-	if (!ft_strncmp(command.type.lexeme, "pwd", 4))
-		return (pwd(), 0);
-	if (!ft_strncmp(command.type.lexeme, "echo", 5))
-		return (echo(command.arguments, command.arg_count));
-	if (!ft_strncmp(command.type.lexeme, "env", 4))
-		return (env(), 0);
-	if (!ft_strncmp(command.type.lexeme, "exit", 5))
-	{
-		if (command.arg_count)
-			exit_code = ft_atoi(command.arguments[0].lexeme);
-		free_command(command);
-		return (custom_exit(NULL, exit_code), 0);
-	}
-	if (!ft_strncmp(command.type.lexeme, "export", 7))
-		return (export(command.arguments, command.arg_count), 0);
-	if (!ft_strncmp(command.type.lexeme, "unset", 6))
-		return (unset(command.arguments, command.arg_count));
-	return (1);
 }
 
 int	process_executer(t_Command command, int *pip_og)
@@ -100,8 +68,6 @@ int	process_executer(t_Command command, int *pip_og)
 	char	**args;
 	int		index;
 
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	if (command.arg_count == 0)
 		args = ft_calloc(3, sizeof(char *));
 	else
@@ -125,6 +91,30 @@ int	process_executer(t_Command command, int *pip_og)
 	exit(errno);
 }
 
+char	*child_exec(t_Command command, int *pip_og)
+{
+	int	child_pid;
+	int	child_error;
+
+	child_pid = fork();
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	if (child_pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		process_executer(command, pip_og);
+	}
+	waitpid(child_pid, &child_error, 0);
+	if (WIFSIGNALED(child_error))
+		child_error = 130;
+	else
+		child_error = WEXITSTATUS(child_error);
+	signal(SIGINT, sig_decide);
+	return (ft_strjoin_free(ft_strdup("?="),
+			ft_itoa(etb(child_error))));
+}
+
 /// Executes the custom command (giving it to the respective function)
 /// or creates child Process and executes the path command in them
 /// (again giving it to the functions)
@@ -132,9 +122,7 @@ int	process_executer(t_Command command, int *pip_og)
 /// @return (int) 0
 int	executer(t_Command command, int *pip)
 {
-	int		child_pid;
 	int		*pip_og;
-	int		child_error;
 	char	*error_env;
 
 	pip_og = pip;
@@ -142,15 +130,7 @@ int	executer(t_Command command, int *pip)
 		pip_og = open_redirect(command.in_fd, command.out_fd, pip);
 	if (check_customs(command) == 1)
 	{
-		child_pid = fork();
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
-		if (child_pid == 0)
-			process_executer(command, pip_og);
-		waitpid(child_pid, &child_error, 0);
-		signal(SIGINT, sig_decide);
-		error_env = ft_strjoin_free(ft_strdup("?="),
-			ft_itoa(WEXITSTATUS(child_error)));
+		error_env = child_exec(command, pip);
 	}
 	else
 		error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(errno));

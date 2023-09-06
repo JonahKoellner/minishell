@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:07:13 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 13:21:52 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:12:20 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ t_Command	input_to_lex(char *input)
 	}
 	get_next_token(0);
 	add_history(input);
-	free(input);
 	if (tokens[j - 1].type == ERR)
-		return (free_tokens(tokens), (t_Command){.err = -3});
-	return (parser(tokens));
+		return (free(input), free_tokens(tokens), (t_Command){.err = -3});
+	return (free(input), parser(tokens));
 }
 
 char	*input(void)
@@ -65,8 +64,6 @@ char	*input(void)
 	prompt = new_line();
 	if (isatty(STDIN))
 		input = readline(prompt);
-
-	// Put gnl fallback here for (testers)
 	free(prompt);
 	if (!input)
 	{
