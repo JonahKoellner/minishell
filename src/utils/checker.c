@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:38:06 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 17:04:50 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:15:44 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	check_customs(t_Command command)
 		return (env(), 0);
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))
 	{
+		printf("exit\n");
 		return (custom_exit(&command));
 	}
 	if (!ft_strncmp(command.type.lexeme, "export", 7))
