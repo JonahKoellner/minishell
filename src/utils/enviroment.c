@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 16:07:37 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 10:10:19 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:11:06 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	add_environ(char	*var)
 {
 	if (!ft_vecreplace(var, enviroment(NULL)))
 		enviroment(ft_vectoradd(enviroment(NULL), var));
+	free(var);
 	return (0);
 }
 

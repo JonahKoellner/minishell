@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/06 12:57:48 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:08:14 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ t_Command	check_parsed(t_Command cmds, t_Token *tokens)
 {
 	int			j;
 
+	if (tokens)
+		free(tokens);
 	if (cmds.type.type == ERR)
 		return (unclosed_pipe(cmds));
 	if (cmds.type.lexeme)
@@ -76,8 +78,6 @@ t_Command	check_parsed(t_Command cmds, t_Token *tokens)
 	}
 	if (cmds.in_fd < 0 || cmds.out_fd < 0)
 		return (open_error(cmds.in_fd, cmds.out_fd, cmds));
-	if (tokens)
-		free(tokens);
 	return (cmds);
 }
 

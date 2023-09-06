@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/06 13:02:21 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:12:33 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	main2(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)argc;
 	enviroment(ft_vecdup(envp));
-	add_environ("?=0");
+	add_environ(ft_strdup("?=0"));
 	while (1)
 	{
 		inp = input();
