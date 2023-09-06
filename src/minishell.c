@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/04 09:13:52 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/05 09:41:03 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ int	main2(int argc, char **argv, char **envp)
 				multi_executor(cmd);
 			free_command(cmd);
 		}
+		if (cmd.err != 0)
+			add_environ(ft_strjoin_free(ft_strdup("?="), ft_itoa(cmd.err)));
 	}
 }
 

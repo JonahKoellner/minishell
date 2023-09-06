@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/08/31 13:47:35 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 09:39:57 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	echo(t_Token *arguments, int arg_count)
 	n_flag = 0;
 	if (!arg_count)
 		return (ft_printf("\n"), 0);
-	if (!ft_strncmp(arguments[0].lexeme, "-n", 3))
+
+	while (!ft_strncmp(arguments[index].lexeme, "-n", 3))
 	{
 		index++;
 		n_flag = 1;
@@ -74,17 +75,21 @@ int	export(t_Token *input, int c_arg)
 	{
 		index = 0;
 		while (input[index].lexeme)
-			add_environ(input[index++].lexeme);
+			if (input[index].lexeme[0] != '=')
+				add_environ(input[index++].lexeme);
+			else
+			{
+				printf("bash: export: `%s': not a valid identifier\n",
+					 input[index].lexeme);
+				index++;
+			}
 	}
 	else
 	{
 		envp = enviroment(NULL);
 		index = 0;
 		while (envp[index])
-		{
-			printf("%s\n", envp[index]);
-			index++;
-		}
+			printf("%s\n", envp[index++]);
 	}
 	return (0);
 }
@@ -107,11 +112,14 @@ int	unset(t_Token *arguments, int arg_count)
 /// @param to_clean (void *) Pointer to anything that needs to be cleaned
 /// when exitin the shell. When nothing to clear pass NULL
 /// @return (void) No return.
-void	custom_exit(void *to_clean)
+void	custom_exit(void *to_clean, t_Token *arguments)
 {
 	ft_vecfree(enviroment(NULL));
 	if (to_clean)
 		free(to_clean);
+	if (arguments)
+		if (arguments[0].lexeme)
+			exit(ft_atoi(arguments[0].lexeme));
 	exit(0);
 }
 

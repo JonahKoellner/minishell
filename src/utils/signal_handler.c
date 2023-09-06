@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:18:23 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/03 02:49:47 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/06 09:16:20 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	sig_ctrl_c(void)
 ///  @return No return value.
 void	sig_ctrl_d(void)
 {
-	custom_exit(NULL);
+	custom_exit(NULL, 0);
 }
 
 /// Signal Handler function for ctrl_\.
@@ -40,7 +40,7 @@ void	sig_ctrl_d(void)
 void	sig_ctrl_quit(void)
 {
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	// rl_replace_line("", 0);
 	rl_redisplay();
 }
 

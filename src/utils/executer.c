@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/04 10:29:05 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:23:16 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,28 @@
 
 int	search_buildins(t_Command cmd, char *args[])
 {
-	char	*bin_ver;
-	char	*usr_bin_ver;
+	char	*path;
+	char	**split_path;
+	char	*cmd_name;
+	int		index;
 
-	bin_ver = ft_strjoin("/bin/", cmd.type.lexeme);
-	usr_bin_ver = ft_strjoin("/usr/bin/", cmd.type.lexeme);
-	if (access(bin_ver, X_OK) == 0)
-		execve(bin_ver, args, enviroment(NULL));
-	else if (access(usr_bin_ver, X_OK) == 0)
-		execve(usr_bin_ver, args, enviroment(NULL));
-	free(bin_ver);
-	free(usr_bin_ver);
+	path = get_environ_item("PATH");
+	if (path == NULL)
+		return (printf("No path ?>..>\n"), 1);
+	split_path = ft_split(path, ':');
+	index = -1;
+	while (split_path[++index] != NULL)
+		split_path[index] = ft_strjoin_free(split_path[index], ft_strdup("/"));
+	index = 0;
+	while (split_path[index] != NULL)
+	{
+		cmd_name = ft_strjoin(split_path[index++], cmd.type.lexeme);
+		if (access(cmd_name, X_OK) == 0)
+			return (execve(cmd_name, args, enviroment(NULL)),
+				free(cmd_name), ft_vecfree(split_path) ,0);
+		free(cmd_name);
+	}
+	ft_vecfree(split_path);
 	return (0);
 }
 
@@ -70,7 +81,7 @@ int	check_customs(t_Command command)
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))
 	{
 		free_command(command);
-		return (custom_exit(NULL), 0);
+		return (custom_exit(NULL, command.arguments), 0);
 	}
 	if (!ft_strncmp(command.type.lexeme, "export", 7))
 		return (export(command.arguments, command.arg_count), 0);

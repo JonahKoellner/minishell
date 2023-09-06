@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:07:13 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/04 09:07:17 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 08:54:24 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ char	*input(void)
 	// Put gnl fallback here for (testers)
 	free(prompt);
 	if (!input)
-		custom_exit(NULL);
+		custom_exit(NULL, 0);
 	return (input);
 }
