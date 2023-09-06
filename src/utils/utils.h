@@ -53,7 +53,8 @@ char	*get_environ_item(char *item);
 //int		close_redirect(int og_in, int og_out);
 void	close_redirect(int *pip, t_Command cmd, int pip_in);
 //int		*open_redirect(int in_fd, int out_fd);
-int		*open_redirect(int in_fd, int out_fd, void *pip);
-int		*close_pipe_rst(int *pip, int in_fd, int out_fd);
+int		*open_redirect(int in_fd, int out_fd, int *pip);
+int		*close_pipe_rst(int *pip, int in_fd, int out_fd, int pip_in);
+void	reset_std(int count);
 
 #endif

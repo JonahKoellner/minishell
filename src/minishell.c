@@ -39,7 +39,7 @@ int	child_pipe(t_Command cmd, int pip_in, int *pid)
 
 	pipe(pip);
 	if (!cmd.next)
-		close_pipe_rst(pip, cmd.in_fd, cmd.out_fd);
+		close_pipe_rst(pip, cmd.in_fd, cmd.out_fd, pip_in);
 	*pid = fork();
 	if (*pid == 0)
 	{
@@ -53,11 +53,8 @@ int	child_pipe(t_Command cmd, int pip_in, int *pid)
 			open_redirect(cmd.in_fd, cmd.out_fd, pip);
 		close_redirect(pip, cmd, pip_in);
 		cmd.arg_i = -13;
-		executer(cmd, pip);
-		exit(0);
+		exit(executer(cmd, pip));
 	}
-	//printf("%i   Pipe with in_fd %i and out_fd %i \n",*pid, pip[0], pip[1]);
-	//printf("Command count %i in %i out %i pipe to %i \n",cmd.count ,cmd.in_fd, cmd.out_fd, pip[0]);
 	close_redirect(NULL, cmd, pip_in);
 	if (pip[1] > 2)
 		close(pip[1]);
@@ -77,11 +74,13 @@ void	multi_executor(t_Command cmd)
 	if (child_pid == NULL)
 		return ;
 	head_cmd = cmd;
+	//reset_std(0
 	while (num_child < head_cmd.count)
 	{
 		pip_in = child_pipe(cmd, pip_in, &child_pid[num_child++]);
 		if (cmd.next)
 			cmd = *(t_Command *)cmd.next;
+		//reset_std(cmd.count);
 	}
 	num_child = 0;
 	while (num_child < head_cmd.count)
@@ -89,7 +88,6 @@ void	multi_executor(t_Command cmd)
 	if (pip_in > 2)
 		close(pip_in);
 	return (free(child_pid));
-	//free_command(head_cmd);
 }
 
 int	main2(int argc, char **argv, char **envp)

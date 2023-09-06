@@ -75,7 +75,7 @@ t_Command	check_parsed(t_Command cmds, t_Token *tokens)
 			cmds.arguments[j].lexeme = expand_word(cmds.arguments[j].lexeme);
 	}
 	if (cmds.in_fd < 0 || cmds.out_fd < 0)
-		return (free_command(cmds), open_error(cmds.in_fd, cmds.out_fd, cmds));
+		return (open_error(cmds.in_fd, cmds.out_fd, cmds));
 	if (tokens)
 		free(tokens);
 	return (cmds);
