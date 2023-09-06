@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 10:39:02 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:15:09 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	export(t_Token *input, int c_arg)
 		index = 0;
 		while (input[index].lexeme)
 			if (input[index].lexeme[0] != '=')
-				add_environ(input[index++].lexeme);
+				add_environ(ft_strdup(input[index++].lexeme));
 			else
 			{
 				printf("bash: export: `%s': not a valid identifier\n",

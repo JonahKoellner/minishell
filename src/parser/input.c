@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:07:13 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 12:59:52 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:21:52 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	*input(void)
 	free(prompt);
 	if (!input)
 	{
-		printf("test ?\n");
 		custom_exit(NULL, 0);
 	}
 	return (input);

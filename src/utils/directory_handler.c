@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/08/30 19:07:40 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:21:59 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	cd(char *path)
 		add_environ(new_pwd);
 		add_environ(old_pwd);
 	}
-	return (free(home), free(old_pwd), free(new_pwd), 0);
+	return (free(home), 0);
 }
 
 /// Print the current working Directory
@@ -49,7 +49,6 @@ int	pwd(void)
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 		return (perror("getcwd"), 1);
-	ft_printf("%s\n", pwd);
 	free(pwd);
 	return (0);
 }

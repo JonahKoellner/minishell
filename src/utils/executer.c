@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 13:11:48 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:20:05 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ int	executer(t_Command command, int *pip)
 	{
 		child_pid = fork();
 		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		if (child_pid == 0)
 			process_executer(command, pip_og);
 		waitpid(child_pid, &child_error, 0);
