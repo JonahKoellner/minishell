@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 15:10:43 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:35:08 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,18 @@ int	echo(t_Token *arguments, int arg_count)
 		return (ft_printf("\n"), 0);
 	while (!ft_strncmp(arguments[index].lexeme, "-n", 3))
 	{
-		index++;
 		n_flag = 1;
+		if (++index >= arg_count)
+			break;
 	}
+	if (index < arg_count)
+	{
 	while (arguments[index].lexeme)
 	{
 		ft_printf("%s", arguments[index++].lexeme);
 		if (index != arg_count)
 			ft_printf(" ");
+	}
 	}
 	if (!n_flag)
 		ft_printf("\n");

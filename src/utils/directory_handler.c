@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 09:50:45 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/06 13:21:59 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 15:21:18 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	pwd(void)
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 		return (perror("getcwd"), 1);
+	printf("%s\n", pwd);
 	free(pwd);
 	return (0);
 }
