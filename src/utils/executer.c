@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 10:23:16 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:49:43 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	process_executer(t_Command command, int *pip_og)
 	int		index;
 
 	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (command.arg_count == 0)
 		args = ft_calloc(3, sizeof(char *));
 	else

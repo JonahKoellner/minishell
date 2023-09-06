@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/05 09:41:03 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:02:21 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 int	child_pipe(t_Command cmd, int pip_in, int *pid)
 {
 	int	pip[2];
+
 
 	pipe(pip);
 	if (!cmd.next)
@@ -75,7 +76,7 @@ void	multi_executor(t_Command cmd)
 		return ;
 	head_cmd = cmd;
 	//reset_std(0
-	while (num_child < head_cmd.count)
+	while (num_child < head_cmd.count && cmd.err == 0)
 	{
 		pip_in = child_pipe(cmd, pip_in, &child_pid[num_child++]);
 		if (cmd.next)
@@ -110,11 +111,15 @@ int	main2(int argc, char **argv, char **envp)
 			if (!cmd.next)
 				executer(cmd, NULL);
 			else
+			{
 				multi_executor(cmd);
+			}
 			free_command(cmd);
 		}
 		if (cmd.err != 0)
+		{
 			add_environ(ft_strjoin_free(ft_strdup("?="), ft_itoa(cmd.err)));
+		}
 	}
 }
 

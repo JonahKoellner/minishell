@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 09:39:57 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:39:02 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,16 @@ void	custom_exit(void *to_clean, t_Token *arguments)
 	ft_vecfree(enviroment(NULL));
 	if (to_clean)
 		free(to_clean);
+	printf("before args\n");
 	if (arguments)
+	{
+		printf("in args\n");
 		if (arguments[0].lexeme)
+		{
+			printf("in args[0] %d\n", ft_atoi(arguments[0].lexeme));
 			exit(ft_atoi(arguments[0].lexeme));
+		}
+	}
 	exit(0);
 }
 

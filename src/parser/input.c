@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:07:13 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 08:54:24 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:59:52 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,13 @@ char	*input(void)
 	prompt = new_line();
 	if (isatty(STDIN))
 		input = readline(prompt);
+
 	// Put gnl fallback here for (testers)
 	free(prompt);
 	if (!input)
+	{
+		printf("test ?\n");
 		custom_exit(NULL, 0);
+	}
 	return (input);
 }
