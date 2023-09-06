@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:14:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/01 14:18:03 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:14:22 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_Command	unexpected_token(t_Token err_token, t_Command cmd)
 	else
 		ft_printf_fd(STDERR, "minishell: Parser Error Near unexp. Token `\\n\n");
 	free(err_token.lexeme);
-	ft_printf_fd(STDERR, "\n");
+	// ft_printf_fd(STDERR, "\n");
 	free_command(cmd);
 	return ((t_Command){.err = -3});
 }

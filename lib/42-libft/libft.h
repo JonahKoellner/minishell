@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:57:44 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/08/29 20:44:09 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:32:39 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # include <unistd.h>// as a foundation for its core curriculum.               //
 # include <stddef.h>// This project is home to all the little helper funtions //
 ////////////////////////////////////////////////////////////////////////////////
+
+# include "get_next_line.h"
 
 // _____                                    _
 //|  ______  _ __ _____      _____  _ __ __| |

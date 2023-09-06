@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 16:52:09 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:52:13 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	executer(t_Command command, int *pip)
 		error_env = child_exec(command, pip);
 	}
 	else
-		error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(errno));
+		error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(etb(errno)));
 	if (!pip)
 		close_redirect(pip_og, command, -1);
 	else

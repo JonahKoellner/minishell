@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:19:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/06 15:04:21 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:12:05 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	cmd_arg_count(t_Token *tokens)
 	{
 		if (is_allowed_token(tokens[i]))
 			n++;
-		if (!is_allowed_token(tokens[i]))
+		if (!is_allowed_token(tokens[i]) && tokens[i + 1].type != TOKEN_END)
 			i += 2;
 		else
 			i++;

@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 17:15:25 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:18:00 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ int	unset(t_Token *arguments, int arg_count)
 /// @return (void) No return.
 int	custom_exit(t_Command *c)
 {
-	int	exit_code;
-
 	if (c != NULL && c->arg_count != 0)
 	{
 		if (c->arg_count >= 2)
@@ -135,8 +133,7 @@ int	custom_exit(t_Command *c)
 			return (printf("exit: %s: numeric argument required\n",
 					c->arguments[0].lexeme), ft_vecfree(enviroment(NULL)),
 				exit(255), 0);
-			exit_code = ft_atoi(c->arguments[0].lexeme);
-		return (ft_vecfree(enviroment(NULL)), exit(exit_code), 0);
+		return (ft_vecfree(enviroment(NULL)), exit(ft_atoi(c->arguments[0].lexeme)), 0);
 	}
 	return (ft_vecfree(enviroment(NULL)), exit(0), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:38:06 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 17:15:44 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:18:27 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ int	is_number(char *str)
 /// @return (int) 0 if it was a custom command, 1 if not.
 int	check_customs(t_Command command)
 {
-	int	exit_code;
-
-	exit_code = 0;
 	if (!ft_strncmp(command.type.lexeme, "cd", 3))
 		return (cd(command.arguments->lexeme));
 	if (!ft_strncmp(command.type.lexeme, "pwd", 4))
@@ -66,7 +63,7 @@ int	check_customs(t_Command command)
 		return (env(), 0);
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))
 	{
-		printf("exit\n");
+		// printf("exit\n");
 		return (custom_exit(&command));
 	}
 	if (!ft_strncmp(command.type.lexeme, "export", 7))

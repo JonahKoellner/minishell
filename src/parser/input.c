@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:07:13 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 17:04:46 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 21:16:42 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_Command	input_to_lex(char *input)
 
 	j = 0;
 	i = tokencount(input);
+	// printf("tkn c %i \n", i);
 	if (i < 0)
 		return (bad_quote(input));
 	else if (i == 0)
@@ -42,7 +43,7 @@ t_Command	input_to_lex(char *input)
 	tokens[i].type = TOKEN_END;
 	if (!tokens)
 		return ((t_Command){.err = -2});
-	while (i--)
+	while (i-- >= 0)
 	{
 		tokens[j++] = get_next_token(input);
 		if (tokens[j - 1].type == TOKEN_END || tokens[j - 1].type == ERR)
@@ -64,6 +65,13 @@ char	*input(void)
 	prompt = new_line();
 	if (isatty(STDIN))
 		input = readline(prompt);
+	else
+	{
+		char *line = get_next_line(fileno(stdin));
+		if (line != NULL)
+			input = ft_strtrim(line, "\n");
+		free(line);
+	}
 	free(prompt);
 	if (!input)
 	{

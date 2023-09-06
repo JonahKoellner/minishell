@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:20:45 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/06 15:04:02 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/06 21:10:36 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ int	tokencount(const char *s)
 	i = 0;
 	while (*s)
 	{
+		if (is_unquotable(*s))
+			wrd = 0;
 		if ((*s == '\'' || *s == '\"' || (*s == '>' || *s == '<' || *s == '|'))
-			&& qt == 0)
+			&& qt == 0 && wrd == 0)
 		{
 			qt = *s++;
 			i++;
@@ -44,8 +46,6 @@ int	tokencount(const char *s)
 		if (!ft_isspace(*s) && wrd == 0 && (qt == 0 || qt == '>'
 				|| qt == '<' || qt == '|'))
 			wrd = ++i;
-		if (ft_isspace(*s))
-			wrd = 0;
 		if (*s == qt || ((qt == '>' || qt == '<' || qt == '|') && *s != qt))
 			qt = 0;
 		s++;

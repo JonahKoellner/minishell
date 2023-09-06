@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mreidenb <mreidenb@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 08:11:09 by mreidenb          #+#    #+#              #
-#    Updated: 2023/08/29 20:45:11 by mreidenb         ###   ########.fr        #
+#    Updated: 2023/09/06 17:35:44 by jkollner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MAIN	= isalpha isdigit isalnum isascii isspace isprint strlen memset bzero memcp
 BONUS	= lstnew lstadd_front lstsize lstlast lstadd_back lstdelone lstclear\
 		lstiter lstmap
 
-MAINFILES	= $(addprefix ft_,$(addsuffix .c, $(MAIN)))
+MAINFILES	= $(addprefix ft_,$(addsuffix .c, $(MAIN))) get_next_line.c get_next_line_utils.c
 BONUSFILES	= $(addprefix ft_,$(addsuffix .c, $(BONUS)))
 MAINOBJ	= $(MAINFILES:.c=.o)
 BONUSOBJ = $(BONUSFILES:.c=.o)
