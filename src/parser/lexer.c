@@ -116,6 +116,6 @@ t_Token	get_next_token_rst(char *input, int *i)
 		return (redirect_decide(token, i));
 	}
 	else if (input[*i] == '\n' || input[*i] == '\0')
-		return ((t_Token){TOKEN_END, ft_substr(input, *i, 1)});
+		return ((t_Token){TOKEN_END, NULL});
 	return ((t_Token){ERR, NULL});
 }
