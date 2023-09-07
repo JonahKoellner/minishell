@@ -105,6 +105,7 @@ char	*finish_expand(char *res)
 		if (ret[i] == 7)
 			ret[i] = '\"';
 	}
+	free(res);
 	return (ret);
 }
 
@@ -128,12 +129,8 @@ char	*expand_word(char *input)
 		else
 		{
 			res = ft_strjoin_free(res, ft_substr(input, i++, 1));
-			//printf("r in ew %s \n", res);
 			if ((is_unquotable(input[i]) && input[i]) || (!input[i] && !is_unquotable(input[i - 1])))
-			{
-				//printf("gamburger \n");
 				res = var_expander(res);
-			}
 		}
 	}
 	free(input);
