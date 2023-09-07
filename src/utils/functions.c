@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 18:22:29 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:42:53 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	export(t_Token *input, int c_arg)
 			add_environ(ft_strdup(input[index++].lexeme));
 		else
 		{
-			ft_printf_fd(2, "bash: export: `%s': not a valid identifier\n",
+			ft_printf_fd(STDERR, "bash: export: `%s': not a valid identifier\n",
 				input[index++].lexeme);
 			ret = 1;
 		}
@@ -103,13 +103,25 @@ int	export(t_Token *input, int c_arg)
 int	unset(t_Token *arguments, int arg_count)
 {
 	int	index;
+	int	ret;
 
 	index = 0;
+	ret = 0;
 	if (arg_count == 0)
-		return (ft_printf_fd(2, "bash: unset: `': not a valid identifier"), 1);
+		return (ft_printf_fd(STDERR, "bash: unset: `': not a valid identifier"),
+			1);
 	while (index < arg_count)
-		remove_environ(arguments[index++].lexeme);
-	return (0);
+	{
+		if (!check_export(arguments[index].lexeme))
+			remove_environ(arguments[index++].lexeme);
+		else
+		{
+			ft_printf_fd(STDERR, "bash: export: `%s': not a valid identifier\n",
+				arguments[index++].lexeme);
+			ret = 1;
+		}
+	}
+	return (ret);
 }
 
 /// Exits the Shell and cleans up the remainders
@@ -120,6 +132,10 @@ int	custom_exit(t_Command *c)
 {
 	if (c != NULL && c->arg_count != 0)
 	{
+		if (c->arguments[0].lexeme == "")
+			return (ft_printf_fd(STDERR,
+					"bash: exit: : numeric argument required"),
+				exit(255), 1);
 		if (c->arg_count >= 2)
 		{
 			if (is_number(c->arguments[0].lexeme))
