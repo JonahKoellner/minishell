@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:18:23 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/06 22:04:45 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:18:17 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	sig_ctrl_c(void)
 {
 	write(1, "\n", 1);
 	rl_on_new_line();
-	//rl_replace_line("", 0);
 	rl_redisplay();
 }
 

@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 10:41:36 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:17:59 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,33 +24,21 @@ int	echo(t_Token *arguments, int arg_count)
 
 	index = 0;
 	n_flag = 0;
-	if (!arg_count)
-		return (ft_printf("\n"), 0);
-
 	while (index < arg_count && arguments[index].lexeme[0] == '-')
 	{
 		if (check_char(&arguments[index].lexeme[1], 'n'))
 		{
 			n_flag = 1;
 			index++;
-		}else
-			break;
-	}
-
-	// while (!ft_strncmp(arguments[index].lexeme, "-n", 2))
-	// {
-	// 	n_flag = 1;
-	// 	if (++index >= arg_count)
-	// 		break ;
-	// }
-	if (index < arg_count)
-	{
-		while (arguments[index].lexeme)
-		{
-			ft_printf("%s", arguments[index++].lexeme);
-			if (index != arg_count)
-				ft_printf(" ");
 		}
+		else
+			break ;
+	}
+	while (index < arg_count && arguments[index].lexeme)
+	{
+		ft_printf("%s", arguments[index++].lexeme);
+		if (index != arg_count)
+			ft_printf(" ");
 	}
 	if (!n_flag)
 		ft_printf("\n");
@@ -145,7 +133,8 @@ int	custom_exit(t_Command *c)
 			return (printf("exit: %s: numeric argument required\n",
 					c->arguments[0].lexeme), ft_vecfree(enviroment(NULL)),
 				exit(255), 0);
-		return (ft_vecfree(enviroment(NULL)), exit(ft_atoi(c->arguments[0].lexeme)), 0);
+		return (ft_vecfree(enviroment(NULL)),
+			exit(ft_atoi(c->arguments[0].lexeme)), 0);
 	}
 	return (ft_vecfree(enviroment(NULL)), exit(0), 0);
 }

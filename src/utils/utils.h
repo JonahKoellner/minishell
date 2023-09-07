@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 14:09:08 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 10:18:54 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:18:36 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,8 @@ int		export(t_Token *input, int c_arg);
 int		echo(t_Token *arguments, int arg_count);
 int		unset(t_Token *arguments, int arg_count);
 int		is_number(char *str);
-int	check_char(char *str, char c);
-int	check_export(char *str);
-
+int		check_char(char *str, char c);
+int		check_export(char *str);
 
 //#--------- Directory Handling ----------#//
 

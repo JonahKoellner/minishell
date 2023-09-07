@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:38:06 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 10:37:41 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:14:02 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	check_customs(t_Command command)
 		return (env(), 0);
 	if (!ft_strncmp(command.type.lexeme, "exit", 5))
 	{
-		// printf("exit\n");
 		return (custom_exit(&command));
 	}
 	if (!ft_strncmp(command.type.lexeme, "export", 7))
@@ -61,13 +60,14 @@ int	check_export(char *str)
 {
 	int	index;
 
-	if (!((str[0] >= 65 && str[0] <=90) || (str[0] >=97 && str[0] <= 122)))
+	if (!((str[0] >= 65 && str[0] <= 90) || (str[0] >= 97 && str[0] <= 122)))
 		return (1);
 	index = 0;
 	while (str[index] != 0x00 && str[index] != '=')
 	{
-		if (!((str[index] >= 65 && str[index] <=90) || (str[index] >=97 && str[index] <= 122))
-		&& !(str[index] >= 48 && str[index] <= 57))
+		if (!((str[index] >= 65 && str[index] <= 90)
+				|| (str[index] >= 97 && str[index] <= 122))
+			&& !(str[index] >= 48 && str[index] <= 57))
 			return (1);
 		index++;
 	}
