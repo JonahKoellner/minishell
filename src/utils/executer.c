@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 17:25:44 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:50:10 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	execute_path(t_Command cmd, char *args[])
 	{
 		search_buildins(cmd, args);
 		if (errno == EACCES)
-			printf("No execution rights\n");
+			ft_printf_fd(STDERR ,"No execution rights\n");
 		if (errno == ENOENT)
-			printf("Command not found: %s\n", cmd.type.lexeme);
+			ft_printf_fd(STDERR, "Command not found: %s\n", cmd.type.lexeme);
 	}
 	return (0);
 }
@@ -138,7 +138,7 @@ int	executer(t_Command command, int *pip)
 	}
 	if (cust_err != -42 && errno == 0)
 		error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(cust_err));
-	else if (errno != 0 || cust_err == -42)
+	else if (cust_err != -42 && errno != 0)
 		error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(etb(errno)));
 	if (!pip)
 		close_redirect(pip_og, command, -1);

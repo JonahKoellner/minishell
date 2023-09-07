@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 11:17:59 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:22:29 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	export(t_Token *input, int c_arg)
 			add_environ(ft_strdup(input[index++].lexeme));
 		else
 		{
-			printf("bash: export: `%s': not a valid identifier\n",
+			ft_printf_fd(2, "bash: export: `%s': not a valid identifier\n",
 				input[index++].lexeme);
 			ret = 1;
 		}
@@ -105,6 +105,8 @@ int	unset(t_Token *arguments, int arg_count)
 	int	index;
 
 	index = 0;
+	if (arg_count == 0)
+		return (ft_printf_fd(2, "bash: unset: `': not a valid identifier"), 1);
 	while (index < arg_count)
 		remove_environ(arguments[index++].lexeme);
 	return (0);
@@ -121,16 +123,16 @@ int	custom_exit(t_Command *c)
 		if (c->arg_count >= 2)
 		{
 			if (is_number(c->arguments[0].lexeme))
-				return (printf("exit: too many arguments\n"),
+				return (ft_printf_fd(2, "exit: too many arguments\n"),
 					add_environ(ft_strjoin_free(ft_strdup("?="),
 							ft_strdup("1"))), 0);
 			else
-				return (printf("exit: %s: numeric argument required\n",
+				return (ft_printf_fd(2, "exit: %s: numeric argument required\n",
 						c->arguments[0].lexeme), ft_vecfree(enviroment(NULL)),
 					exit(255), 0);
 		}
 		if (c->arg_count == 1 && !is_number(c->arguments[0].lexeme))
-			return (printf("exit: %s: numeric argument required\n",
+			return (ft_printf_fd(2, "exit: %s: numeric argument required\n",
 					c->arguments[0].lexeme), ft_vecfree(enviroment(NULL)),
 				exit(255), 0);
 		return (ft_vecfree(enviroment(NULL)),

@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:18:23 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/07 11:18:17 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:43:22 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	sig_ctrl_c(void)
 {
 	write(1, "\n", 1);
 	rl_on_new_line();
+	rl_replace_line("", 1);
 	rl_redisplay();
 }
 

@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:07:13 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 21:16:42 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:46:07 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_Command	input_to_lex(char *input)
 	while (i-- >= 0)
 	{
 		tokens[j++] = get_next_token(input);
-		printf("tkn %s num %i \n", tokens[j - 1].lexeme, tokens[j-1].type);
 		if (tokens[j - 1].type == TOKEN_END || tokens[j - 1].type == ERR)
 			break ;
 	}
