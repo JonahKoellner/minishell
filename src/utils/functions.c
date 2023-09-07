@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 18:42:53 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:44:15 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,9 @@ int	custom_exit(t_Command *c)
 {
 	if (c != NULL && c->arg_count != 0)
 	{
-		if (c->arguments[0].lexeme == "")
+		if (c->arguments[0].lexeme[0] == 0)
 			return (ft_printf_fd(STDERR,
-					"bash: exit: : numeric argument required"),
+					"bash: exit: : numeric argument required\n"),
 				exit(255), 1);
 		if (c->arg_count >= 2)
 		{
