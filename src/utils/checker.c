@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:38:06 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 18:18:27 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:25:13 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,6 @@ int	etb(int err)
 	return (err);
 }
 
-int	is_number(char *str)
-{
-	int	index;
-
-	index = 0;
-	if (str == NULL)
-		return (1);
-	while (index < (int)ft_strlen(str))
-	{
-		if (str[index] > 57 || str[index] < 48)
-			return (0);
-		index++;
-	}
-	return (1);
-}
-
 /// Checks if the given command is a custom build function
 /// @param command (t_Command) Command from the parser
 /// @param envp (char **) Enviourment variables given by the main function
@@ -54,7 +38,7 @@ int	is_number(char *str)
 int	check_customs(t_Command command)
 {
 	if (!ft_strncmp(command.type.lexeme, "cd", 3))
-		return (cd(command.arguments->lexeme));
+		return (cd(command.arguments[0].lexeme));
 	if (!ft_strncmp(command.type.lexeme, "pwd", 4))
 		return (pwd(), 0);
 	if (!ft_strncmp(command.type.lexeme, "echo", 5))
@@ -71,4 +55,21 @@ int	check_customs(t_Command command)
 	if (!ft_strncmp(command.type.lexeme, "unset", 6))
 		return (unset(command.arguments, command.arg_count));
 	return (1);
+}
+
+int	check_export(char *str)
+{
+	int	index;
+
+	if (!((str[0] >= 65 && str[0] <=90) || (str[0] >=97 && str[0] <= 122)))
+		return (1);
+	index = 0;
+	while (str[index] != 0x00 && str[index] != '=')
+	{
+		if (!((str[index] >= 65 && str[index] <=90) || (str[index] >=97 && str[index] <= 122))
+		&& !(str[index] >= 48 && str[index] <= 57))
+			return (1);
+		index++;
+	}
+	return (0);
 }

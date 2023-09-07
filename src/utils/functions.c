@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/06 18:18:00 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:19:12 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,23 @@ int	echo(t_Token *arguments, int arg_count)
 	n_flag = 0;
 	if (!arg_count)
 		return (ft_printf("\n"), 0);
-	while (!ft_strncmp(arguments[index].lexeme, "-n", 3))
+
+	while (index < arg_count && arguments[index].lexeme[0] == '-')
 	{
-		n_flag = 1;
-		if (++index >= arg_count)
-			break ;
+		if (check_char(&arguments[index].lexeme[1], 'n'))
+		{
+			n_flag = 1;
+			index++;
+		}else
+			break;
 	}
+
+	// while (!ft_strncmp(arguments[index].lexeme, "-n", 2))
+	// {
+	// 	n_flag = 1;
+	// 	if (++index >= arg_count)
+	// 		break ;
+	// }
 	if (index < arg_count)
 	{
 		while (arguments[index].lexeme)
@@ -74,12 +85,12 @@ int	export(t_Token *input, int c_arg)
 	int		index;
 	char	**envp;
 
+	index = 0;
 	if (c_arg)
 	{
-		index = 0;
 		while (input[index].lexeme)
 		{
-			if (input[index].lexeme[0] != '=')
+			if (!check_export(input[index].lexeme))
 				add_environ(ft_strdup(input[index++].lexeme));
 			else
 				printf("bash: export: `%s': not a valid identifier\n",
@@ -89,7 +100,6 @@ int	export(t_Token *input, int c_arg)
 	else
 	{
 		envp = enviroment(NULL);
-		index = 0;
 		while (envp[index])
 			printf("%s\n", envp[index++]);
 	}
