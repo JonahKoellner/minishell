@@ -6,7 +6,7 @@
 /*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/07 02:42:35 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/07 01:47:32 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*var_expander(char *input)
 		if (input[i++] == '$' && is_unquotable(input[i]) != 1)
 		{
 			e = i;
-			while (!is_unquotable(input[i]) && input[i] != 7)
+			while (!is_unquotable(input[i]))
 				i++;
 			tmp = var_search(ft_substr(input, e, i - e));
 			result = ft_strjoin_free(result, tmp);
@@ -74,8 +74,6 @@ char	*replace_dollar(char *input)
 	{
 		if (input[i] == '$')
 			input[i] = 6;
-		if (input[i] == '\"')
-			input[i] = 7;
 		i++;
 	}
 	return (input);
@@ -84,56 +82,42 @@ char	*replace_dollar(char *input)
 char	*finish_expand(char *res)
 {
 	int		i;
-	char	*ret;
 
-	//printf("r in fe %s \n", res);
 	i = 0;
 	//res = var_expander(res);
-	ret = ft_calloc(1, sizeof(char));
 	while (res[i])
 	{
-		if (res[i] == '\"')
-			ret = ft_strjoin_free(ret, quote(res, &i));
-		else
-			ret = ft_strjoin_free(ret, ft_substr(res, i++, 1));
+		if (res[i] == 6)
+			res[i] = '$';
+		i++;
 	}
-	i = -1;
-	while (ret[++i])
-	{
-		if (ret[i] == 6)
-			ret[i] = '$';
-		if (ret[i] == 7)
-			ret[i] = '\"';
-	}
-	return (ret);
+	return (res);
 }
 
 char	*expand_word(char *input)
 {
 	int		i;
-	int		dbl;
+	char	*tmp;
 	char	*res;
 
 	i = 0;
-	dbl = 0;
 	res = ft_strdup("");
+	//printf("var_exp %s \n", input);
 	while (input[i])
 	{
-		if (input[i] == '\"' && dbl == 0)
-			dbl = 1;
-		else if (input[i] == '\"')
-			dbl = 0;
-		if (input[i] == '\'' && dbl == 0)
-			res = ft_strjoin_free(res, replace_dollar(quote(input, &i)));
+		if (input[i] == '\"' || input[i] == '\'')
+		{
+			if (input[i] == '\"')
+				tmp = var_expander(quote(input, &i));
+			else if (input[i] == '\'')
+				tmp = replace_dollar(quote(input, &i));
+			res = ft_strjoin_free(var_expander(res), tmp);
+		}
 		else
 		{
-			res = ft_strjoin_free(res, ft_substr(input, i++, 1));
-			//printf("r in ew %s \n", res);
-			if ((is_unquotable(input[i]) && input[i]) || (!input[i] && !is_unquotable(input[i - 1])))
-			{
-				//printf("gamburger \n");
-				res = var_expander(res);
-			}
+		tmp = ft_substr(input, i, 1);
+		res = ft_strjoin_free(res, tmp);
+		i++;
 		}
 	}
 	free(input);

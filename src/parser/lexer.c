@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/06 21:17:00 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 01:48:41 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,8 @@ t_Token	get_next_token_qte(char *input, int *i)
 	t_Token	token;
 	int		j;
 
-	if (input[*i] == '$')
-		return (lex_dollar(input, i));
-	else if (!is_unquotable(input[*i]) || input[*i] == '\''
-		|| input[*i] == '\"')
+	if (!is_unquotable(input[*i]) || input[*i] == '\''
+		|| input[*i] == '\"' || input[*i] == '$')
 	{
 		j = *i;
 		while (!is_unquotable(input[*i]) || input[*i] == '\''
@@ -99,7 +97,7 @@ t_Token	get_next_token_qte(char *input, int *i)
 				*i += 1;
 		}
 		token.lexeme = fillstr(input, j, *i);
-		// printf("%s %i \n", token.lexeme, *i);
+		//printf("%s %i \n", token.lexeme, *i);
 		token.type = TOKEN_WORD;
 		return (token);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 12:20:39 by jonahkollne       #+#    #+#             */
-/*   Updated: 2023/09/06 15:06:02 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 03:07:29 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	multi_executor(t_Command cmd)
 	if (child_pid == NULL)
 		return ;
 	head_cmd = cmd;
-	while (num_child < head_cmd.count && cmd.err == 0)
+	while (num_child < head_cmd.count && cmd.err >= 0)
 	{
 		pip_in = child_pipe(cmd, pip_in, &child_pid[num_child++]);
 		if (cmd.next)
@@ -82,7 +82,7 @@ int	main2(int argc, char **argv, char **envp)
 	{
 		inp = input();
 		cmd = input_to_lex(inp);
-		if (cmd.err == 0 && cmd.type.lexeme != NULL)
+		if (cmd.err >= 0 && cmd.type.lexeme != NULL)
 		{
 			if (!cmd.next)
 				executer(cmd, NULL);

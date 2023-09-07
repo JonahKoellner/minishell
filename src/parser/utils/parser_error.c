@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:14:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/06 19:14:22 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 02:55:38 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ t_Command	unclosed_pipe(t_Command cmd)
 t_Command	open_error(int in_f, int out_f, t_Command cmd)
 {
 	if (in_f < 0)
-		ft_printf_fd(STDERR, "minishell: Error Opening Input File\n");
+		cmd.err_msg = ft_strdup("minishell: Error Opening Input File\n");
 	if (out_f < 0)
-		ft_printf_fd(STDERR, "minishell: Error Opening Output File\n");
-	free_command(cmd);
-	return ((t_Command){.err = -8});
+		cmd.err_msg = ft_strdup("minishell: Error Opening Output File\n");
+	//free_command(cmd);
+	cmd.err = 1;
+	return (cmd);
 }
