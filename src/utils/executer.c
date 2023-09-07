@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 03:06:06 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:41:13 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +124,20 @@ int	executer(t_Command command, int *pip)
 {
 	int		*pip_og;
 	char	*error_env;
+	int		cust_err;
 
 	if (command.err)
 		return (ft_printf_fd(STDERR, command.err_msg));
 	pip_og = pip;
 	if (!pip)
 		pip_og = open_redirect(command.in_fd, command.out_fd, pip);
-	if (check_customs(command) == 1)
+	cust_err = check_customs(command);
+	if (cust_err == -42)
 	{
 		error_env = child_exec(command, pip);
 	}
+	if (cust_err != -42 && errno == 0)
+		error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(cust_err));
 	else
 		error_env = ft_strjoin_free(ft_strdup("?="), ft_itoa(etb(errno)));
 	if (!pip)

@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 12:58:19 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 10:19:12 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:41:36 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,26 +84,28 @@ int	export(t_Token *input, int c_arg)
 {
 	int		index;
 	char	**envp;
+	int		ret;
 
 	index = 0;
-	if (c_arg)
+	ret = 0;
+	while (c_arg && input[index].lexeme)
 	{
-		while (input[index].lexeme)
+		if (!check_export(input[index].lexeme))
+			add_environ(ft_strdup(input[index++].lexeme));
+		else
 		{
-			if (!check_export(input[index].lexeme))
-				add_environ(ft_strdup(input[index++].lexeme));
-			else
-				printf("bash: export: `%s': not a valid identifier\n",
-					input[index++].lexeme);
+			printf("bash: export: `%s': not a valid identifier\n",
+				input[index++].lexeme);
+			ret = 1;
 		}
 	}
-	else
+	if (!c_arg)
 	{
 		envp = enviroment(NULL);
 		while (envp[index])
 			printf("%s\n", envp[index++]);
 	}
-	return (0);
+	return (ret);
 }
 
 /// @brief Unsets the given enviroment varible fromt the given eniroment
