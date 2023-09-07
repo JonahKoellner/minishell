@@ -108,7 +108,7 @@ t_Token	get_next_token_rst(char *input, int *i)
 {
 	t_Token	token;
 
-	if (input[*i] == '>' || input[*i] != '<' || input[*i] != '|')
+	if (input[*i] == '>' || input[*i] == '<' || input[*i] == '|')
 	{
 		token.type = TOKEN_REDIRECT;
 		token.lexeme = ft_substr(input, *i, 2);
