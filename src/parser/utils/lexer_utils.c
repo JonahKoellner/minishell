@@ -44,6 +44,8 @@ int	tokencount(const char *s)
 			qt = *s;
 			i++;
 		}
+		if (*s == '|' || *s == '<' || *s == '>')
+			i++;
 		else if (!ft_isspace(*s) && wrd == 0 && qt == 0)
 			wrd = ++i;
 		s++;
