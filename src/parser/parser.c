@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/07 18:12:49 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:39:28 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_Command	in_out(t_Token type, t_Token where, t_Command cmd, int *i)
 		cmd.in_fd = open(where.lexeme, O_RDONLY);
 	else if (type.type == TOKEN_LESS_LESS)
 		cmd.in_fd = make_heredoc(ft_strdup(where.lexeme));
-	free(where.lexeme);
+	if (where.lexeme)
+		free(where.lexeme);
 	where.lexeme = NULL;
 	*i += 1;
 	return (cmd);

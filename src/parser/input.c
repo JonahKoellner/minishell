@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:07:13 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 17:46:07 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:34:43 by mreidenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_Command	input_to_lex(char *input)
 
 	j = 0;
 	i = tokencount(input);
-	 printf("tkn c %i \n", i);
 	if (i < 0)
 		return (bad_quote(input));
 	else if (i == 0)
