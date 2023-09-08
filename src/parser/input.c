@@ -34,7 +34,7 @@ t_Command	input_to_lex(char *input)
 
 	j = 0;
 	i = tokencount(input);
-	// printf("tkn c %i \n", i);
+	 printf("tkn c %i \n", i);
 	if (i < 0)
 		return (bad_quote(input));
 	else if (i == 0)
@@ -46,7 +46,6 @@ t_Command	input_to_lex(char *input)
 	while (i-- >= 0)
 	{
 		tokens[j++] = get_next_token(input);
-		printf("tkn %s num %i \n", tokens[j - 1].lexeme, tokens[j-1].type);
 		if (tokens[j - 1].type == TOKEN_END || tokens[j - 1].type == ERR)
 			break ;
 	}

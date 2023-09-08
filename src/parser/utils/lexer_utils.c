@@ -37,17 +37,15 @@ int	tokencount(const char *s)
 	{
 		if (is_unquotable(*s))
 			wrd = 0;
-		if ((*s == '\'' || *s == '\"' || (*s == '>' || *s == '<' || *s == '|'))
-			&& qt == 0 && wrd == 0)
+		if (*s == qt)
+			qt = 0;
+		else if ((*s == '\'' || *s == '\"') && qt == 0 && wrd == 0)
 		{
-			qt = *s++;
+			qt = *s;
 			i++;
 		}
-		if (!ft_isspace(*s) && wrd == 0 && (qt == 0 || qt == '>'
-				|| qt == '<' || qt == '|'))
+		else if (!ft_isspace(*s) && wrd == 0 && qt == 0)
 			wrd = ++i;
-		if (*s == qt || ((qt == '>' || qt == '<' || qt == '|') && *s != qt))
-			qt = 0;
 		s++;
 	}
 	return (i * ((qt - 1) * -1));
