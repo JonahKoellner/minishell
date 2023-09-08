@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:04:52 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 17:50:10 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:10:21 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	execute_path(t_Command cmd, char *args[])
 	{
 		search_buildins(cmd, args);
 		if (errno == EACCES)
-			ft_printf_fd(STDERR ,"No execution rights\n");
+			ft_printf_fd(STDERR, "No execution rights\n");
 		if (errno == ENOENT)
 			ft_printf_fd(STDERR, "Command not found: %s\n", cmd.type.lexeme);
 	}

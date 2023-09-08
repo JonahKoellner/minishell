@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   expander cop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/07 01:47:32 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:08:58 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ char	*finish_expand(char *res)
 	int		i;
 
 	i = 0;
-	//res = var_expander(res);
 	while (res[i])
 	{
 		if (res[i] == 6)
@@ -102,7 +101,6 @@ char	*expand_word(char *input)
 
 	i = 0;
 	res = ft_strdup("");
-	//printf("var_exp %s \n", input);
 	while (input[i])
 	{
 		if (input[i] == '\"' || input[i] == '\'')

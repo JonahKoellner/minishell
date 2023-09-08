@@ -6,7 +6,7 @@
 /*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:38:06 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/07 18:32:37 by jkollner         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:10:02 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_export(char *str)
 	int	index;
 
 	if (!((str[0] >= 65 && str[0] <= 90) || (str[0] >= 97 && str[0] <= 122)
-		|| str[0] == '_'))
+			|| str[0] == '_'))
 		return (1);
 	index = 0;
 	while (str[index] != 0x00 && str[index] != '=')

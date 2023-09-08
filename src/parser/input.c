@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:07:13 by jkollner          #+#    #+#             */
-/*   Updated: 2023/09/08 13:34:43 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:08:27 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*input(void)
 {
 	char	*input;
 	char	*prompt;
+	char	*line;
 
 	input = NULL;
 	prompt = new_line();
@@ -66,7 +67,7 @@ char	*input(void)
 		input = readline(prompt);
 	else
 	{
-		char *line = get_next_line(fileno(stdin));
+		line = get_next_line(fileno(stdin));
 		if (line != NULL)
 			input = ft_strtrim(line, "\n");
 		free(line);

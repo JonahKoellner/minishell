@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:32:25 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/07 02:42:35 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:09:30 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ char	*finish_expand(char *res)
 	int		i;
 	char	*ret;
 
-	//printf("r in fe %s \n", res);
 	i = 0;
-	//res = var_expander(res);
 	ret = ft_calloc(1, sizeof(char));
 	while (res[i])
 	{
@@ -129,7 +127,8 @@ char	*expand_word(char *input)
 		else
 		{
 			res = ft_strjoin_free(res, ft_substr(input, i++, 1));
-			if ((is_unquotable(input[i]) && input[i]) || (!input[i] && !is_unquotable(input[i - 1])))
+			if ((is_unquotable(input[i]) && input[i]) || (!input[i]
+					&& !is_unquotable(input[i - 1])))
 				res = var_expander(res);
 		}
 	}

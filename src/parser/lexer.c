@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:01:12 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/07 01:48:41 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:08:40 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ t_Token	get_next_token_qte(char *input, int *i)
 				*i += 1;
 		}
 		token.lexeme = fillstr(input, j, *i);
-		//printf("%s %i \n", token.lexeme, *i);
 		token.type = TOKEN_WORD;
 		return (token);
 	}

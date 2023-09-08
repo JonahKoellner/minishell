@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mreidenb <mreidenb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkollner <jkollner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 13:01:26 by mreidenb          #+#    #+#             */
-/*   Updated: 2023/09/08 13:39:28 by mreidenb         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:07:56 by jkollner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,6 @@ t_Command	in_out(t_Token type, t_Token where, t_Command cmd, int *i)
 	*i += 1;
 	return (cmd);
 }
-
-//t_Command	check_parsed(t_Command cmds, t_Token *tokens)
-//{
-//	t_Command	*cmd;
-//	int			i;
-//	int			n;
-//	int			j;
-
-//	i = 0;
-//	n = cmd_count(tokens);
-//	cmd = &cmds;
-//	while (i++ < n)
-//	{
-//		if (cmds.type.type == ERR)
-//			return (unclosed_pipe());
-//		cmds.type.lexeme = expand_word(cmds.type.lexeme);
-//		if (cmds.arg_i != cmds.arg_count)
-//			return ((t_Command){.err = -7});
-//		j = -1;
-//		while (++j < cmds.arg_count)
-//			cmds.arguments[j].lexeme = expand_word(cmds.arguments[j].lexeme);
-//		if (cmds.in_fd < 0 || cmds.out_fd < 0)
-//			return (free_command(cmds), open_error(cmds.in_fd, cmds.out_fd));
-//		if (cmds.next)
-//			cmds = *(t_Command *)cmds.next;
-//	}
-//	free(tokens);
-//	return (*cmd);
-//}
 
 t_Command	check_parsed(t_Command cmds, t_Token *tokens)
 {
