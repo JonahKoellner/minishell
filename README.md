@@ -8,7 +8,7 @@
 
 # Overview
 ### - [How to use the minishell](#how-to-use-the-minishell)
-- [Building / Executing](#building-/-executing)
+- [Building / Executing](#building--executing)
 - [Usage](#Usage)
 
 - [Example minishell Sequence](#example-minishell-sequence)
