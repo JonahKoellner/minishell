@@ -1,7 +1,25 @@
-# minishell
-42 Minishell
+# minishell project
 
-<h2>Example minishell Sequence</h2>
+**made by** Jonah Köllner, Maximilian Reidenbach
+
+<br>
+<img width="1047" alt="Screenshot 2023-11-13 at 13 02 52" src="https://github.com/JonahKoellner/minishell/assets/33061141/ae85c0c6-24fc-4a3c-a0bb-a8d48ce0e8b4">
+
+
+# Overview
+### - [Prerequisites](#prerequisites)
+### - [How to use the minishell](#how-to-use-the-minishell)
+- [Build](#build)
+- [Execute](#execute)
+
+- [Example minishell Sequence](#example-minishell-sequence)
+
+## How to use the minishell
+### build
+### execute
+
+
+## Example minishell Sequence
 <! Needs to be simplified, prob. move this to parser section later>
 
 ```mermaid
