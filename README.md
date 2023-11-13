@@ -11,7 +11,7 @@
 - [Building / Executing](#building--executing)
 - [Usage](#Usage)
 
-- [Example minishell Sequence](#example-minishell-sequence)
+### [Example minishell Sequence](#example-minishell-sequence)
 
 
 ## How to use the minishell
